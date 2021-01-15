@@ -33,11 +33,9 @@ import React from 'react'
 
 import SlideInput from 'stuff-to-click'
 
-class Example extends Component {
-  render() {
+default export function yourComponent() {
     return <SlideInput value={state.value} onChange={doThis} valid="true"/>
-  }
-}
+ }
 ```
 
 ## License
