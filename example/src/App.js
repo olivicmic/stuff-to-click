@@ -8,11 +8,11 @@ const App = () => {
 		text: '',
 		password: '',
 		email: '',
-		tel: ''
+		phonenumber: '',
+		extraTxt: ''
 	});
 	const onChange = (e) => {
-		console.log(typeof e.target.type);
-		setSt({ ...apSt, [e.target.type]: e.target.value});
+		setSt({ ...apSt, [e.target.name]: e.target.value});
 	};
 
 	const testStyle = {
@@ -31,10 +31,13 @@ const App = () => {
 				<li>Email input: {apSt.email}</li>
 				<li>Telephone input: {apSt.tel}</li>
 			</ul>			
-			<SlideInput type="text" value={apSt.text} onChange={onChange} name='Some text' style={testStyle}/>
-			<SlideInput type="password" value={apSt.password} onChange={onChange} name='A password' required bar={{}}/>
-			<SlideInput type="email" value={apSt.email} onChange={onChange} name='An email' required bar={{}} style={{ fontSize: '1.5rem' }}/>
-			<SlideInput type="tel" value={apSt.tel} onChange={onChange} name='A phone number' required bar={{backgroundColor: 'blue'}} style={{ fontSize: '1.75rem', display: 'block' }} valid={false}/>
+			<SlideInput type="text" value={apSt.text} onChange={onChange} name='text' style={testStyle} id="howdy" label='Some text'/>
+			<SlideInput type="password" value={apSt.password} onChange={onChange} name='password' required bar={{}} label='A Password'/>
+			<SlideInput type="tel" value={apSt.tel} onChange={onChange} name='phonenumber' required bar={{backgroundColor: 'blue'}} style={{ fontSize: '1.75rem', display: 'block' }} valid={false}/>
+			<SlideInput type="email" value={apSt.email} onChange={onChange} name='email' required bar={{}} style={{ fontSize: '1.5rem' }} autoComplete="false" label="An Email"/>
+			<div style={{margin: '30px'}} label="A Phone Number">
+				<SlideInput type="text" value={apSt.extraTxt} onChange={onChange} name='extraTxt' required bar={{}} style={{ fontSize: '1.5rem' }} autoComplete="false" label="Some Text"/>
+			</div>
 		</div>
 	);
 }

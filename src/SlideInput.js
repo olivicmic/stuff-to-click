@@ -2,10 +2,11 @@ import React, {useState} from "react";
 import './SlideInput.scss';
 
 const SlideInput = (props) => {
-	const { autoComplete, autoFocus, bar, disabled, id, max, maxLength, min, minLength, name, onChange, readOnly, required, style, type, valid, value} = props;
+	const { autoComplete, autoFocus, bar, disabled, id, label, max, maxLength, min, minLength, name, onChange, readOnly, required, style, type, valid, value} = props;
 	const [focus, toggleFocus] = useState(false);
 	const isValid = (valid === undefined ) ? true : valid;
-	const focusSwitch = () => toggleFocus(!focus);
+	const onFocus = () => toggleFocus(true);
+	const onBlur = () => toggleFocus(false);
 	const classes = [
 		'stuff-slide-input',
 		'stuff-slide-input-active',
@@ -22,7 +23,7 @@ const SlideInput = (props) => {
 	return(
 		<div className={mainClass} style={style}>
 			<label htmlFor={id} className={labelClass} name={name}>
-				{name}
+				{label}
 				{required ? <div className="stuff-slide-input-required"></div> : null}
 			</label>
 			<input	
@@ -35,9 +36,9 @@ const SlideInput = (props) => {
 				min={min}
 				minLength={minLength}
 				name={name}
-				onBlur={focusSwitch}
+				onBlur={onBlur}
 				onChange={onChange}
-				onFocus={focusSwitch}
+				onFocus={onFocus}
 				required={required}
 				readOnly={readOnly}
 				type={type ? type : 'text'}
