@@ -1,13 +1,13 @@
 .stuff-slide-input {
 	color: inherit;
 	position: relative;
-	height: 100%;
 	overflow: hidden;
 	display: inline-block;
 	width: auto;
 	font-size: 1em;
 	
 	.stuff-slide-input-label {
+		pointer-events: none;
 		font-size: .75em;
 		height: 1.5em;
 		display: flex;
