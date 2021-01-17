@@ -1,6 +1,7 @@
 import React from 'react'
 //import styles from './styles.module.css'
 import SlideInput from './SlideInput';
-import DragSlider from './DragSlider'
+import DragSlider from './DragSlider';
+import ColorDragSlider from './ColorDragSlider';
 
-export { SlideInput, DragSlider };
+export { SlideInput, DragSlider, ColorDragSlider };

@@ -4,7 +4,7 @@
 	height: 26px;
 	padding: 0 13px;
 
-	.slider-track {
+	.stuff-drag-slider-track {
 		border-radius: 1px;
 		position: relative;
 		display: inline-block;
@@ -14,6 +14,7 @@
 		appearance: none;
 		z-index: 1;
 		margin: auto 0;
+		background-color: #333;
 
 		&::-webkit-slider-thumb{
 			appearance: none;
@@ -23,15 +24,15 @@
 		}
 	}
 
-	.track-r {background: linear-gradient(90deg, rgba(0,0,0,1) 0%, rgba(255,0,0,1) 100%);}
-	.track-g {background: linear-gradient(90deg, rgba(0,0,0,1) 0%, rgba(0,255,0,1) 100%);}
-	.track-b {background: linear-gradient(90deg, rgba(0,0,0,1) 0%, rgba(0,0,255,1) 100%);}
+	.stuff-drag-track-red {background: linear-gradient(90deg, rgba(0,0,0,1) 0%, rgba(255,0,0,1) 100%);}
+	.stuff-drag-track-green {background: linear-gradient(90deg, rgba(0,0,0,1) 0%, rgba(0,255,0,1) 100%);}
+	.stuff-drag-track-blue {background: linear-gradient(90deg, rgba(0,0,0,1) 0%, rgba(0,0,255,1) 100%);}
 
-	.slider {
+	.stuff-drag-slider {
 		cursor: pointer;
 		outline: none;
 		user-select: none;
-		background-color: #1b1b1b;
+		background-color: #ccc;
 		border: #1b1b1b 2px solid;
 		border-radius: 4px;
 		box-sizing: border-box;

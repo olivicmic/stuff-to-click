@@ -1,37 +1,21 @@
 import React from 'react';
-import Chroma from 'chroma-js';
-import IsolateChannel from './IsolateChannel';
 import { Range } from 'react-range';
 import './DragSlider.scss';
 
-const Slider = (props) => {
-	const { color, channel, onChange } = props;
-	const inColor = color ? Chroma.valid(color) ? Chroma(color).rgb() : Chroma('#000') : Chroma('#000');
-	const inChan = channel ? channel : 0;
-	const rgbSel = ['r','g','b'];
-	const soloColor = IsolateChannel({color: inColor[inChan], channel: inChan});
-
-	const processColor = (input) => {
-		inColor[inChan] = input[0];
-		onChange(Chroma(inColor).hex());
-	}
-
+export default function Slider(props) {
+	const { value, max, mode, onChange, slide } = props;
 	return (
 		<div className='stuff-drag-slide'>
-			<Range step={1} min={0} max={255} values={[inColor[inChan]]} onChange={values => processColor( values )}
+			<Range step={1} min={0} max={max} values={[value]} onChange={values => onChange( values )}
 				renderTrack={({ props, children }) => (
-					<div className={`slider-track track-${rgbSel[inChan]}`} {...props}>
+					<div className={`stuff-drag-slider-track${ mode ? ` stuff-drag-track-${mode}` : ''}`} {...props}>
 						{children}
 					</div>
 				)}
 				renderThumb={({ props }) => (
-					<div className="slider" {...props} style={{
-						backgroundColor: soloColor}}  />
+					<div className="stuff-drag-slider" {...props} style={slide}  />
 				)}
 	      	/>
       	</div>
 	);
-
-}
-
- export default Slider;
+};

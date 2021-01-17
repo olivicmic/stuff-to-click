@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-import { DragSlider, SlideInput } from 'stuff-to-click';
+import { DragSlider, SlideInput, ColorDragSlider } from 'stuff-to-click';
 
 import 'stuff-to-click/dist/index.css'
 
@@ -11,10 +11,12 @@ const App = () => {
 		email: '',
 		phonenumber: '',
 		extraTxt: '',
-		color: '9acd33'
+		color: '9acd33',
+		opacity: 75
 	});
 	const onChange = (e) => setSt({ ...apSt, [e.target.name]: e.target.value});
 	const colorChange = (color) => setSt({ ...apSt, color: color});
+	const opacityChange = (opacity) => setSt({ ...apSt, opacity: opacity});
 
 	const testStyle = {
 		color: 'blue',
@@ -32,6 +34,7 @@ const App = () => {
 				<li>Email input: {apSt.email}</li>
 				<li>Telephone input: {apSt.tel}</li>
 				<li>Color: {apSt.color}</li>
+				<li>Opacity: {apSt.opacity}</li>
 			</ul>			
 			<SlideInput type="text" value={apSt.text} onChange={onChange} name='text' style={testStyle} id="howdy" label='Some text'/>
 			<SlideInput type="password" value={apSt.password} onChange={onChange} name='password' required bar={{}} label='A Password'/>
@@ -42,9 +45,10 @@ const App = () => {
 			</div>
 			<div>
 				<h3>Drag Slider</h3>
-				<DragSlider color={apSt.color} onChange={colorChange}/>
-				<DragSlider color={apSt.color} onChange={colorChange} channel='1'/>
-				<DragSlider color={apSt.color} onChange={colorChange} channel='2'/>
+				<DragSlider value={apSt.opacity} max={100} onChange={opacityChange} slide={{backgroundColor: `rgba(100,100,100, ${ apSt.opacity / 100})`}}/>
+				<ColorDragSlider value={apSt.color} onChange={colorChange} mode='red'/>
+				<ColorDragSlider value={apSt.color} onChange={colorChange} mode='green'/>
+				<ColorDragSlider value={apSt.color} onChange={colorChange} mode='blue'/>
 			</div>
 		</div>
 	);
