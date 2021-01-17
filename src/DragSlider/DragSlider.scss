@@ -1,0 +1,43 @@
+.stuff-drag-slide {
+	display: flex;
+	width: 300px;
+	height: 26px;
+	padding: 0 13px;
+
+	.slider-track {
+		border-radius: 1px;
+		position: relative;
+		display: inline-block;
+		width: 100%;
+		height: 2px;
+		overflow: visible;
+		appearance: none;
+		z-index: 1;
+		margin: auto 0;
+
+		&::-webkit-slider-thumb{
+			appearance: none;
+			background: #4CAF50;
+			width: 26px;
+			height: 26px;
+		}
+	}
+
+	.track-r {background: linear-gradient(90deg, rgba(0,0,0,1) 0%, rgba(255,0,0,1) 100%);}
+	.track-g {background: linear-gradient(90deg, rgba(0,0,0,1) 0%, rgba(0,255,0,1) 100%);}
+	.track-b {background: linear-gradient(90deg, rgba(0,0,0,1) 0%, rgba(0,0,255,1) 100%);}
+
+	.slider {
+		cursor: pointer;
+		outline: none;
+		user-select: none;
+		background-color: #1b1b1b;
+		border: #1b1b1b 2px solid;
+		border-radius: 4px;
+		box-sizing: border-box;
+		position: relative;
+		display: block;
+		height: 26px;
+		width: 26px;
+	}
+}
