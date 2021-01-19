@@ -1,6 +1,6 @@
 import React from 'react';
 import Chroma from 'chroma-js';
-import IsolateChannel from './IsolateChannel';
+import Lal from 'lal';
 import DragSlider from '../DragSlider';
 
 export default function Slider(props) {
@@ -9,7 +9,7 @@ export default function Slider(props) {
 	const channel = rgb.indexOf(mode);
 	const isColor = (channel > -1);
 	const colorRgb = isColor ? Chroma.valid(value) ? Chroma(value).rgb() : Chroma('#000').rgb() : Chroma('#000').rgb();
-	const soloColor = IsolateChannel({color: colorRgb[channel], channel: channel});
+	const soloColor = Lal.isolateChannel({color: colorRgb[channel], channel: channel});
 
 	const processColor = (input) => {
 		colorRgb[channel] = input[0];
