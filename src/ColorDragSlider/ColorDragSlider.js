@@ -2,10 +2,9 @@ import React from 'react';
 import Chroma from 'chroma-js';
 import Lal from 'lal';
 import DragSlider from '../DragSlider';
+import rgb from '../resources/rgbArr';
 
-export default function Slider(props) {
-	const { value, mode, onChange } = props;
-	const rgb = ['red', 'green', 'blue'];
+export default function Slider({ value, mode, onChange }) {
 	const channel = rgb.indexOf(mode);
 	const isColor = (channel > -1);
 	const colorRgb = isColor ? Chroma.valid(value) ? Chroma(value).rgb() : Chroma('#000').rgb() : Chroma('#000').rgb();

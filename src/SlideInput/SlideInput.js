@@ -1,8 +1,7 @@
 import React, {useState} from "react";
 import './SlideInput.scss';
 
-const SlideInput = (props) => {
-	const { autoComplete, autoFocus, bar, disabled, id, label, max, maxLength, min, minLength, name, onChange, readOnly, required, style, type, valid, value} = props;
+const SlideInput = ({ bar, id, label, name, required, style, type, valid, value, ...rest}) => {
 	const [focus, toggleFocus] = useState(false);
 	const isValid = (valid === undefined ) ? true : valid;
 	const onFocus = () => toggleFocus(true);
@@ -22,28 +21,11 @@ const SlideInput = (props) => {
 
 	return(
 		<div className={mainClass} style={style}>
-			<label htmlFor={id} className={labelClass} name={name}>
+			<label htmlFor={id} className={labelClass} name={name + ' label'}>
 				{label}
 				{required ? <div className="stuff-slide-input-required"></div> : null}
 			</label>
-			<input	
-				autoComplete={autoComplete}			
-				autoFocus={autoFocus}				
-				disabled={disabled}				
-				id={id}
-				max={max}
-				maxLength={maxLength}
-				min={min}
-				minLength={minLength}
-				name={name}
-				onBlur={onBlur}
-				onChange={onChange}
-				onFocus={onFocus}
-				required={required}
-				readOnly={readOnly}
-				type={type ? type : 'text'}
-				value={value}
-			/>
+			<input {...rest} id={id} name={name} onBlur={onBlur} onFocus={onFocus} required={required} type={type ? type : 'text'} value={value} />
 			{ bar ? <div className='stuff-slide-bar' style={bar}></div> : null }
 		</div>
 	);

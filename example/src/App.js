@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-import { DragSlider, SlideInput, ColorDragSlider } from 'stuff-to-click';
+import { DragSlider, HexInput, SlideInput, ColorDragSlider, RGBInput } from 'stuff-to-click';
 
 import 'stuff-to-click/dist/index.css'
 
@@ -38,16 +38,20 @@ const App = () => {
 			</ul>			
 			<SlideInput type="text" value={apSt.text} onChange={onChange} name='text' style={testStyle} id="howdy" label='Some text'/>
 			<SlideInput type="password" value={apSt.password} onChange={onChange} name='password' required bar={{}} label='A Password'/>
-			<SlideInput type="tel" value={apSt.tel} onChange={onChange} name='phonenumber' required bar={{backgroundColor: 'blue'}} style={{ fontSize: '1.75rem', display: 'block' }} valid={false}/>
+			<SlideInput type="tel" value={apSt.tel} onChange={onChange} name='phonenumber' required bar={{backgroundColor: 'blue'}} style={{ fontSize: '1.75rem', display: 'block' }} valid={false} label='phone'/>
 			<SlideInput type="email" value={apSt.email} onChange={onChange} name='email' required bar={{}} style={{ fontSize: '1.5rem' }} autoComplete="false" label="An Email"/>
 			<div style={{margin: '30px'}} label="A Phone Number">
 				<SlideInput type="text" value={apSt.extraTxt} onChange={onChange} name='extraTxt' required bar={{}} style={{ fontSize: '1.5rem' }} autoComplete="false" label="Some Text"/>
 			</div>
 			<div>
-				<h3>Drag Slider</h3>
+				<h3>HexInput, DragSlider, RGBInput & ColorSlider</h3>
+				<HexInput value={apSt.color} onChange={colorChange} style={{borderColor: apSt.color}} /> 
 				<DragSlider value={apSt.opacity} max={100} onChange={opacityChange} slide={{backgroundColor: `rgba(100,100,100, ${ apSt.opacity / 100})`}}/>
+				<RGBInput value={apSt.color} onChange={colorChange} mode='red' />
 				<ColorDragSlider value={apSt.color} onChange={colorChange} mode='red'/>
+				<RGBInput value={apSt.color} onChange={colorChange} mode='green' />
 				<ColorDragSlider value={apSt.color} onChange={colorChange} mode='green'/>
+				<RGBInput value={apSt.color} onChange={colorChange} mode='blue' />
 				<ColorDragSlider value={apSt.color} onChange={colorChange} mode='blue'/>
 			</div>
 		</div>
