@@ -8,7 +8,7 @@ export default function Slider({ value, mode, onChange }) {
 	const channel = rgb.indexOf(mode);
 	const isColor = (channel > -1);
 	const colorRgb = isColor ? Chroma.valid(value) ? Chroma(value).rgb() : Chroma('#000').rgb() : Chroma('#000').rgb();
-	const soloColor = Lal.isolateChannel({color: colorRgb[channel], channel: channel});
+	const soloColor = Lal.color.solo({color: colorRgb[channel], channel: channel});
 
 	const processColor = (input) => {
 		colorRgb[channel] = input[0];
