@@ -47,7 +47,7 @@ const App = () => {
 				<h3>HexInput, DragSlider, RGBInput & ColorSlider</h3>
 				<HexInput value={apSt.color} onChange={colorChange} style={{borderColor: apSt.color}} /> 
 				<DragSlider value={apSt.opacity} max={100} onChange={opacityChange} slide={{backgroundColor: `rgba(100,100,100, ${ apSt.opacity / 100})`}}/>
-				<RGBInput value={apSt.color} onChange={colorChange} mode='red' />
+				<RGBInput value={apSt.color} onChange={colorChange} mode='red' style={{color: 'red'}} />
 				<ColorDragSlider value={apSt.color} onChange={colorChange} mode='red'/>
 				<RGBInput value={apSt.color} onChange={colorChange} mode='green' />
 				<ColorDragSlider value={apSt.color} onChange={colorChange} mode='green'/>
