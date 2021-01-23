@@ -4,7 +4,7 @@ import Lal from 'lal';
 import DragSlider from '../DragSlider';
 import rgb from '../resources/rgbArr';
 
-export default function Slider({ value, mode, onChange }) {
+export default function ColorDragSlider({ value, mode, onChange, slide }) {
 	const channel = rgb.indexOf(mode);
 	const isColor = (channel > -1);
 	const colorRgb = isColor ? Chroma.valid(value) ? Chroma(value).rgb() : Chroma('#000').rgb() : Chroma('#000').rgb();
@@ -16,6 +16,6 @@ export default function Slider({ value, mode, onChange }) {
 	};
 
 	return (
-		<DragSlider value={colorRgb[channel]} max={255} onChange={processColor} slide={{backgroundColor: soloColor}} mode={rgb[channel]}/>
+		<DragSlider value={colorRgb[channel]} max={255} onChange={processColor} slide={{...slide, backgroundColor: soloColor}} mode={rgb[channel]}/>
 	);
 };

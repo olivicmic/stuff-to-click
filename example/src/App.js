@@ -50,7 +50,7 @@ const App = () => {
 				<RGBInput value={apSt.color} onChange={colorChange} mode='red' style={{color: 'red'}} />
 				<ColorDragSlider value={apSt.color} onChange={colorChange} mode='red'/>
 				<RGBInput value={apSt.color} onChange={colorChange} mode='green' />
-				<ColorDragSlider value={apSt.color} onChange={colorChange} mode='green'/>
+				<ColorDragSlider value={apSt.color} onChange={colorChange} mode='green' slide={{borderColor: 'green'}}/>
 				<RGBInput value={apSt.color} onChange={colorChange} mode='blue' />
 				<ColorDragSlider value={apSt.color} onChange={colorChange} mode='blue'/>
 			</div>
