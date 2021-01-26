@@ -2,11 +2,11 @@ import React from 'react';
 import { Range } from 'react-range';
 import './DragSlider.scss';
 
-export default function Slider(props) {
-	const { value, max, mode, onChange, slide } = props;
+export default function Slider({ value, max = 100, mode, onChange, slide, ...rest }) {
+	const toDo = newVal => onChange(newVal[0]);
 	return (
 		<div className='stuff-drag-slide'>
-			<Range step={1} min={0} max={max} values={[value]} onChange={values => onChange( values )}
+			<Range {...rest} step={1} min={0} max={max} values={[value]} onChange={toDo}
 				renderTrack={({ props, children }) => (
 					<div className={`stuff-drag-slider-track${ mode ? ` stuff-drag-track-${mode}` : ''}`} {...props}>
 						{children}

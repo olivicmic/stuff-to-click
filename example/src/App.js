@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-import { DragSlider, HexInput, SlideInput, ColorDragSlider, RGBInput } from 'stuff-to-click';
+import { DragSlider, HexInput, SlideInput, ColorDragSlider, RGBInput, NumInput } from 'stuff-to-click';
 
 import 'stuff-to-click/dist/index.css'
 
@@ -16,7 +16,7 @@ const App = () => {
 	});
 	const onChange = (e) => setSt({ ...apSt, [e.target.name]: e.target.value});
 	const colorChange = (color) => setSt({ ...apSt, color: color});
-	const opacityChange = (opacity) => setSt({ ...apSt, opacity: opacity});
+	const opacityChange = (opacity) => { console.log(opacity); setSt({ ...apSt, opacity: opacity}); };
 
 	const testStyle = {
 		color: 'blue',
@@ -54,6 +54,8 @@ const App = () => {
 				<RGBInput value={apSt.color} onChange={colorChange} mode='blue' />
 				<ColorDragSlider value={apSt.color} onChange={colorChange} mode='blue'/>
 			</div>
+			<NumInput value={apSt.opacity} max={100} onChange={opacityChange}/>
+			<NumInput value={apSt.opacity} max={100} onChange={opacityChange}/>
 		</div>
 	);
 }

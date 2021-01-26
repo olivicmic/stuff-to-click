@@ -17,15 +17,11 @@ This input has a built in label (defined by using the 'label' attribute). It is 
 Other standard input attributes can be applied to it, and they will be passed to the core child input.
 
 ```jsx
-import React from 'react'
-
-import SlideInput from 'stuff-to-click';
 
 doThis = (newValue) => setState(newValue);
 
-default export function yourComponent() {
-    return <SlideInput label={state.value} onChange={doThis} valid="true" name="firstname" bar={/* css */}/>
- }
+<SlideInput label={state} onChange={doThis} valid="true" name="firstname" bar={/* css */}/>
+
 ```
 
 ## DragSlider
@@ -33,15 +29,14 @@ default export function yourComponent() {
 dragSlider is a numerical range slider, that adjust values from 0 to whatever is set as "max" attribute. An updated value is returned via the onChange function. Styling can applied to slider handle via the "slide" attribute.
 
 ```jsx
-import React from 'react'
 
-import DragSlider from 'stuff-to-click';
+
+import { DragSlider } from 'stuff-to-click'; // outside parent component
 
 doThis = (newValue) => setState(newValue);
 
-default export function yourComponent() {
-    return <DragSlider value={state.value} max={100} onChange={doThis} slide={{/* css */}}/>
- }
+<DragSlider value={value} max={100} onChange={doThis} slide={{/* css */}}/>
+
 ```
 
 ## ColorDragSlider
@@ -49,32 +44,44 @@ default export function yourComponent() {
 ColorDragSlider is similar to DragSlider except that it accepts a 6 digit hex color as its value, and will return a new hex color depending on which color string ('red','green', or 'blue') is assigned to the mode attribute. The color returned via the onChange function will be a hex color including a hash. The unselected channels will be unaltered.
 
 ```jsx
-import React from 'react'
 
-import ColorDragSlider from 'stuff-to-click';
+import { ColorDragSlider } from 'stuff-to-click'; // outside parent component
 
 doThis = (newValue) => setState(newValue);
 
-default export function yourComponent() {
-    return <ColorDragSlider value={state.value} max={100} onChange={doThis} slide={{/* css */}} mode='red'/>
- }
+<ColorDragSlider value={state} max={100} onChange={doThis} slide={{/* css */}} mode='red'/>
+
 ```
-## RGBInput
+## NumInput
 
-RGBInput is a number input which when given a hex value and a 'red', 'green', or 'blue' mode, will display the 0-255 value of the selected channel. When the number is changed, it will return an updated full hex color via the onChange function, with the unselected channels unaltered.
+NumInput is used in place of standard number inputs, to avoid leading zeros, allowing for more natural typing input, while excluding unwanted input (such as letters). It will use numpad/keypad input on mobile. By applying a max prop, you can set a maximum input allowed (default 100).
 
-Standard number input attributes can be applied to it.
+Additional input props will be passed down to the input.
 
 ```jsx
-import React from 'react'
 
-import RGBInput from 'stuff-to-click';
+import { NumInput } from 'stuff-to-click'; // outside parent component
 
 doThis = (newValue) => setState(newValue);
 
-default export function yourComponent() {
-    return <RGBInput value={apSt.color} onChange={colorChange} mode='red' />
- }
+<NumInput value={state} max='300' onChange={doThis} />
+
+```
+
+## RGBInput
+
+RGBInput an input which uses NumINput, and when given a hex value alongside a 'red', 'green', or 'blue' mode, will display the 0-255 value of the selected channel. When the number is changed, it will return an updated full hex color via the onChange function, with the unselected channels unaltered.
+
+Additional input props will be passed down to the input.
+
+```jsx
+
+import { RGBInput } from 'stuff-to-click'; // outside parent component
+
+doThis = (newValue) => setState(newValue); // newValue = # hex string 
+
+return <RGBInput value={state} onChange={colorChange} mode='red' /> // value = # hex string 
+
 ```
 
 ## HexInput
@@ -84,15 +91,13 @@ Hex input is a text input that accepts a hex color as its value. It anicipates a
 Standard text input attributes can be passed down to the input.
 
 ```jsx
-import React from 'react'
 
-import HexInput from 'stuff-to-click';
+import { HexInput } from 'stuff-to-click'; // outside parent component
 
 doThis = (newValue) => setState(newValue);
 
-default export function yourComponent() {
-    return <HexInput value={apSt.color} onChange={colorChange} />
- }
+<HexInput value={state} onChange={doThis} />
+
 ```
 
 ## License
