@@ -1,4 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
+import { useTransition, animated } from 'react-spring';
+import FauxOption  from './FauxOption';
+import useArrowFocus  from './useArrowFocus';
 
 const outsideClose = (ref, close) => {
 	useEffect(() => {
@@ -17,6 +20,7 @@ const outsideClose = (ref, close) => {
 
 export default function FauxSelect({ name, onChange, set, value, ...rest }) {
 	const [expanded, toggle] = useState(false);
+	const [focus, setFocus] = useArrowFocus(set.length);
 	const open = () => toggle(true);
 	const close = () => toggle(false);
 
@@ -33,23 +37,40 @@ export default function FauxSelect({ name, onChange, set, value, ...rest }) {
 	};
 
 	const fauxOptionList = set.map((item,i) => {
-		return [
-			<li value={item.value} key={'l' + i} onClick={() => makeChange(item)}>{item.label}</li>,
-			<hr key={'h' + i} />
-		];
+		return <FauxOption 
+			item={item} 
+			value={value}
+			key={i}
+			onChange={makeChange}
+			setFocus={setFocus}
+			index={i}
+			focus={focus === i} />;
+	});
+
+	const transitions = useTransition(expanded, null, {
+		from: { opacity: 0, transform: 'translateY(0em)'},
+		enter: { opacity: 1, transform: 'translateY(0.5em)'},
+		leave: { opacity: 0, transform: 'translateY(0em)'},
+    	config: { friction: 50, tension: 350 }
 	});
 
 	return(
 		<React.Fragment>
-			<div className='faux-select' onClick={open}>
-				<div className='faux-select-label'>
-					{value}
+			<div ref={listRef}>
+				<div className='faux-select' onClick={open}>
+					<div className='faux-select-label'>
+						{value}
+					</div>
+					<div className='arrow'></div>
 				</div>
-				<div className='arrow'></div>
-			</div>			
-			<ul className={`faux-select-list${expanded ? ' faux-select-list-open' : ''}`} ref={listRef}>
-				{fauxOptionList}
-			</ul>
+				{
+					transitions.map(({ item, key, props }) =>
+						item && <animated.ul className='faux-select-list' style={props} key={key}>
+							{fauxOptionList}
+						</animated.ul>
+					)
+				}				
+			</div>		
 			<select name={name} value={value} {...rest} onChange={onChange} >
 				<option value={null} disabled> </option>
 				{optionList}
