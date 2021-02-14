@@ -13,6 +13,7 @@
     "react": "file:../node_modules/react",
     "react-dom": "file:../node_modules/react-dom",
     "react-scripts": "file:../node_modules/react-scripts",
+    "react-spring": "^8.0.27",
     "stuff-to-click": "file:.."
   },
   "devDependencies": {

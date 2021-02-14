@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-import { DragSlider, HexInput, SlideInput, ColorDragSlider, RGBInput, NumInput } from 'stuff-to-click';
+import { DragSlider, HexInput, SlideInput, ColorDragSlider, RGBInput, NumInput, SlideSelect } from 'stuff-to-click';
 
 import 'stuff-to-click/dist/index.css'
 
@@ -14,7 +14,7 @@ const App = () => {
 		color: '9acd33',
 		opacity: 75
 	});
-	const onChange = (e) => setSt({ ...apSt, [e.target.name]: e.target.value});
+	const onChange = (e) => {console.log(e.target.name); setSt({ ...apSt, [e.target.name]: e.target.value})};
 	const colorChange = (color) => setSt({ ...apSt, color: color});
 	const opacityChange = (opacity) => { console.log(opacity); setSt({ ...apSt, opacity: opacity}); };
 
@@ -24,6 +24,17 @@ const App = () => {
 		fontSize: '2rem',
 		width: '800px'
 	};
+
+	const selItems = [{
+		value: 'pizza',
+		label: 'pizza'
+	},{
+		value: 'sandwich',
+		label: 'sandwich'
+	},{
+		value: 'hotdog',
+		label: 'hotdog'
+	}];
 
 	return (
 		<div>
@@ -35,7 +46,13 @@ const App = () => {
 				<li>Telephone input: {apSt.tel}</li>
 				<li>Color: {apSt.color}</li>
 				<li>Opacity: {apSt.opacity}</li>
-			</ul>			
+			</ul>
+			<div>
+				<SlideSelect value={apSt.text} onChange={onChange} label='Some text' name='text' set={selItems} bar={{}}/>	
+			</div>
+			<br />
+			<br />
+			<br />
 			<SlideInput type="text" value={apSt.text} onChange={onChange} name='text' style={testStyle} id="howdy" label='Some text'/>
 			<SlideInput type="password" value={apSt.password} onChange={onChange} name='password' required bar={{}} label='A Password'/>
 			<SlideInput type="tel" value={apSt.tel} onChange={onChange} name='phonenumber' required bar={{backgroundColor: 'blue'}} style={{ fontSize: '1.75rem', display: 'block' }} valid={false} label='phone'/>

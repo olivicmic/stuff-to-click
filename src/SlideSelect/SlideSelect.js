@@ -1,11 +1,12 @@
 import React, {useState} from "react";
 import SlideWrapper  from '../SlideWrapper';
-const Input = ({...rest}) => <input {...rest}/>;
+import FauxSelect from './FauxSelect';
+
 
 const SlideInput = ({ ...rest}) => {
 	
 	return(
-		<SlideWrapper {...rest} component={Input}/>
+		<SlideWrapper {...rest} component={FauxSelect}/>
 	);
 };
 
