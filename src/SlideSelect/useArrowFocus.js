@@ -1,7 +1,7 @@
 import { useCallback, useState, useEffect } from "react";
 
 export default function useArrowFocus(size) {
-	const [currentFocus, setCurrentFocus] = useState(0);
+	const [currentFocus, setCurrentFocus] = useState(-1);
 
 	const handleKeyDown = useCallback(
 		e => {
@@ -13,6 +13,9 @@ export default function useArrowFocus(size) {
 				// Up arrow
 				e.preventDefault();
 				setCurrentFocus(currentFocus === 0 ? size - 1 : currentFocus - 1);
+			} else if (e.keyCode === 13) {
+				e.preventDefault();
+				console.log('hi :)');
 			}
 		},
 		[size, currentFocus, setCurrentFocus]

@@ -2,21 +2,8 @@ import React, { useState, useRef, useEffect } from 'react';
 import { useTransition, animated } from 'react-spring';
 import FauxOption  from './FauxOption';
 import useArrowFocus  from './useArrowFocus';
-
-const outsideClose = (ref, close) => {
-	useEffect(() => {
-		const handleClickOutside = (event) => {
-			if (ref.current && !ref.current.contains(event.target)) {
-				close();
-			}
-		};
-		document.addEventListener("mousedown", handleClickOutside);
-		return () => {
-		// Unbind the event listener on clean up
-			document.removeEventListener("mousedown", handleClickOutside);
-		};
-	}, [ref]);
-};
+import outsideClose  from './outsideClose';
+import selectSwitch  from './selectSwitch';
 
 export default function FauxSelect({ name, onChange, set, value, ...rest }) {
 	const [expanded, toggle] = useState(false);
@@ -25,7 +12,7 @@ export default function FauxSelect({ name, onChange, set, value, ...rest }) {
 	const close = () => toggle(false);
 
 	const listRef = useRef(null);
-	outsideClose(listRef, close);
+	outsideClose(listRef, close, setFocus);
 
 	const optionList = set.map((item,i) => {
 		return <option value={item.value} key={i}>{item.label}</option>
@@ -33,6 +20,7 @@ export default function FauxSelect({ name, onChange, set, value, ...rest }) {
 
 	const makeChange = (item) => {
 		onChange({ target: {...item, name: name}});
+		setFocus(-1);
 		close();
 	};
 
@@ -47,12 +35,7 @@ export default function FauxSelect({ name, onChange, set, value, ...rest }) {
 			focus={focus === i} />;
 	});
 
-	const transitions = useTransition(expanded, null, {
-		from: { opacity: 0, transform: 'translateY(0em)'},
-		enter: { opacity: 1, transform: 'translateY(0.5em)'},
-		leave: { opacity: 0, transform: 'translateY(0em)'},
-    	config: { friction: 50, tension: 350 }
-	});
+	const transitions = useTransition(expanded, null, selectSwitch);
 
 	return(
 		<React.Fragment>
