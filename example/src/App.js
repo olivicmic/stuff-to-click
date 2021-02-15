@@ -56,6 +56,8 @@ const App = () => {
 		label: 'fries'
 	}];
 
+	const arrow = ({...rest}) => <div {...rest} style={{ height: '1em', width: '1em', backgroundColor: 'purple', display: 'block'}}></div>;
+
 	return (
 		<div>
 			<h1>Click These Things!</h1>
@@ -68,8 +70,10 @@ const App = () => {
 				<li>Opacity: {apSt.opacity}</li>
 			</ul>
 			<div>
-				<SlideSelect value={apSt.text} onChange={onChange} label='Some text' name='text' set={selItems} bar={{}}/>
-				<SlideSelect value={apSt.text} onChange={onChange} label='Look at this how about it' name='text' set={junk} bar={{}}/>	
+				<SlideSelect value={apSt.text} onChange={onChange} label='Some text' name='text' set={selItems} bar={{}} tabIndex='1' required/>
+				<SlideSelect value={apSt.text} onChange={onChange} label='Look at this how about it especially one more ok one more' name='text' set={junk} bar={{}} tabIndex='2'/>
+				<SlideSelect value={apSt.text} onChange={onChange} label='Look at this how about it especially one more ok one more' name='text' set={junk} bar={{}} tabIndex='3' arrow={arrow}/>
+				<SlideSelect value={apSt.text} onChange={onChange} label='Some text' name='text' set={selItems} bar={{}} tabIndex='1' style={{color: 'orange'}}/>
 			</div>
 			<br />
 			<br />

@@ -25,7 +25,7 @@ const SlideInput = ({ component: Component, bar, id, label, name, required, styl
 				{label}
 				{required ? <div className="stuff-slide-input-required"></div> : null}
 			</label>
-			<Component {...rest} id={id} name={name} onBlur={onBlur} onFocus={onFocus} required={required} type={type} value={value}/>
+			<Component {...rest} id={id} name={name} focus={focus} onBlur={onBlur} onFocus={onFocus} required={required} type={type} value={value}/>
 			{ bar ? <div className='stuff-slide-bar' style={bar}></div> : null }
 		</div>
 	);

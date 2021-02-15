@@ -1,14 +1,14 @@
 import { useCallback, useState, useEffect } from "react";
 
-export default function useArrowFocus(set, expanded, close, onChange, name) {
+export default function useArrowFocus(set, expanded, expand, close, onChange, name, focus) {
 	const [currentFocus, setCurrentFocus] = useState(-1);
 	const size = set.length;
 
 	const handleKeyDown = useCallback(e => {
-		if (expanded && e.keyCode === 40) {
-			// Down arrow
+		if (e.keyCode === 40) {
 			e.preventDefault();
-			setCurrentFocus(currentFocus === size - 1 ? currentFocus : currentFocus + 1);
+			if (expanded) setCurrentFocus(currentFocus === size - 1 ? currentFocus : currentFocus + 1);
+			else if (focus) expand(true);
 		} else if (expanded && e.keyCode === 38) {
 			// Up arrow
 			e.preventDefault();
@@ -19,7 +19,7 @@ export default function useArrowFocus(set, expanded, close, onChange, name) {
 			setCurrentFocus(-1);
 			close();
 		}
-	},[size, currentFocus, setCurrentFocus, close, onChange]);
+	},[size, expanded, expand, currentFocus, setCurrentFocus, close, onChange]);
 
 	useEffect(() => {
 		document.addEventListener("keydown", handleKeyDown, false);

@@ -5,24 +5,24 @@ import useArrowFocus  from './useArrowFocus';
 import outsideClose  from './outsideClose';
 import selectSwitch  from './selectSwitch';
 
-export default function FauxSelect({ name, onChange, set, value, ...rest }) {
-	const [expanded, toggle] = useState(false);
-	const open = () => toggle(true);
-	const close = () => toggle(false);
-	const [focus, setFocus] = useArrowFocus(set, expanded, close, onChange, name);
+export default function FauxSelect({ arrow: Arrow, focus, onFocus, onBlur, name, onChange, set, tabIndex, value, style, ...rest }) {
+	const [expanded, expand] = useState(false);	
+	const open = () => expand(true);
+	const close = () => expand(false);
+	const [optionFocus, setOptionFocus] = useArrowFocus(set, expanded, expand, close, onChange, name, focus);
 
 	const listRef = useRef(null);
-	outsideClose(listRef, close, setFocus);
+	outsideClose(listRef, close, setOptionFocus);
 
-	const optionList = set.map((item,i) => {
-		return <option value={item.value} key={i}>{item.label}</option>
-	});
+	const optionList = set.map((item,i) => <option value={item.value} key={i}>{item.label}</option>);
 
 	const makeChange = (item) => {
 		onChange({ target: {...item, name: name}});
-		setFocus(-1);
+		setOptionFocus(-1);
 		close();
 	};
+
+	useEffect(() => { if (!focus) close(); });
 
 	const fauxOptionList = set.map((item,i) => {
 		return <FauxOption 
@@ -30,31 +30,34 @@ export default function FauxSelect({ name, onChange, set, value, ...rest }) {
 			value={value}
 			key={i}
 			onChange={makeChange}
-			setFocus={setFocus}
+			setFocus={setOptionFocus}
 			index={i}
-			focus={focus === i} />;
+			focus={optionFocus === i} />;
 	});
 
 	const transitions = useTransition(expanded, null, selectSwitch);
+	const attrSet = {onBlur, onFocus, style, tabIndex};
 
 	return(
-		<React.Fragment>
-			<div ref={listRef}>
-				<div className='faux-select' onClick={open}>
-					<div className='faux-select-label'>
-						{value}
-					</div>
-					<div className='arrow'></div>
+		<React.Fragment>			
+			<div className='faux-select' {...attrSet} onClick={open} ref={listRef}>
+				<div className='faux-select-label'>
+					{value}
 				</div>
-				{
-					transitions.map(({ item, key, props }) =>
-						item && <animated.ul className='faux-select-list' style={props} key={key}>
-							{fauxOptionList}
-						</animated.ul>
-					)
-				}				
-			</div>		
-			<select name={name} value={value} {...rest} onChange={onChange} >
+				{Arrow ?
+					<Arrow className='stuff-faux-select-marker'/> :
+					<div className='stuff-faux-select-marker'>
+						<div className='stuff-faux-arrow'></div>
+					</div>}
+			</div>
+			{
+				transitions.map(({ item, key, props }) =>
+					item && <animated.ul className='faux-select-list' style={props} key={key}>
+						{fauxOptionList}
+					</animated.ul>
+				)
+			}
+			<select name={name} value={value} {...rest} onChange={onChange} tabIndex={tabIndex}>
 				<option value={null} disabled> </option>
 				{optionList}
 			</select>

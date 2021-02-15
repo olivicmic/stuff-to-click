@@ -4,7 +4,6 @@ import FauxSelect from './FauxSelect';
 
 
 const SlideInput = ({ ...rest}) => {
-	
 	return(
 		<SlideWrapper {...rest} component={FauxSelect}/>
 	);

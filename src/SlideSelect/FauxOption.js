@@ -8,12 +8,12 @@ export default function FauxOption({ onChange, value, item, focus, index, setFoc
 	const indicator = () => {
 		if (active && ( hover || focus )) return 'translateX(-0.5em)';
 		else if (active) return 'translateX(0em)';
-		else if (hover || focus ) return 'translateX(0.5em)';
-		else return 'translateX(1em)';
+		else if (hover || focus ) return 'translateX(1em)';
+		else return 'translateX(1.5em)';
 	};
 	const indSpring = useSpring({
 		transform: indicator(),
-		config: config.stiff
+		config: config.wobbly
 	});
 
 	const handleSelect = useCallback(() => {
