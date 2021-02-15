@@ -36,6 +36,26 @@ const App = () => {
 		label: 'hotdog'
 	}];
 
+	const junk = [{
+		value: 'apple',
+		label: 'apple'
+	},{
+		value: 'banana',
+		label: 'banana'
+	},{
+		value: 'carrot',
+		label: 'carrot'
+	},{
+		value: 'drink',
+		label: 'drink'
+	},{
+		value: 'eggs',
+		label: 'eggs'
+	},{
+		value: 'fries',
+		label: 'fries'
+	}];
+
 	return (
 		<div>
 			<h1>Click These Things!</h1>
@@ -48,7 +68,8 @@ const App = () => {
 				<li>Opacity: {apSt.opacity}</li>
 			</ul>
 			<div>
-				<SlideSelect value={apSt.text} onChange={onChange} label='Some text' name='text' set={selItems} bar={{}}/>	
+				<SlideSelect value={apSt.text} onChange={onChange} label='Some text' name='text' set={selItems} bar={{}}/>
+				<SlideSelect value={apSt.text} onChange={onChange} label='Look at this how about it' name='text' set={junk} bar={{}}/>	
 			</div>
 			<br />
 			<br />

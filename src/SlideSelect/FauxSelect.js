@@ -7,9 +7,9 @@ import selectSwitch  from './selectSwitch';
 
 export default function FauxSelect({ name, onChange, set, value, ...rest }) {
 	const [expanded, toggle] = useState(false);
-	const [focus, setFocus] = useArrowFocus(set.length);
 	const open = () => toggle(true);
 	const close = () => toggle(false);
+	const [focus, setFocus] = useArrowFocus(set, expanded, close, onChange, name);
 
 	const listRef = useRef(null);
 	outsideClose(listRef, close, setFocus);
