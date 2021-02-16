@@ -1,11 +1,11 @@
 import React, {useState} from "react";
 import SlideWrapper  from '../SlideWrapper';
-import FauxSelect from './FauxSelect';
+import SelectSwitch from './SelectSwitch';
 
 
 const SlideInput = ({ ...rest}) => {
 	return(
-		<SlideWrapper {...rest} component={FauxSelect}/>
+		<SlideWrapper {...rest} component={SelectSwitch}/>
 	);
 };
 

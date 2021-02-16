@@ -1,7 +1,7 @@
 import React, {useRef, useState} from "react";
 import './SlideWrapper.scss';
 
-const SlideInput = ({ component: Component, bar, id, label, name, required, style, type, valid, value, ...rest}) => {
+const SlideWrapper = ({ component: Component, bar, id, label, name, required, style, type, valid, value, ...rest}) => {
 	const [focus, toggleFocus] = useState(false);
 	const isValid = (valid === undefined ) ? true : valid;
 	const onFocus = () => toggleFocus(true);
@@ -31,4 +31,4 @@ const SlideInput = ({ component: Component, bar, id, label, name, required, styl
 	);
 };
 
-export default SlideInput;
+export default SlideWrapper;

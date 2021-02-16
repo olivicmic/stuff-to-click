@@ -1,0 +1,102 @@
+select {
+	cursor: pointer;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	background-color: red;
+	opacity: 0;
+}
+
+@media (hover: hover) {
+	select {
+		display: none;
+	}
+}
+
+option {
+	padding-top: 20px;
+}
+
+.stuff-faux-select {
+	display: flex;
+	cursor: pointer;
+}
+
+.stuff-faux-select-label {
+	display: inline-block;
+}
+
+.stuff-faux-select-marker {
+	display: inline-block;
+	margin: auto 1em auto auto;
+	height: .5em;
+	width: .5em;
+}
+
+.stuff-faux-arrow {
+	border: solid currentColor;
+	border-width: 0 2px 2px 0;
+	box-sizing: border-box;
+	height: 100%;
+	width: 100%;
+	transform: rotate(45deg);
+}
+
+	
+.stuff-select-container {
+	display: inline-block;
+	position: relative;
+	width: auto;
+}
+
+.stuff-faux-select-list {	
+	background-color: #000;
+	border-radius: 4px;
+	box-sizing: border-box;
+	cursor: pointer;
+	flex-direction: column;
+	padding: 0;
+	position: absolute;
+	display: flex;
+	width: 100%;
+	z-index: 3000;
+	color: #fff;
+	margin: 0;
+
+	li {
+		display: flex;
+		align-items: center;
+		cursor: pointer;
+		padding: .5em;
+		list-style: none;
+		overflow: hidden;
+		
+		.faux-select-indicator {
+			background-color: #fff;
+			border-radius: 2px;
+			display: inline-block;
+			width: 1em;
+			height: 2px;
+			margin: auto 0 auto auto;
+		}
+	}
+
+	hr {
+		appearance: none;
+		border: none;
+		border-radius: 2px;
+		background-color: #fff;
+		display: block;
+		height: 2px;
+		margin: 0 .5em;
+		opacity: .25;
+	}
+
+	hr:last-child { display: none; }
+}
+
+.faux-select-list-open {
+	display: flex;
+}
