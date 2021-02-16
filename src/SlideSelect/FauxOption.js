@@ -23,7 +23,7 @@ export default function FauxOption({ onChange, value, item, focus, index, setFoc
 	return(
 		<React.Fragment>
 			<li value={item.value} onClick={() => onChange(item)} onMouseEnter={() => setHover(true)} onMouseLeave={() => setHover(false)} onKeyPress={handleSelect}>
-				{item.label}
+				<span>{item.label}</span>
 				<animated.div className='faux-select-indicator' style={indSpring}></animated.div>
 			</li>
 			<hr />

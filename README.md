@@ -10,9 +10,12 @@
 npm install --save stuff-to-click
 ```
 
+## Common usage
+All of the stuff-to-click inputs are designed as controlled inputs, pulling their value from a parent state and updating it via a provided function via the onChange attribute.
+
 ## SlideInput
 
-This input has a built in label (defined by using the 'label' attribute). It is intended to work with values within a parent state. Use the onChange attribute to define a function to update the parent state, which can also be a sanitizing function. The valid attribute takes a boolean which will assign error classes 'stuff-slide-input-error' and 'stuff-slide-input-label-error' which can be styled any which way to indicate an error. The bar attribute is disabled by default, but when passed an empty object or a CSS object a bottom bar will appear and can be styled via the CSS object.
+This input has a built in label (defined by using the 'label' attribute). Use the onChange attribute to define a function to update the parent state, which can also be a sanitizing function. The valid attribute takes a boolean which will assign error classes 'stuff-slide-input-error' and 'stuff-slide-input-label-error' which can be styled any which way to indicate an error. The bar attribute is disabled by default, but when passed an empty object or a CSS object a bottom bar will appear and can be styled via the CSS object.
 
 Other standard input attributes can be applied to it, and they will be passed to the core child input.
 
@@ -20,7 +23,44 @@ Other standard input attributes can be applied to it, and they will be passed to
 
 doThis = (newValue) => setState(newValue);
 
-<SlideInput label={state} onChange={doThis} valid="true" name="firstname" bar={/* css */}/>
+<SlideInput label={state} onChange={doThis} valid="true" name="firstname" bar={{/* css */}}/>
+
+```
+
+## SlideSelect
+
+SlideSelect is a select/dropdown with a built-in label like SlideInput. It updates a parent state via an onChange function. Options are provided via an array of objects, each with a 'value' and 'label' property. The selected value is what is returned and the label property is what is displayed on the component.
+
+The valid attribute takes a boolean which will assign error classes 'stuff-slide-input-error' and 'stuff-slide-input-label-error' which can be styled any which way to indicate an error. The main select input, the option list, and the optional bottom bar can be styled by providing 
+
+A component can be injected via the 'arrow' attribute, to replace the default arrow.
+
+It can be controlled via the up and down arrows, and a selection can be made with the enter key. On mobile devices the system select interface will activate rather than the custom styled list.
+
+```jsx
+
+doThis = (newValue) => setState(newValue);
+
+options = [{
+		value: 'pizza', // will be returned if chosen
+		label: 'Fresh Pizza'// will be displayed if chosen
+	},{
+		value: 'sandwich',
+		label: 'Deli Sandwich'
+	}];
+
+<SlideSelect 
+	value={state}
+	onChange={doThis} 
+	label='Pick a food' name='text'
+	set={options}
+	tabIndex='1'
+	required
+	valid={/* boolean */} arrow={myCustomeArrowComponent}
+	style={{ /* css for the main select input */}}
+	listStyle={{/* css for the option list*/}}
+	bar={{/* css for the bottom bar */}}
+/>
 
 ```
 

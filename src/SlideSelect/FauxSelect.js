@@ -5,7 +5,7 @@ import useArrowFocus  from './useArrowFocus';
 import listTransition  from './listTransition';
 import FauxOption  from './FauxOption';
 
-export default function FauxSelect({arrow: Arrow, focus, onChange, name, value, set, ...rest}) {
+export default function FauxSelect({arrow: Arrow, focus, onChange, name, value, set, listStyle, ...rest}) {
 	const listRef = useRef(null);
 	const [expanded, expand] = useState(false);	
 	const open = () => expand(true);
@@ -61,7 +61,7 @@ export default function FauxSelect({arrow: Arrow, focus, onChange, name, value, 
 			</div>
 			{
 				transitions.map(({ item, key, props }) =>
-					item && <animated.ul className='stuff-faux-select-list' style={props} key={key}>
+					item && <animated.ul className='stuff-faux-select-list' style={{...props, ...listStyle}} key={key}>
 						{fauxOptionList}
 					</animated.ul>
 				)

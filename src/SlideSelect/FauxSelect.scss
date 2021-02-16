@@ -1,54 +1,44 @@
-select {
-	cursor: pointer;
-	top: 0;
-	left: 0;
-	width: 100%;
-	height: 100%;
-	position: absolute;
-	background-color: red;
-	opacity: 0;
-}
-
-@media (hover: hover) {
+.stuff-slide-input {
 	select {
-		display: none;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		position: absolute;
+		opacity: 0;
 	}
-}
 
-option {
-	padding-top: 20px;
+	@media (hover: hover) {
+		select {
+			display: none;
+		}
+	}
 }
 
 .stuff-faux-select {
 	display: flex;
 	cursor: pointer;
-}
 
-.stuff-faux-select-label {
-	display: inline-block;
-}
+	.stuff-faux-select-label {
+		display: inline-block;
+	}
 
-.stuff-faux-select-marker {
-	display: inline-block;
-	margin: auto 1em auto auto;
-	height: .5em;
-	width: .5em;
-}
+	.stuff-faux-select-marker {
+		display: inline-block;
+		margin: auto 1em auto auto;
+		height: .5em;
+		width: .5em;
+	}
 
-.stuff-faux-arrow {
-	border: solid currentColor;
-	border-width: 0 2px 2px 0;
-	box-sizing: border-box;
-	height: 100%;
-	width: 100%;
-	transform: rotate(45deg);
-}
+	.stuff-faux-arrow {
+		border: solid currentColor;
+		border-width: 0 2px 2px 0;
+		box-sizing: border-box;
+		height: 100%;
+		width: 100%;
+		transform: rotate(45deg);
+	}
 
-
-.stuff-select-container {
-	display: inline-block;
-	position: relative;
-	width: auto;
 }
 
 .stuff-faux-select-list {	
@@ -60,10 +50,11 @@ option {
 	padding: 0;
 	position: absolute;
 	display: flex;
-	width: 100%;
+	width: auto;
 	z-index: 3000;
 	color: #fff;
 	margin: 0;
+	left: -2px;
 
 	li {
 		display: flex;
@@ -72,9 +63,12 @@ option {
 		padding: .5em;
 		list-style: none;
 		overflow: hidden;
+
+		span { margin-right: 3rem; }
 		
 		.faux-select-indicator {
-			background-color: #fff;
+			flex-shrink: 0;
+			background-color: currentColor;
 			border-radius: 2px;
 			display: inline-block;
 			width: 1em;
@@ -87,7 +81,7 @@ option {
 		appearance: none;
 		border: none;
 		border-radius: 2px;
-		background-color: #fff;
+		background-color: currentColor;
 		display: block;
 		height: 2px;
 		margin: 0 .5em;
