@@ -27,13 +27,13 @@ const App = () => {
 
 	const selItems = [{
 		value: 'pizza',
-		label: 'pizza'
+		label: 'Pizza'
 	},{
 		value: 'sandwich',
-		label: 'sandwich'
+		label: 'Sandwich'
 	},{
 		value: 'hotdog',
-		label: 'hotdog'
+		label: 'Hotdog'
 	}];
 
 	const junk = [{
@@ -73,7 +73,7 @@ const App = () => {
 				<SlideSelect value={apSt.text} onChange={onChange} label='Some text' name='text' set={selItems} bar={{}} tabIndex='1' required/>
 				<SlideSelect value={apSt.text} onChange={onChange} label='Look at this how about it especially one more ok one more' name='text' set={junk} bar={{}} tabIndex='2'/>
 				<SlideSelect value={apSt.text} onChange={onChange} label='Look at this how about it especially one more ok one more' name='text' set={junk} bar={{}} tabIndex='3' arrow={arrow}/>
-				<SlideSelect value={apSt.text} onChange={onChange} label='Some text' name='text' set={selItems} bar={{}} tabIndex='1' style={{color: 'orange'}}/>
+				<SlideSelect value={apSt.text} onChange={onChange} label='Some text' name='text' set={selItems} bar={{}} tabIndex='1' style={{color: 'orange', fontSize: '30px'}}/>
 			</div>
 			<br />
 			<br />
