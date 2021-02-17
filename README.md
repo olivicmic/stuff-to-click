@@ -29,7 +29,7 @@ doThis = (newValue) => setState(newValue);
 
 ## SlideSelect
 
-SlideSelect is a select/dropdown with a built-in label like SlideInput. It updates a parent state via an onChange function. Options are provided via an array of objects, each with a 'value' and 'label' property. The selected value is what is returned and the label property is what is displayed on the component.
+SlideSelect is a select/dropdown with a built-in label like SlideInput. It updates a parent state via an onChange function which is passed an e.target callback object like standard input. Options are provided via an array of objects, each with a 'value' and 'label' property. The label property is what is displayed on the component but does not have to reflect the value exactly.
 
 The valid attribute takes a boolean which will assign error classes 'stuff-slide-input-error' and 'stuff-slide-input-label-error' which can be styled any which way to indicate an error. The main select input, the option list, and the optional bottom bar can be styled by providing 
 

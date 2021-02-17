@@ -2,10 +2,10 @@ import React, { useState, useRef, useEffect } from 'react';
 import FauxSelect  from './FauxSelect';
 import './FauxSelect.scss'
 
-export default function SelectSwitch({ arrow, focus, onFocus, onBlur, name, onChange, set, tabIndex, value, style, listStyle, ...rest }) {
+export default function SelectSwitch({ arrow, focus, onFocus, onBlur, name, onChange, set, tabIndex, value, style, listStyle, debug, ...rest }) {
 	
 	const optionList = set.map((item,i) => <option value={item.value} key={i}>{item.label}</option>);
-	const attrSet = { arrow, onChange, name, onBlur, focus, onFocus, style, tabIndex, set: set, value, listStyle};
+	const attrSet = { arrow, onChange, name, onBlur, focus, onFocus, style, tabIndex, set: set, value, listStyle, debug};
 
 	return(
 		<React.Fragment>

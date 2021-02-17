@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 import SlideWrapper  from '../SlideWrapper';
-const Input = ({focus, ...rest}) => <input {...rest}/>;
+const Input = ({focus, type = 'text', ...rest}) => <input type={type} {...rest}/>;
 
 const SlideInput = ({ ...rest}) => {
 	

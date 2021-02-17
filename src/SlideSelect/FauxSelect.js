@@ -5,7 +5,7 @@ import useArrowFocus  from './useArrowFocus';
 import listTransition  from './listTransition';
 import FauxOption  from './FauxOption';
 
-export default function FauxSelect({arrow: Arrow, focus, onChange, name, value, set, listStyle, ...rest}) {
+export default function FauxSelect({arrow: Arrow, focus, onChange, name, value, set, listStyle, debug, ...rest}) {
 	const listRef = useRef(null);
 	const [expanded, expand] = useState(false);	
 	const open = () => expand(true);
@@ -14,9 +14,9 @@ export default function FauxSelect({arrow: Arrow, focus, onChange, name, value, 
 	const [optionFocus, setOptionFocus] = useArrowFocus(set, expanded, expand, close, onChange, name, focus, setLabel);
 	const transitions = useTransition(expanded, null, listTransition);
 
-	outsideClose(listRef, close, setOptionFocus);
+	outsideClose(listRef, close, setOptionFocus, debug);
 	useEffect(() => { 
-		if (!focus) close();
+		if (!focus && !debug) close();
 		if (value) {
 			let matched = false;
 			set.forEach((item, i) => {
