@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-import { DragSlider, HexInput, SlideInput, ColorDragSlider, RGBInput, NumInput, SlideSelect } from 'stuff-to-click';
+import { Accordian, DragSlider, HexInput, SlideInput, ColorDragSlider, RGBInput, NumInput, SlideSelect } from 'stuff-to-click';
 
 import 'stuff-to-click/dist/index.css'
 
@@ -69,6 +69,10 @@ const App = () => {
 				<li>Color: {apSt.color}</li>
 				<li>Opacity: {apSt.opacity}</li>
 			</ul>
+			<Accordian>
+				<h3>Hey</h3>
+				<p>Some stuff</p>
+			</Accordian>
 			<div>
 				<SlideSelect value={apSt.text} onChange={onChange} label='Some text' name='text' set={selItems} bar={{}} tabIndex='1' required/>
 				<SlideSelect value={apSt.text} onChange={onChange} label='Look at this how about it especially one more ok one more' name='text' set={junk} bar={{}} tabIndex='2'/>

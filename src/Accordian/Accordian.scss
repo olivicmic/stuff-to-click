@@ -1,0 +1,30 @@
+.stuff-accordian-container {
+	border: 2px solid currentColor;
+	box-sizing: border-box;
+
+	header {
+		padding: 1em;
+	}
+
+	.stuff-accordian {
+		position: relative;
+		overflow: hidden;
+	}
+
+	.stuff-accordian-content {
+		padding: 0 1em 1em;
+
+		hr {
+			margin: 0;
+			appearance: none;
+			background-color: #000;
+			height: 2px;
+			border-radius: 2px;
+			border: none;
+		}
+
+		footer {
+			margin: 0;
+		}
+	}
+}
