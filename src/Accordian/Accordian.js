@@ -3,18 +3,14 @@ import { useSpring, animated }  from 'react-spring';
 import PlaceholderBtn from '../PlaceholderBtn';
 import './Accordian.scss'
 
-export default function Accordian({ children, expander: Expander, footer: Footer, header: Header }) {
-	const defaultHeight = "0px";
-	const [expanded, toggle] = useState(false);
+export default function Accordian({ children, expander: Expander, footer: Footer, header: Header, opened = false }) {
+	let defaultHeight = 0;
+	const [expanded, toggle] = useState(opened);
 	const [contentHeight, setContentHeight] = useState(defaultHeight);
 	const contentRef = useRef(null);
 	const expand = useSpring({
 		config: { friction: 50, tension: 350 },
-		height: expanded ? `${contentHeight}px` : defaultHeight
-	});
-	const spin = useSpring({
-		config: { friction: 10 },
-		transform: expanded ? "rotate(180deg)" : "rotate(0deg)"
+		height: expanded ? `${contentHeight}px` : `${defaultHeight}px`
 	});
 
 	const openClose = () => toggle(!expanded);

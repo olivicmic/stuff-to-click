@@ -73,6 +73,10 @@ const App = () => {
 				<h3>Hey</h3>
 				<p>Some stuff</p>
 			</Accordian>
+			<Accordian opened>
+				<h3>Hey</h3>
+				<p>Some stuff</p>
+			</Accordian>
 			<div>
 				<SlideSelect value={apSt.text} onChange={onChange} label='Some text' name='text' set={selItems} bar={{}} tabIndex='1' required/>
 				<SlideSelect value={apSt.text} onChange={onChange} label='Look at this how about it especially one more ok one more' name='text' set={junk} bar={{}} tabIndex='2'/>
