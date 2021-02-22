@@ -8,11 +8,14 @@
 
 	.stuff-accordian {
 		position: relative;
-		overflow: hidden;
 	}
 
 	.stuff-accordian-content {
-		padding: 0 1em 1em;
+		padding: 0 1em;
+		box-sizing: border-box;
+		height: 100%;
+		width: 100%;
+		overflow: hidden;
 
 		hr {
 			margin: 0;

@@ -1,16 +1,15 @@
 import React, { useState, useRef, useEffect } from 'react';
-import FauxSelect  from './FauxSelect';
+import Selection  from '../Selection';
 import './FauxSelect.scss'
 
-export default function SelectSwitch({ arrow, focus, onFocus, onBlur, name, onChange, set, tabIndex, value, style, listStyle, debug, ...rest }) {
-	
+export default function SelectSwitch({ arrow, focus, onFocus, onBlur, name, set, tabIndex, value, valueName, style, listStyle, debug, onClick, ...rest }) {
 	const optionList = set.map((item,i) => <option value={item.value} key={i}>{item.label}</option>);
-	const attrSet = { arrow, onChange, name, onBlur, focus, onFocus, style, tabIndex, set: set, value, listStyle, debug};
+	const attrSet = { arrow, name, onClick, onBlur, focus, onFocus, style, tabIndex, set: set, value, valueName, listStyle, debug};
 
 	return(
 		<React.Fragment>
-			<FauxSelect {...attrSet}/>
-			<select {...rest} name={name} value={value} onChange={onChange} tabIndex={tabIndex}>
+			<Selection {...attrSet}/>
+			<select {...rest} name={name} value={value} tabIndex={tabIndex}>
 				<option value={null} disabled> </option>
 				{optionList}
 			</select>

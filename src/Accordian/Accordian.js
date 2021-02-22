@@ -20,9 +20,9 @@ export default function Accordian({ children, expander: Expander, footer: Footer
 	};
 
 	useEffect(() => {
-		setContentHeight(contentRef.current.offsetHeight); //Sets initial height	
-		window.addEventListener("resize", setContentHeight(contentRef.current.offsetHeight)); //Adds resize event listener
-		return window.removeEventListener("resize", setContentHeight(contentRef.current.offsetHeight)); // Clean-up
+		setContentHeight(contentRef.current.scrollHeight); //Sets initial height	
+		window.addEventListener("resize", setContentHeight(contentRef.current.scrollHeight)); //Adds resize event listener
+		return window.removeEventListener("resize", setContentHeight(contentRef.current.scrollHeight)); // Clean-up
 	}, [contentRef]);
 
 	return(

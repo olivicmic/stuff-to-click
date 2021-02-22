@@ -5,7 +5,7 @@ import SelectSwitch from './SelectSwitch';
 
 const SlideInput = ({ ...rest}) => {
 	return(
-		<SlideWrapper {...rest} component={SelectSwitch}/>
+		<SlideWrapper {...rest} component={SelectSwitch} dropdown/>
 	);
 };
 
