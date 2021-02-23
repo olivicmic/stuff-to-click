@@ -21,12 +21,9 @@ export default function FauxOption({ onChange, value, item, focus, index, setFoc
 	}, [index, setFocus]);
 
 	return(
-		<React.Fragment>
-			<li value={item.value} onClick={() => onChange(item)} onMouseEnter={() => setHover(true)} onMouseLeave={() => setHover(false)} onKeyPress={handleSelect}>
-				<span>{item.label}</span>
-				<animated.div className='faux-select-indicator' style={indSpring}></animated.div>
-			</li>
-			<hr />
-		</React.Fragment>
+		<li value={item.value} onClick={() => onChange(item)} onMouseEnter={() => setHover(true)} onMouseLeave={() => setHover(false)} onKeyPress={handleSelect}>
+			<span>{item.label}</span>
+			<animated.div className='faux-select-indicator' style={indSpring}></animated.div>
+		</li>
 	);
 };

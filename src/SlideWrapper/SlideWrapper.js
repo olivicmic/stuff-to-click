@@ -2,9 +2,9 @@ import React, {useEffect, useRef, useState} from "react";
 import DropDown  from '../DropDown';
 import './SlideWrapper.scss';
 
-const SlideWrapper = ({ component: Component, bar, dropdown, id, label, name, onChange, required, set, style, type, valid, value, debug, ...rest}) => {
+const SlideWrapper = ({ component: Component, bar, dropdown, id, label, listStyle, name, onChange, required, set, style, type, valid, value, debug, ...rest}) => {
 	const [focus, toggleFocus] = useState(false);
-	const [listOffset, setOffset] = useState(0);
+	const [listOffset, setOffset] = useState([0,0]);
 	const [valueName, setValueName] = useState(null);
 	const [expanded, toggleExpand] = useState(false);
 	const expand = () => toggleExpand(!expanded);
@@ -29,8 +29,8 @@ const SlideWrapper = ({ component: Component, bar, dropdown, id, label, name, on
 	const sharedAttr = { set: set, name, focus, onChange, value };
 
 	useEffect(() => {
-		setOffset(selRef.current.offsetLeft);
-	},[selRef]);
+		if (expanded) setOffset([selRef.current.offsetLeft, (selRef.current.offsetTop + selRef.current.offsetHeight)]);
+	},[selRef, expanded]);
 
 	return(
 		<React.Fragment>
@@ -42,7 +42,7 @@ const SlideWrapper = ({ component: Component, bar, dropdown, id, label, name, on
 			<Component {...rest} {...sharedAttr} id={id} onBlur={onBlur} onFocus={onFocus} required={required} type={type}  valueName={valueName} onClick={open}/>
 			{ bar ? <div className='stuff-slide-bar' style={bar}></div> : null }
 		</div>
-		{(dropdown && set) ? <DropDown {...sharedAttr} listOffset={listOffset} setValueName={setValueName} expanded={expanded} close={close} debug={debug}/> : null}
+		{(dropdown && set) ? <DropDown {...sharedAttr} listOffset={listOffset} setValueName={setValueName} expanded={expanded} close={close} debug={debug} listStyle={listStyle}/> : null}
 		</React.Fragment>
 	);
 };

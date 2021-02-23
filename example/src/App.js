@@ -74,7 +74,7 @@ const App = () => {
 				<p>Some stuff</p>
 			</Accordian>
 			<Accordian opened>
-				<SlideSelect value={apSt.text} onChange={onChange} label='Some text' name='text' set={selItems} bar={{}} tabIndex='1' style={{color: 'orange', fontSize: '30px'}} listStyle={{ color: 'red'}} debug/>
+				<SlideSelect value={apSt.text} onChange={onChange} label='Some text' name='text' set={selItems} bar={{}} tabIndex='1' style={{color: 'orange', fontSize: '30px'}} listStyle={{ backgroundColor: 'blue', color: 'red'}} debug/>
 			</Accordian>
 			<div>
 				<SlideSelect value={apSt.text} onChange={onChange} label='Some text' name='text' set={selItems} bar={{}} tabIndex='1' required/>

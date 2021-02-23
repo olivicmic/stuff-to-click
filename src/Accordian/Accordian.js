@@ -13,7 +13,10 @@ export default function Accordian({ children, expander: Expander, footer: Footer
 		height: expanded ? `${contentHeight}px` : `${defaultHeight}px`
 	});
 
-	const openClose = () => toggle(!expanded);
+	const openClose = () => {
+		if (expanded) document.activeElement.blur();
+		toggle(!expanded);
+	};
 	const switchProps = {
 		active: expanded,
 		onClick: openClose

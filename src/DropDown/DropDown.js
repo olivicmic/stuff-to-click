@@ -46,7 +46,12 @@ export default function DropDown({arrow: Arrow, focus, onChange, name, value, se
 
 	return(		
 		transitions.map(({ item, key, props }) => item &&
-			<animated.ul ref={listRef} className='stuff-faux-select-list' style={{...props, ...listStyle, left: listOffset + 'px'}} key={key}>
+			<animated.ul ref={listRef} className='stuff-faux-select-list' style={{
+				...props,
+				...listStyle,
+				left: listOffset[0] + 'px',
+				top: listOffset[1] + 'px',
+			}} key={key}>
 				{fauxOptionList}
 			</animated.ul>
 		)

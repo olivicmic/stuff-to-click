@@ -58,7 +58,7 @@
 	z-index: 3000;
 	color: #fff;
 	margin: 0;
-	left: -2px;
+	//top: 3em;
 
 	li {
 		display: flex;
@@ -79,17 +79,17 @@
 			height: 2px;
 			margin: auto 0 auto auto;
 		}
-	}
 
-	hr {
-		appearance: none;
-		border: none;
-		border-radius: 2px;
-		background-color: currentColor;
-		display: block;
-		height: 2px;
-		margin: 0 .5em;
-		opacity: .25;
+		hr {
+			appearance: none;
+			border: none;
+			border-radius: 2px;
+			background-color: currentColor;
+			display: block;
+			height: 2px;
+			margin: 0 .5em;
+			opacity: .25;
+		}
 	}
 
 	hr:last-child { display: none; }
