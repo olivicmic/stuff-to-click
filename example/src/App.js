@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-import { Accordian, DragSlider, HexInput, SlideInput, ColorDragSlider, RGBInput, NumInput, SlideSelect } from 'stuff-to-click';
+import { Accordian, DragSlider, HexInput, SlideInput, ColorDragSlider, RGBInput, NumInput, PlaceholderBtn, SlideSelect } from 'stuff-to-click';
 
 import 'stuff-to-click/dist/index.css'
 
@@ -73,8 +73,12 @@ const App = () => {
 				<h3>Hey</h3>
 				<p>Some stuff</p>
 			</Accordian>
-			<Accordian opened>
+			<Accordian opened expander={({...rest}) => {
+				console.log(rest);
+				return <PlaceholderBtn {...rest} />
+			}}>
 				<SlideSelect value={apSt.text} onChange={onChange} label='Some text' name='text' set={selItems} bar={{}} tabIndex='1' style={{color: 'orange', fontSize: '30px'}} listStyle={{ backgroundColor: 'blue', color: 'red'}} debug/>
+				<textarea name="" id="" cols="30" rows="10"></textarea>
 			</Accordian>
 			<div>
 				<SlideSelect value={apSt.text} onChange={onChange} label='Some text' name='text' set={selItems} bar={{}} tabIndex='1' required/>

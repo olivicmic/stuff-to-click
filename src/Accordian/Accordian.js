@@ -35,7 +35,6 @@ export default function Accordian({ children, expander: Expander, footer: Footer
 		<div className='stuff-accordian-container' >
 			<header>
 				{Header ? <Header /> : ''}
-				{sizes.height}
 				{Expander ? <Expander {...switchProps} /> : <PlaceholderBtn {...switchProps} />}
 			</header>
 			<animated.div className='stuff-accordian' style={expand} >
