@@ -22,29 +22,24 @@ export default function Accordian({ children, expander: Expander, footer: Footer
 		toggle(!expanded);
 	};
 
-	const switchProps = {
-		active: expanded,
-		onClick: openClose
-	};
-
 	useEffect(() => {
 		if (sizes.height) setContentHeight(sizes.height);
 	});
 
 	return(
 		<div className='stuff-accordian-container' >
-			<header>
+			<header onClick={openClose}>
 				{Header ? <Header /> : ''}
-				{Expander ? <Expander {...switchProps} /> : <PlaceholderBtn {...switchProps} />}
+				{Expander ? <Expander active={expanded}/> : <PlaceholderBtn active={expanded}/>}
 			</header>
 			<animated.div className='stuff-accordian' style={expand} >
 				<div className='stuff-accordian-content'>
 					<hr />
 					{resizeListener}
 					{children}
-					<footer>
+					<footer onClick={openClose}>
 						{Footer ? <Footer /> : ''}
-						{Expander ? <Expander {...switchProps} /> : <PlaceholderBtn {...switchProps} />}
+						{Expander ? <Expander active={expanded}/> : <PlaceholderBtn active={expanded}/>}
 					</footer>
 				</div>
 			</animated.div>

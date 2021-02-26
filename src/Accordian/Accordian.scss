@@ -2,6 +2,8 @@
 	border: 2px solid currentColor;
 	box-sizing: border-box;
 
+	header, footer { cursor: pointer; }
+
 	header {
 		padding: 1em;
 	}
