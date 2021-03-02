@@ -2,26 +2,23 @@
 	border: 2px solid currentColor;
 	box-sizing: border-box;
 
-	header, footer { cursor: pointer; }
+	.stuff-accordian-header, .stuff-accordian-footer { cursor: pointer; }
 
-	header {
+	.stuff-accordian-header {
 		padding: 1em;
 	}
 
 	.stuff-accordian {
-		//position: relative;
 		overflow: hidden;
 	}
 
 	.stuff-accordian-content {
 		padding: 0 1em;
 		box-sizing: border-box;
-		//height: 100%;
 		width: 100%;
-		//overflow: hidden;
 		position: relative;
 
-		hr {
+		.stuff-accordian-seperator {
 			margin: 0 0 1em;
 			appearance: none;
 			background-color: #000;
@@ -30,7 +27,7 @@
 			border: none;
 		}
 
-		footer {
+		.stuff-accordian-footer {
 			margin: 0;
 			padding: 1em 0;
 		}

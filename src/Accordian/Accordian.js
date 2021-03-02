@@ -28,16 +28,16 @@ export default function Accordian({ children, expander: Expander, footer: Footer
 
 	return(
 		<div className='stuff-accordian-container' >
-			<header onClick={openClose}>
+			<header className='stuff-accordian-header' onClick={openClose}>
 				{Header ? <Header /> : ''}
 				{Expander ? <Expander active={expanded}/> : <PlaceholderBtn active={expanded}/>}
 			</header>
 			<animated.div className='stuff-accordian' style={expand} >
 				<div className='stuff-accordian-content'>
-					<hr />
+					<hr className='stuff-accordian-seperator'/>
 					{resizeListener}
 					{children}
-					<footer onClick={openClose}>
+					<footer className='stuff-accordian-footer' onClick={openClose}>
 						{Footer ? <Footer /> : ''}
 						{Expander ? <Expander active={expanded}/> : <PlaceholderBtn active={expanded}/>}
 					</footer>
