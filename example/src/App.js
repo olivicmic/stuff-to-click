@@ -18,6 +18,8 @@ const App = () => {
 	const colorChange = (color) => setSt({ ...apSt, color: color});
 	const opacityChange = (opacity) => { console.log(opacity); setSt({ ...apSt, opacity: opacity}); };
 
+	const watchAcc = (oState) => console.log(oState);
+
 	const testStyle = {
 		color: 'blue',
 		backgroundColor: 'green',
@@ -69,7 +71,7 @@ const App = () => {
 				<li>Color: {apSt.color}</li>
 				<li>Opacity: {apSt.opacity}</li>
 			</ul>
-			<Accordian>
+			<Accordian onChange={watchAcc}>
 				<h3>Hey</h3>
 				<p>Some stuff</p>
 			</Accordian>

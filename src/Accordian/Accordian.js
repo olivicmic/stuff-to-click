@@ -6,7 +6,7 @@ import useResizeAware from 'react-resize-aware';
 import useHeight  from '../useHeight';
 import './Accordian.scss'
 
-export default function Accordian({ children, expander: Expander, footer: Footer, header: Header, opened = false }) {
+export default function Accordian({ children, expander: Expander, footer: Footer, header: Header, opened = false, onChange = () => {} }) {
 	let defaultHeight = 0;
 	const [expanded, toggle] = useState(opened);
 	const [contentHeight, setContentHeight] = useState(defaultHeight);
@@ -17,6 +17,8 @@ export default function Accordian({ children, expander: Expander, footer: Footer
 		to: {height: expanded ? contentHeight : 0}
 	});
 
+	const makeChange = () => onChange(expanded);
+
 	const openClose = () => {
 		if (expanded) document.activeElement.blur();
 		toggle(!expanded);
@@ -24,7 +26,8 @@ export default function Accordian({ children, expander: Expander, footer: Footer
 
 	useEffect(() => {
 		if (sizes.height) setContentHeight(sizes.height);
-	});
+		makeChange();
+	},[expanded]);
 
 	return(
 		<div className='stuff-accordian-container' >

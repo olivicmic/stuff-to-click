@@ -142,7 +142,7 @@ doThis = (newValue) => setState(newValue);
 
 ## Accordian
 
-The accordian, closed by default, will expand to the height of the child contents. It is expanded via clicking the accordian header and footer. There is an expander attribute where you can specify a component which is passed an "active" boolean attribute. Content for the header and footer can be specified via the header and footer attributes respectively. Only the header is visible while the accordian is closed.
+The accordian, closed by default, will expand to the height of the child contents. It is expanded via clicking the accordian header and footer. There is an expander attribute where you can specify a component which is passed an "active" boolean attribute. Content for the header and footer can be specified via the header and footer attributes respectively. Only the header is visible while the accordian is closed. It can also recieve a function which itself can recieve a callback that returns the expanded state as a boolean (true = expanded, false = closed).
 
 ```jsx
 const myButton = ({ active, onClick}) => <button type='button' onClick={onClick}>{ active ? 'on' : 'off' }</button>;
