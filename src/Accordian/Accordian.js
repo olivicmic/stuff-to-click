@@ -26,8 +26,9 @@ export default function Accordian({ children, expander: Expander, footer: Footer
 
 	useEffect(() => {
 		if (sizes.height) setContentHeight(sizes.height);
-		makeChange();
-	},[expanded]);
+	});
+
+	useEffect(() => makeChange(),[expanded]);
 
 	return(
 		<div className='stuff-accordian-container' >
