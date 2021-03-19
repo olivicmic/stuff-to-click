@@ -18,18 +18,19 @@
 		width: 100%;
 		position: relative;
 
-		.stuff-accordian-seperator {
-			margin: 0 0 1em;
-			appearance: none;
-			background-color: #000;
-			height: 2px;
-			border-radius: 2px;
-			border: none;
-		}
+
 
 		.stuff-accordian-footer {
 			margin: 0;
 			padding: 1em 0;
 		}
+	}
+
+	.stuff-accordian-seperator {
+		margin: 0 0 1em;
+		appearance: none;
+		height: 2px;
+		border-radius: 2px;
+		border: none;
 	}
 }
