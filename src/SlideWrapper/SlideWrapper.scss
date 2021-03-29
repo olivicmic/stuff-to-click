@@ -63,6 +63,10 @@
 		height: 2.5em;
 	}
 
+	.stuff-slide-input-content {
+		display: flex;
+	}
+
 	.stuff-slide-bar {
 		display: block;
 		background-color: currentColor;
@@ -71,6 +75,10 @@
 		border-radius: 2px;
 		margin: 0 0 -2px 0;
 		bottom: 0;
+	}
+
+	.stuff-slide-input-icon {
+		margin: auto 1em auto auto; //
 	}
 }
 

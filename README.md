@@ -17,6 +17,8 @@ All of the stuff-to-click inputs are designed as controlled inputs, pulling thei
 
 This input has a built in label (defined by using the 'label' attribute). Use the onChange attribute to define a function to update the parent state, which can also be a sanitizing function. The valid attribute takes a boolean which will assign error classes 'stuff-slide-input-error' and 'stuff-slide-input-label-error' which can be styled any which way to indicate an error. The bar attribute is disabled by default, but when passed an empty object or a CSS object a bottom bar will appear and can be styled via the CSS object.
 
+An icon or other component can be displayed in the input by passing the component via the 'icon' attribute.
+
 Other standard input attributes can be applied to it, and they will be passed to the core child input.
 
 ```jsx
