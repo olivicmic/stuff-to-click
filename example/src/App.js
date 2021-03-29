@@ -60,6 +60,11 @@ const App = () => {
 
 	const arrow = ({...rest}) => <div {...rest} style={{ height: '1em', width: '1em', backgroundColor: 'purple', display: 'block'}}></div>;
 
+	const btnPair = ({ ...rest }) => <div {...rest}>
+		<button className='pair-btns' onClick={() => console.log('One')}>One</button>
+		<button className='pair-btns' onClick={() => console.log('Two')}>Two</button>
+	</div>;
+
 	return (
 		<div>
 			<h1>Click These Things!</h1>
@@ -91,7 +96,7 @@ const App = () => {
 			<br />
 			<br />
 			<SlideInput type="text" value={apSt.text} onChange={onChange} name='text' style={testStyle} id="howdy" label='Some text'/>
-			<SlideInput type="text" value={apSt.text} onChange={onChange} name='text' style={testStyle} id="howdy" label='Some text' icon={arrow}/>
+			<SlideInput type="text" value={apSt.text} onChange={onChange} name='text' style={testStyle} id="howdy" label='Some text' extra={btnPair}/>
 			<SlideInput type="password" value={apSt.password} onChange={onChange} name='password' required bar={{}} label='A Password'/>
 			<SlideInput type="tel" value={apSt.tel} onChange={onChange} name='phonenumber' required bar={{backgroundColor: 'blue'}} style={{ fontSize: '1.75rem', display: 'block' }} valid={false} label='phone'/>
 			<SlideInput type="email" value={apSt.email} onChange={onChange} name='email' required bar={{}} style={{ fontSize: '1.5rem' }} autoComplete="false" label="An Email"/>

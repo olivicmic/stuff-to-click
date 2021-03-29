@@ -25,3 +25,7 @@ code {
 .stuff-accordian-container {
   margin-bottom: 3em;
 }
+
+.pair-btns {
+  display: inline-block;
+}

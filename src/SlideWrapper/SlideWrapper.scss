@@ -77,8 +77,10 @@
 		bottom: 0;
 	}
 
-	.stuff-slide-input-icon {
-		margin: auto 1em auto auto; //
+	.stuff-slide-input-extra {
+		margin: auto 1em auto auto;
+		white-space: nowrap;
+		display: flex;
 	}
 }
 

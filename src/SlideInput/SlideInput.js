@@ -1,9 +1,9 @@
 import React, {useState} from "react";
 import SlideWrapper  from '../SlideWrapper';
-const Input = ({focus, icon: Icon, type = 'text', valueName, ...rest}) => 
+const Input = ({focus, extra: Extra, type = 'text', valueName, ...rest}) => 
 <div className='stuff-slide-input-content'>
 	<input type={type} {...rest}/>
-	{ Icon ? <Icon className='stuff-slide-input-icon'/> : null }
+	{ Extra ? <Extra className='stuff-slide-input-extra'/> : null }
 </div>;
 
 const SlideInput = ({ ...rest}) => {
