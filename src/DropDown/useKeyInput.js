@@ -1,6 +1,6 @@
 import { useCallback, useState, useEffect } from "react";
 
-export default function useArrowFocus(set, onChange, name, setValueName, expanded, focus, open, close) {
+export default function useKeyInput(set, onChange, name, setValueName, expanded, focus, open, close) {
 	const [currentFocus, setCurrentFocus] = useState(-1);
 	const size = set.length;
 

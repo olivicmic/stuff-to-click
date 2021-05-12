@@ -1,9 +1,7 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { useSpring, animated }  from 'react-spring';
 import PlaceholderBtn from '../PlaceholderBtn';
-import { useResizeDetector } from 'react-resize-detector';
 import useResizeAware from 'react-resize-aware';
-import useHeight  from '../useHeight';
 import './Accordian.scss'
 
 export default function Accordian({ 

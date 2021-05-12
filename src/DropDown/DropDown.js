@@ -1,14 +1,14 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { useTransition, animated } from 'react-spring';
 import outsideClose  from './outsideClose';
-import keyControl  from './keyControl';
+import useKeyInput  from './useKeyInput';
 import listTransition  from './listTransition';
 import FauxOption  from './FauxOption';
 
 export default function DropDown({arrow: Arrow, focus, onChange, name, value, set, listOffset, listStyle, debug, setValueName,expanded, open, close, ...rest}) {	
 	const listRef = useRef(null);
-	const [optionFocus, setOptionFocus] = keyControl(set, onChange, name, setValueName, expanded, focus, open, close);
-	const transitions = useTransition(expanded, null, listTransition);
+	const [optionFocus, setOptionFocus] = useKeyInput(set, onChange, name, setValueName, expanded, focus, open, close);
+	const transitions = useTransition(expanded, listTransition);
 
 	outsideClose(listRef, close, setOptionFocus, debug);
 	useEffect(() => { 
@@ -45,13 +45,13 @@ export default function DropDown({arrow: Arrow, focus, onChange, name, value, se
 	});
 
 	return(		
-		transitions.map(({ item, key, props }) => item &&
+		transitions((props, item) => item &&
 			<animated.ul ref={listRef} className='stuff-faux-select-list' style={{
 				...props,
 				...listStyle,
 				left: listOffset[0] + 'px',
 				top: listOffset[1] + 'px',
-			}} key={key}>
+			}}>
 				{fauxOptionList}
 			</animated.ul>
 		)
