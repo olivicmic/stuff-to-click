@@ -19,6 +19,8 @@ const App = () => {
 	const opacityChange = (opacity) => { console.log(opacity); setSt({ ...apSt, opacity: opacity}); };
 
 	const watchAcc = (oState) => console.log(oState);
+	const onClosed = (oState) => console.log('closed');
+	const onOpened = (oState) => console.log('opened');
 
 	const testStyle = {
 		color: 'blue',
@@ -76,7 +78,7 @@ const App = () => {
 				<li>Color: {apSt.color}</li>
 				<li>Opacity: {apSt.opacity}</li>
 			</ul>
-			<Accordian onChange={watchAcc}>
+			<Accordian onChange={watchAcc} onClosed={onClosed} onOpened={onOpened}>
 				<h3>Hey</h3>
 				<p>Some stuff</p>
 			</Accordian>

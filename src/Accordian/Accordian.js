@@ -6,7 +6,16 @@ import useResizeAware from 'react-resize-aware';
 import useHeight  from '../useHeight';
 import './Accordian.scss'
 
-export default function Accordian({ children, expander: Expander, footer: Footer, header: Header, opened = false, onChange = () => {} }) {
+export default function Accordian({ 
+	children,
+	expander: Expander,
+	footer: Footer,
+	header: Header,
+	opened = false,
+	onChange = () => {},
+	onClosed = () => {},
+	onOpened = () => {},
+}) {
 	let defaultHeight = 0;
 	const [expanded, toggle] = useState(opened);
 	const [contentHeight, setContentHeight] = useState(defaultHeight);
@@ -28,7 +37,11 @@ export default function Accordian({ children, expander: Expander, footer: Footer
 		if (sizes.height) setContentHeight(sizes.height);
 	});
 
-	useEffect(() => makeChange(),[expanded]);
+	useEffect(() => {
+		if (expanded) onOpened(expanded);
+		if (!expanded) onClosed(expanded);
+		onChange(expanded);
+	},[expanded]);
 
 	return(
 		<div className='stuff-accordian-container' >
