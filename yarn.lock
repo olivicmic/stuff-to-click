@@ -7840,10 +7840,10 @@ konva@^7.2.5:
   resolved "https://registry.yarnpkg.com/konva/-/konva-7.2.5.tgz#9b4ac3a353e6be66e3e69123bf2a0cbc61efeb26"
   integrity sha512-yk/li8rUF+09QNlOdkwbEId+QvfATMe/aMGVouWW1oFoUVTYWHsQuIAE6lWy11DK8mLJEJijkNAXC5K+NVlMew==
 
-lal@^5.3.5:
-  version "5.3.6"
-  resolved "https://registry.yarnpkg.com/lal/-/lal-5.3.6.tgz#c95eca1cc70862ce150865733438888bdbd82e2f"
-  integrity sha512-gfxyFVP0UkRtGYUUJLHemrcWjq2K5C1u06sUEI8HWMEC4hYbr4s3Y5NL+TgrjID8vNlJQEOp7dIJAVdBN8O5Ww==
+lal@^5.3.7:
+  version "5.3.7"
+  resolved "https://registry.yarnpkg.com/lal/-/lal-5.3.7.tgz#bdae70df0252a4422916b1056a97e402f68927ef"
+  integrity sha512-3xOh6n5dOLb6TQhXBLfIVqjPZdq1q9CjII5hwg3sviErqmXxAisUB/ElkRsI0Nrprub/npeI3L+wthVjyVgiEw==
   dependencies:
     axios "^0.21.1"
     chroma-js "^2.1.1"
