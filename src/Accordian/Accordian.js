@@ -6,6 +6,7 @@ import './Accordian.scss'
 
 export default function Accordian({ 
 	children,
+	className,
 	expander: Expander,
 	footer: Footer,
 	header: Header,
@@ -13,6 +14,7 @@ export default function Accordian({
 	onChange = () => {},
 	onClosed = () => {},
 	onOpened = () => {},
+	...rest
 }) {
 	let defaultHeight = 0;
 	const [expanded, toggle] = useState(opened);
@@ -42,7 +44,7 @@ export default function Accordian({
 	},[expanded]);
 
 	return(
-		<div className='stuff-accordian-container' >
+		<div className={`stuff-accordian-container${ className ? ' ' + className : ''}`} {...rest} >
 			<header className='stuff-accordian-header' onClick={openClose}>
 				{Header ? <Header /> : ''}
 				{Expander ? <Expander active={expanded}/> : <PlaceholderBtn active={expanded}/>}

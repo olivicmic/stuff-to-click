@@ -78,7 +78,7 @@ const App = () => {
 				<li>Color: {apSt.color}</li>
 				<li>Opacity: {apSt.opacity}</li>
 			</ul>
-			<Accordian onChange={watchAcc} onClosed={onClosed} onOpened={onOpened}>
+			<Accordian className='sticky' onChange={watchAcc} onClosed={onClosed} onOpened={onOpened}>
 				<h3>Hey</h3>
 				<p>Some stuff</p>
 			</Accordian>
