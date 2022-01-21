@@ -4,7 +4,7 @@ export default function Selection({arrow: Arrow, focus, listStyle, value, valueN
 	return(
 		<div className='stuff-faux-select' {...rest}>
 			<div className='stuff-faux-select-label'>
-				{valueName ? valueName : value}
+				{ valueName || value || '' }
 			</div>
 			{
 				Arrow ?

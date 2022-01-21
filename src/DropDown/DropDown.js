@@ -5,7 +5,7 @@ import useKeyInput  from './useKeyInput';
 import listTransition  from './listTransition';
 import FauxOption  from './FauxOption';
 
-export default function DropDown({arrow: Arrow, focus, onChange, name, value, set, listOffset, listStyle, debug, setValueName,expanded, open, close, ...rest}) {	
+export default function DropDown({arrow: Arrow, focus, onChange, name, value, set = [], listOffset, listStyle, debug, setValueName,expanded, open, close, ...rest}) {	
 	const listRef = useRef(null);
 	const [optionFocus, setOptionFocus] = useKeyInput(set, onChange, name, setValueName, expanded, focus, open, close);
 	const transitions = useTransition(expanded, listTransition);

@@ -2,7 +2,7 @@ import React, {useEffect, useRef, useState} from "react";
 import DropDown  from '../DropDown';
 import './SlideWrapper.scss';
 
-const SlideWrapper = ({ component: Component, bar, dropdown, id, label, listStyle, name, onChange, required, set, style, type, valid, value, debug, ...rest}) => {
+const SlideWrapper = ({ component: Component, bar, dropdown, id, label, listStyle, name, onChange = () => {}, required, set, style, type, valid, value, debug, ...rest}) => {
 	const [focus, toggleFocus] = useState(false);
 	const [listOffset, setOffset] = useState([0,0]);
 	const [valueName, setValueName] = useState(null);
