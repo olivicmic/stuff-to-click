@@ -9,6 +9,7 @@ export default function Accordian({
 	className,
 	expander: Expander,
 	footer: Footer,
+	footExpander = true,
 	header: Header,
 	opened = false,
 	onChange = () => {},
@@ -55,8 +56,10 @@ export default function Accordian({
 					{resizeListener}
 					{children}
 					<footer className='stuff-accordian-footer' onClick={openClose}>
-						{Footer ? <Footer /> : ''}
-						{Expander ? <Expander active={expanded}/> : <PlaceholderBtn active={expanded}/>}
+						{ Footer ? <Footer /> : ''}
+						{ footExpander ? 
+							Expander ? <Expander active={expanded}/> : <PlaceholderBtn active={expanded}/>
+						: null }
 					</footer>
 				</div>
 			</animated.div>
