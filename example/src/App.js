@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-import { Accordian, DragSlider, HexInput, SlideInput, ColorDragSlider, RGBInput, NumInput, PlaceholderBtn, SlideSelect } from 'stuff-to-click';
+import { Accordian, Carousel, DragSlider, HexInput, SlideInput, ColorDragSlider, RGBInput, NumInput, PlaceholderBtn, SlideSelect } from 'stuff-to-click';
 
 import 'stuff-to-click/dist/index.css'
 

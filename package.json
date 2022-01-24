@@ -33,7 +33,7 @@
     "@react-three/fiber": "^7.0.1",
     "babel-eslint": "^10.0.3",
     "cross-env": "^7.0.2",
-    "eslint": "^7.28.0",
+    "eslint": "^7.11.0",
     "eslint-config-standard": "^16.0.3",
     "eslint-config-standard-react": "^11.0.1",
     "eslint-plugin-import": "^2.23.4",
