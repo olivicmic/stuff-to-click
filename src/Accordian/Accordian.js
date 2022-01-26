@@ -17,7 +17,7 @@ export default function Accordian({
 	onOpened = () => {},
 	...rest
 }) {
-defaultHeight = 0;
+	let defaultHeight = 0;
 	const [expanded, toggle] = useState(opened);
 	const [contentHeight, setContentHeight] = useState(defaultHeight);
 	const [resizeListener, sizes] = useResizeAware();

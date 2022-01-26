@@ -3,7 +3,7 @@ import { useSpring, animated, useTransition } from 'react-spring';
 import useResizeAware from 'react-resize-aware';
 
 export default function Carousel({ ...rest }) {
-	 defaultHeight = 0;
+	let defaultHeight = 0;
 	const [page, setPage] = useState(0);
 	const [contentHeight, setContentHeight] = useState(defaultHeight);
 	const [resizeListener, sizes] = useResizeAware();
