@@ -26,6 +26,14 @@ code {
   margin-bottom: 3em;
 }
 
+.stuff-carousel-slide {
+  height: 200px;
+}
+
+.stuff-carousel-container {
+  background-color: #ffcccc;
+}
+
 .pair-btns {
   display: inline-block;
 }
