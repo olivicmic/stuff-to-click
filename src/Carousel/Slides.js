@@ -3,26 +3,35 @@ import { animated, useTransition, config } from 'react-spring';
 import useResizeAware from 'react-resize-aware';
 import usePagination from './usePagination';
 
-export default function Slides({ children, initial, setHeight = () => {} }) {
-	const { direction, page, ...pagination } = usePagination({ count: children && children().length, initial});
-	const [toLeft, setLEft] = useState(false);
+export default function Slides({ axis='x', children, enter = {}, from = {}, leave = {}, initial, preset='slot', range = 100, setHeight = () => {} }) {
+	const selAxis = ['x','y','xy'].indexOf(axis);
+	const { active, direction, page, ...pagination } = usePagination({ count: children && children().length, initial});
 	const collection = children ? children({ page, ...pagination }) : [];
 	const [resizeListener, sizes] = useResizeAware();
-	const rng = 100;
-	const presets = {
-		fade: {
-			from: { opacity: 0 },
-			enter: { opacity: 1 },
-			leave: { opacity: 0 },
-			config: config.molasses,
-		}, slot: {
-			from: { position: 'absolute', transform: `translate3d(${direction ? rng : -rng}%,0,0)` },
-			enter: { position: 'relative', transform: `translate3d(0%,0,0)` },
-			leave: { position: 'absolute', transform: `translate3d(${direction ? -rng : rng}%,0,0)` },
-			config: config.gentle
+	const onOff = (rng, off) => active ? rng : off;
+	const invert = (order, flip, rng) => ((flip ? -1 : 1) * (order ? rng : -rng));
+	const xyObj = (rng, flip, xy = 0) => {
+		let inRng = invert(direction, flip, rng);
+		let ax = num => xy === 2 || xy === num ? inRng && inRng + '%' : 0;
+		return {
+			transform: `translate3d(${ax(0)},${ax(1)},0)`
+		};
+	};
+	const ways = ['from','leave'];
+	const keyStyle = (props) => {
+		let way = ways.indexOf(props);
+		let isEnter = way === -1;
+		return {
+			position: isEnter ? 'relative' : 'absolute',
+			opacity: onOff([props].opacity || isEnter ? 1 : 0, 1),
+			...xyObj(onOff([props].range || isEnter ? 0 : range, 0), isEnter ? 1 : way, selAxis) 
 		}
 	};
-	const transitions = useTransition(page, presets.slot)
+	const makeStyles = () => Object.fromEntries(['enter', ...ways].map((item,i) => [ item, keyStyle(item) ]));
+	const transitions = useTransition(page, {
+		...makeStyles(),
+		config: config.gentle
+	});
 	useEffect(() => {
 		if (sizes.height) setHeight(sizes.height);
 	});

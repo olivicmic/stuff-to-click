@@ -7,18 +7,23 @@ import './Carousel.scss'
 export default function Carousel({ ...rest }) {
 	let defaultHeight = 0;
 	const [contentHeight, setHeight] = useState(defaultHeight);
+	const [reqPg, setReqPg] = useState(0);
 	const [resizeListener, sizes] = useResizeAware();
 	const expand = useSpring({
 		config: { friction: 50, tension: 350 },
 		from: { height: 0 },
 		to: { height: contentHeight }
 	});
-	const AThing = ({ atStart, atEnd, back, num, value, forward, ...more }) => {
+	const AThing = ({ atStart, atEnd, back, goTo, num, page, value, forward, ...more }) => {
 		console.log(more);
 		return <div>
 			<button onClick={back} disabled={atStart}>Back</button>
-				{ num + ': ' + value }
 			<button onClick={forward} disabled={atEnd}>Next</button>
+			<div>
+				<div>{ num + ': ' + value }</div>
+				<input type='number' value={reqPg} onChange={e => setReqPg(e.target.value)}/>
+				<button onClick={() => goTo(reqPg)}>Go to page</button>
+			</div>			
 		</div>;
 	};
 	const things = ['Apple','Banana','carrot'];
