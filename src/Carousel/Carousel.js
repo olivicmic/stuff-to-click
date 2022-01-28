@@ -13,16 +13,6 @@ export default function Carousel({ ...rest }) {
 		from: { height: 0 },
 		to: { height: contentHeight }
 	});
-
-	// fruits below should become an array of components, then rendered within the animated.divs
-	// 
-	/*
-	const Slides = ({ back, forward}) => ['Apple','Banana','carrot'].map((item, i) => page === i ? 
-		<animated.div key={i}>
-			<h3>{i}</h3>
-			<span>{item}</span>
-		</animated.div> : null); */
-
 	const AThing = ({ atStart, atEnd, back, num, value, forward, ...more }) => {
 		console.log(more);
 		return <div>
@@ -33,11 +23,7 @@ export default function Carousel({ ...rest }) {
 	};
 	const things = ['Apple','Banana','carrot'];
 	const theThings = (props) => things.map((thing, i) => <AThing num={i} value={thing} key={i} {...props}/>);
-/*
-	useEffect(() => {
-		if (sizes.height) setHeight(sizes.height);
-	});
-*/
+
 	return(
 		<animated.div className={`stuff-carousel-container`} { ...rest } style={expand}>
 			
