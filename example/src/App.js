@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 
 import { Accordian, Carousel, DragSlider, HexInput, SlideInput, ColorDragSlider, RGBInput, NumInput, PlaceholderBtn, SlideSelect } from 'stuff-to-click';
 
+import ExampleSlide from './ExampleSlide';
+
 import 'stuff-to-click/dist/index.css'
 
 const App = () => {
@@ -67,6 +69,9 @@ const App = () => {
 		<button className='pair-btns' onClick={() => console.log('Two')}>Two</button>
 	</div>;
 
+	const things = ['Apple','Banana','carrot'];
+	const theThings = (props) => things.map((thing, i) => <ExampleSlide num={i} value={thing} key={i} {...props}/>);
+
 	return (
 		<div>
 			<h1>Click These Things!</h1>
@@ -78,7 +83,7 @@ const App = () => {
 				<li>Color: {apSt.color}</li>
 				<li>Opacity: {apSt.opacity}</li>
 			</ul>
-			<Carousel />
+			<Carousel from={{opacity: 1, range: 100}} leave={{opacity: 0, range: 50}} spring='slow'>{theThings}</Carousel>
 			<Accordian className='sticky' onChange={watchAcc} onClosed={onClosed} onOpened={onOpened}>
 				<h3>Hey</h3>
 				<p>Some stuff</p>
