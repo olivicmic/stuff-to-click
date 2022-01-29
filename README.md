@@ -66,14 +66,52 @@ options = [{
 
 ```
 
+## SlideShow
+
+Slideshow takes a collection of elements and animates between them utilizing [react-spring](https://react-spring.io). Slides are provided with a variety of controls to navigate between, and for the overall animation simplified controls may be used or full react-spring params.
+
+```jsx
+// containing slides are presented via a function to make the slideshow controls/values accessible to your slides, which themselves are returned within an array.
+const mySlides = ({ atStart, atEnd, back, busy, page, forward, ...more }) => [ ... ].map((item, it) =>
+	<div>
+		<h1>Page {page}: {item.title}</h1>
+		<button onClick={back} disabled={atStart || busy}>Back</button>
+		<button onClick={forward} disabled={atEnd || busy}>Next</button>
+	</div>);
+
+<Slideshow from={{opacity: 1, range: 100}} leave={{opacity: 0, range: 50}} spring='slow'>{myslides}</Slideshow>
+
+```
+
+### Parameters
+- `axis (string, default 'x')`: Set the orientation of movement between 'x', 'y', and 'xy'.
+- `direction (number 0 - 1 default 1,)`: Flip the direction, for example a value of 1 advances right, reverses left, but alternates with 0.
+- `fade (number 0 - 1 default 1)`: Set the opacity on the from/leave steps simultaneously.
+- `from \ enter \ leave (object)`: Params defining the animation steps 'from' (item adds/appears), 'enter' (item stationary), and 'leave' (item hides/removes).
+	- `opacity (number, 0 - 1.0 )`: Opacity value for the respective step.
+	- `range (any number, including negative )`: Refers the percentage moved from origin.
+- `initial (number)`; Set the initial page.
+- `override (object)`: Set your own react-spring useTransition params.
+- `range (any number, including negative default 100)`: Set the range on the from/leave steps simultaneously.
+- `spring (object/string, default 'slot')`: Set spring config, including default react-spring configs, or pass your own config object.
+
+### Slide Callbacks
+- `active (boolean)`: Initially false, will be true on the first page change.
+- `atEnd (boolean)`: Will be true if on the last page.
+- `atStart (boolean)`: Will be true if on the first page.
+- `back (function)`: Function to go back one page if not on the first page.
+- `busy (boolean)`: Is true while the slideshow is animating, and false when static.
+- `count (number)`: Total number of slides.
+- `direction (number)`: Direction value provided above.
+- `forward (function)`: Function to go forward one page if not on the last page.
+- `goto (function(number))`: Function to go to the page provided as a number param if the page is within count.
+- `page (number)`: Current page as a number.
+
 ## DragSlider
 
 dragSlider is a numerical range slider, that adjust values from 0 to whatever is set as "max" attribute. An updated value is returned via the onChange function. Styling can applied to slider handle via the "slide" attribute.
 
 ```jsx
-
-
-import { DragSlider } from 'stuff-to-click'; // outside parent component
 
 doThis = (newValue) => setState(newValue);
 

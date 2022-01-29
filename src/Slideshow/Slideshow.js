@@ -2,9 +2,9 @@ import React, { useEffect, useState } from 'react';
 import { config, useSpring, animated, useTransition } from 'react-spring';
 import useResizeAware from 'react-resize-aware';
 import Slides from './Slides';
-import './Carousel.scss'
+import './Slideshow.scss'
 
-export default function Carousel({ children, className, ...rest }) {
+export default function Slideshow({ children, className, ...rest }) {
 	let defaultHeight = 0;
 	const [contentHeight, setHeight] = useState(defaultHeight);
 	const [resizeListener, sizes] = useResizeAware();
@@ -15,7 +15,7 @@ export default function Carousel({ children, className, ...rest }) {
 	});
 
 	return(
-		<animated.div className={`stuff-carousel-container${ className && ' ' + className}`}  style={expand}>
+		<animated.div className={`stuff-slideshow-container${ className ? ' ' + className : ''}`}  style={expand}>
 			<Slides setHeight={setHeight} { ...rest } >
 				{ children }
 			</Slides>

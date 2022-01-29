@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-import { Accordian, Carousel, DragSlider, HexInput, SlideInput, ColorDragSlider, RGBInput, NumInput, PlaceholderBtn, SlideSelect } from 'stuff-to-click';
+import { Accordian, Slideshow, DragSlider, HexInput, SlideInput, ColorDragSlider, RGBInput, NumInput, PlaceholderBtn, SlideSelect } from 'stuff-to-click';
 
 import ExampleSlide from './ExampleSlide';
 
@@ -83,7 +83,7 @@ const App = () => {
 				<li>Color: {apSt.color}</li>
 				<li>Opacity: {apSt.opacity}</li>
 			</ul>
-			<Carousel from={{opacity: 1, range: 100}} leave={{opacity: 0, range: 50}} spring='slow'>{theThings}</Carousel>
+			<Slideshow from={{opacity: 1, range: 100}} leave={{opacity: 0, range: 50}} spring='slow'>{theThings}</Slideshow>
 			<Accordian className='sticky' onChange={watchAcc} onClosed={onClosed} onOpened={onOpened}>
 				<h3>Hey</h3>
 				<p>Some stuff</p>

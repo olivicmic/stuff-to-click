@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { animated } from 'react-spring';
 import useResizeAware from 'react-resize-aware';
-import usePagination from './usePagination';
+import { usePagination } from 'hangers';
 import useSlides from './useSlides';
 
 export default function Slides({ children, initial, setHeight = () => {}, ...slideProps }) {
@@ -12,17 +12,15 @@ export default function Slides({ children, initial, setHeight = () => {}, ...sli
 	useEffect(() => {
 		if (sizes.height) setHeight(sizes.height);
 	});
-	const colorSet = ['yellow','cyan','magenta'];
 	const slides = collection.map((slide, i) => ({ style }) => 
-		<animated.div key={i} className={`stuff-carousel-slide`} style={{ ...style, backgroundColor: colorSet[i] }}>
+		<animated.div key={i} className={`stuff-slideshow-slide`} style={style}>
 			{ slide }
 		</animated.div>
 	);
-	return <div className='stuff-carousel-content'>
+	return <div className='stuff-slideshow-content'>
 		{ resizeListener }
 		{
 			transitions((style, i) => {
-				//console.log(style);
 				const Slide = slides[i];
 				return <Slide style={style} />;
 			})

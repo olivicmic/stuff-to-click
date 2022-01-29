@@ -3401,7 +3401,7 @@ caniuse-api@^3.0.0:
     lodash.memoize "^4.1.2"
     lodash.uniq "^4.5.0"
 
-caniuse-lite@^1.0.0, caniuse-lite@^1.0.30001109, caniuse-lite@^1.0.30001283, caniuse-lite@^1.0.30001286, caniuse-lite@^1.0.30001297, caniuse-lite@^1.0.30001299:
+caniuse-lite@^1.0.0, caniuse-lite@^1.0.30001109, caniuse-lite@^1.0.30001286, caniuse-lite@^1.0.30001297, caniuse-lite@^1.0.30001299:
   version "1.0.30001302"
   resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30001302.tgz#da57ce61c51177ef3661eeed7faef392d3790aaa"
   integrity sha512-YYTMO+tfwvgUN+1ZnRViE53Ma1S/oETg+J2lISsqi/ZTNThj3ZYBOKP2rHwJc37oCsPqAzJ3w2puZHn0xlLPPw==
@@ -3476,7 +3476,12 @@ check-types@^11.1.1:
   optionalDependencies:
     fsevents "~2.3.2"
 
-chroma-js@^2.1.1, chroma-js@^2.1.2:
+chroma-js@^2.1.1:
+  version "2.3.0"
+  resolved "https://registry.yarnpkg.com/chroma-js/-/chroma-js-2.3.0.tgz#fdf68a18d8f97ce006422338044218ccbffb9ecb"
+  integrity sha512-dRgAp9FHHy+VfE7e3/I5HHU0+zZlUHBODcjvXUXinsR/NnHCO+kfv68ofzrAqFI80q2IWvDSAmHAqHh93TGgKg==
+
+chroma-js@^2.1.2:
   version "2.1.2"
   resolved "https://registry.yarnpkg.com/chroma-js/-/chroma-js-2.1.2.tgz#1075cb9ae25bcb2017c109394168b5cf3aa500ec"
   integrity sha512-ri/ouYDWuxfus3UcaMxC1Tfp3IE9K5iQzxc2hSxbBRVNQFut1UuGAsZmiAf2mOUubzGJwgMSv9lHg+XqLaz1QQ==
@@ -5759,13 +5764,12 @@ handle-thing@^2.0.0:
   resolved "https://registry.yarnpkg.com/handle-thing/-/handle-thing-2.0.1.tgz#857f79ce359580c340d43081cc648970d0bb234e"
   integrity sha512-9Qn4yBxelxoh2Ow62nP+Ka/kMnOXRi8BXnRaUwezLNhqelnN49xKz4F/dPP8OYLxLxq6JDtZb2i9XznUQbNPTg==
 
-hangers@^2.5.13:
-  version "2.8.0"
-  resolved "https://registry.yarnpkg.com/hangers/-/hangers-2.8.0.tgz#b29e9660274f05926e91522912722a625a0f7b7c"
-  integrity sha512-hXs5j9P5IKUxKcloEEAz5w8t6n6XtUvOLgnbcKeuMj5UHTA94+AI2SypUMA+dPVsnzj5ikslcfKEpCp9MEMZrQ==
+hangers@^2.9.0:
+  version "2.9.0"
+  resolved "https://registry.yarnpkg.com/hangers/-/hangers-2.9.0.tgz#12f6ecafc45636f6b5e3d50ae039ad0db7794d07"
+  integrity sha512-M1KD00SP0Hd3qkBL1ZSl65H3l50yoEfpvYPm1syp+E7AEI6EateUNpt4xFtGoeWNLOKSZdPGMCYv9P5X/17qag==
   dependencies:
-    caniuse-lite "^1.0.30001283"
-    lal "^5.4.1"
+    lal "^5.5.0"
 
 harmony-reflect@^1.4.6:
   version "1.6.2"
@@ -7360,7 +7364,7 @@ konva@^8.3.2:
   resolved "https://registry.yarnpkg.com/konva/-/konva-8.3.2.tgz#3823a6ea0eb3605142c637f327c4cc29fd188c02"
   integrity sha512-vWi51qFTFkEIp+HxMek1eH1fA1zFo0DPD3uqUez+v2gy/IfZF2eLu9DcEj7Exk532hxfHJi/2oZ0GQYHlhg/dQ==
 
-lal@^5.4.1, lal@^5.5.0:
+lal@^5.5.0:
   version "5.5.0"
   resolved "https://registry.yarnpkg.com/lal/-/lal-5.5.0.tgz#c3e1885ac924731e77165a282cba5116ad9dfa41"
   integrity sha512-bVrY+hbayu5RYHXDcCQ4e4i1HtH5NgPhEO53HhCAcL1tJRjHWkmN/LOrYqBTWkOf2Bz/K7PIVNCJwv+mNZuBWA==
