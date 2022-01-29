@@ -91,6 +91,7 @@ const mySlides = ({ atStart, atEnd, back, busy, page, forward, ...more }) => [ .
 	- `opacity (number, 0 - 1.0 )`: Opacity value for the respective step.
 	- `range (any number, including negative )`: Refers the percentage moved from origin.
 - `initial (number)`; Set the initial page.
+- `onChange (function)`: A function to run on page changes. Recieves the current page number ala e.target.value
 - `override (object)`: Set your own react-spring useTransition params.
 - `range (any number, including negative default 100)`: Set the range on the from/leave steps simultaneously.
 - `spring (object/string, default 'slot')`: Set spring config, including default react-spring configs, or pass your own config object.

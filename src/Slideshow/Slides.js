@@ -4,8 +4,12 @@ import useResizeAware from 'react-resize-aware';
 import { usePagination } from 'hangers';
 import useSlides from './useSlides';
 
-export default function Slides({ children, initial, setHeight = () => {}, ...slideProps }) {
-	const { active, direction, page, ...pagination } = usePagination({ count: children && children().length, initial});
+export default function Slides({ children, initial, onChange, setHeight = () => {}, ...slideProps }) {
+	const { active, direction, page, ...pagination } = usePagination({ 
+		count: children && children().length, 
+		initial, 
+		onChange
+	});
 	const { busy, transitions } = useSlides({ direction, page, paused: !active, ...slideProps });
 	const collection = children ? children({ busy, page, ...pagination }) : [];
 	const [resizeListener, sizes] = useResizeAware();
