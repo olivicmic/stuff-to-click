@@ -1,12 +1,15 @@
 import { useEffect, useRef, useState } from 'react';
+import useKeyList  from '../DropDown/useKeyList';
 
-export default function useDropDown({ debug }) {
+export default function useDropDown({ count, focus, debug, pre, setValueName, submit }) {
 	const hostRef = useRef(null);
 	const [listOffset, setOffset] = useState([0,0]);
 	const [active, setActive] = useState(false);
 	const [expanded, setExpanded] = useState(false);
 	const open = () => setActive(true);
 	const close = () => { setActive(false); setExpanded(false)};
+
+	const [index, setIndex] = useKeyList({ close, count, expanded, focus, open, pre, setValueName, submit });
 
 	useEffect(() => {
 		let listRef = hostRef.current;
@@ -17,5 +20,5 @@ export default function useDropDown({ debug }) {
 			setExpanded(true);
 		}
 	},[hostRef, active]);
-	return { active, close, expanded, hostRef, listOffset, open, setOffset };
+	return { active, close, expanded, hostRef, index, listOffset, listRef: useRef(null), open, setIndex, setOffset };
 };

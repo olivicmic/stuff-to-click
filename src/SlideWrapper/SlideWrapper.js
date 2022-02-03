@@ -4,9 +4,13 @@ import useDropDown from './useDropDown';
 import useInput from './useInput';
 import './SlideWrapper.scss';
 
-const SlideWrapper = ({ component: Component, bar, dropdown, id, label, listStyle, name, onChange = () => {}, onClick = () => {}, required, set, style, valid, value, debug, ...rest}) => {	
+const SlideWrapper = ({ component: Component, bar, dropdown, id, label, listStyle, name, onChange = () => {}, onClick = () => {}, required, set = [], style, valid, value, debug, ...rest}) => {
+	const submit = y => {
+		onChange({ target: {...set[y], name }});
+		setValueName(set[y].label);
+	};
 	const { focus, labelClass, mainClass, setValueName, ...inpProps } = useInput({ valid, value });
-	const { hostRef, open, ...dropProps } = useDropDown({debug});
+	const { hostRef, open, ...dropProps } = useDropDown({ count: set.length, debug, focus, pre: set.indexOf(value), setValueName, submit });
 	const sharedAttr = { set, name, focus, onChange, value };
 	const click = () => { open(); onClick(); };
 
