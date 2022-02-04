@@ -13,7 +13,7 @@ export default function useDropDown({ focus, debug, submit, ...rest }) {
 	const open = () => setActive(true);
 	const reset = () => { setActive(false); setExpanded(false)};
 	const [index, close] = useKeyList({ active, focus, reset, expanded, open, submit, ...rest });
-	const [offPage, setOffPage] = useState(0);
+	const [offPage, setOffPage] = useState(false);
 	const [rendered, setRendered] = useState(null);
 
 
@@ -46,12 +46,16 @@ export default function useDropDown({ focus, debug, submit, ...rest }) {
 
 	useEffect(() => {
 		if (rendered) {
-			let listBox = rendered.getBoundingClientRect();
-			let listBottom = listBox.y + listBox.height;
-			console.log(rendered.getBoundingClientRect());
+			//let listBox = rendered.getBoundingClientRect();
+			//let listBottom = listBox.y + listBox.height;
+			//console.log(rendered);
 			//setExpanded(true);
-			setOffPage(1);
-		}
+			//setOffPage(1);
+			if ((rendered.y + rendered.height) > window.innerHeight) {
+				//console.log("bammmm");
+				setOffPage(true);
+			}
+		} else setOffPage(false);
 	});
 
 

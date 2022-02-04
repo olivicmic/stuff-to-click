@@ -25,7 +25,7 @@ const SlideWrapper = ({ component: Component, bar, dropdown, id, label, list, li
 			<Component { ...{ ...rest, ...sharedAttr, ...inpProps, id, required, onClick: click }} />
 			{ bar ? <div className='stuff-slide-bar' style={bar}></div> : null }
 		</div>
-		{ dropdown && set ? <DropDown { ...{...sharedAttr, ...dropProps, debug, items, listStyle }} /> : null }
+		{ dropdown && set ? <DropDown { ...{...sharedAttr, ...dropProps, debug, hostRef, items, listStyle }} /> : null }
 	</React.Fragment>;
 };
 
