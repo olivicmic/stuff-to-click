@@ -1,10 +1,9 @@
 import { useEffect } from 'react';
 
-export default function outsideClose(ref, close, setFocus, debug) {
+export default function useOutside(ref, close, debug) {
 	useEffect(() => {
 		const handleClickOutside = (event) => {
 			if (ref.current && !ref.current.contains(event.target)) {
-				setFocus(-1);
 				if (!debug) close();
 			}
 		};
