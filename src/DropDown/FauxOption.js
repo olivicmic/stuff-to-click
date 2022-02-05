@@ -1,7 +1,7 @@
 import React, { useState, useRef, useCallback } from 'react';
 import { useSpring, animated,config } from 'react-spring';
 
-export default function FauxOption({ index, position, item, submit, value }) {
+export default function FauxOption({ close, index, position, item, submit, value }) {
 	const focus = position === index;
 	const [hover, setHover] = useState(false);
 	const ref = useRef(null);
@@ -18,7 +18,7 @@ export default function FauxOption({ index, position, item, submit, value }) {
 	});
 
 	return(
-		<li value={item.value} onClick={() => submit(position)} onMouseEnter={() => setHover(true)} onMouseLeave={() => setHover(false)} >
+		<li value={item.value} onClick={() => {submit(position); close()}} onMouseEnter={() => setHover(true)} onMouseLeave={() => setHover(false)} >
 			<span>{item.label}</span>
 			<animated.div className='faux-select-indicator' style={indSpring}></animated.div>
 		</li>

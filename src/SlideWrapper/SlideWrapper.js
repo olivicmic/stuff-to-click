@@ -11,10 +11,10 @@ const SlideWrapper = ({ component: Component, bar, dropdown, id, label, list, li
 		onChange({ target: {...set[y], name }});
 		setValueName(set[y].label);
 	};
-	const { hostRef, index, open, ...dropProps } = useDropDown({ count: set.length, debug, focus, pre: set.indexOf(value), setValueName, submit });
+	const { close, hostRef, index, open, ...dropProps } = useDropDown({ count: set.length, debug, focus, pre: set.indexOf(value), setValueName, submit });
 	const sharedAttr = { set, name, focus, onChange, value };
 	const click = () => { open(); onClick(); };
-	const items = list ? list({ index, value, submit }) : null;
+	const items = list ? list({ close, index, value, submit }) : null;
 
 	return <React.Fragment>
 		<div className={mainClass} style={style} ref={hostRef}>
