@@ -1,11 +1,15 @@
 import { useEffect } from 'react';
 
-export default function useOutside(ref, close, debug) {
+export default function useOutside(ref, close, debug, setFocus) {
 	useEffect(() => {
 		const handleClickOutside = (event) => {
-			if (ref.current && !ref.current.contains(event.target)) {
-				if (!debug) close();
-			}
+			//console.log("ummmmmm");
+			setFocus(false);
+			close();
+			/*if (ref.current  && !ref.current.contains(event.target)) {
+				console.log("umm");
+				
+			}*/
 		};
 		document.addEventListener("mousedown", handleClickOutside);
 		return () => {

@@ -73,7 +73,7 @@ const App = () => {
 	const theThings = (props) => things.map((thing, i) => <ExampleSlide num={i} value={thing} key={i} {...props}/>);
 
 	return (
-		<div>
+		<div key='moreass'>
 			<h1>Click These Things!</h1>
 			<ul>
 				<li>Text input: {apSt.text}</li>
@@ -95,10 +95,10 @@ const App = () => {
 				<SlideSelect value={apSt.text} onChange={onChange} label='Some text' name='text' set={selItems} bar={{}} tabIndex='1' style={{color: 'orange', fontSize: '30px'}} listStyle={{ backgroundColor: 'blue', color: 'red'}} debug/>
 				<textarea name="" id="" cols="30" rows="10"></textarea>
 			</Accordian>
-			<div>
-				<SlideSelect value={apSt.text} onChange={onChange} label='Some text' name='text' set={selItems} bar={{}} tabIndex='1' required/>
-				<SlideSelect value={apSt.text} onChange={onChange} label='Look at this how about it especially one more ok one more' name='text' set={junk} bar={{}} tabIndex='2'/>
-				<SlideSelect value={apSt.text} onChange={onChange} label='Look at this how about it especially one more ok one more' name='text' set={junk} bar={{}} tabIndex='3' arrow={arrow}/>
+			<div key='ass'>
+				<SlideSelect value={apSt.text} onChange={onChange} label='Some text' name='text' id='sel-00' set={selItems} bar={{}} tabIndex='1' required/>
+				<SlideSelect value={apSt.text} onChange={onChange} label='Look at this how about it especially one more ok one more' name='text' id='sel-01' set={junk} bar={{}} tabIndex='2'/>
+				<SlideSelect value={apSt.text} onChange={onChange} label='Look at this how about it especially one more ok one more' name='text' id='sel-02' set={junk} bar={{}} tabIndex='3' arrow={arrow}/>
 			</div>
 			<br />
 			<br />

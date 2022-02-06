@@ -3,7 +3,7 @@ import { useTransition, animated, useSpring, config } from 'react-spring';
 import useKeyList  from '../DropDown/useKeyList';
 import useOutside  from '../DropDown/useOutside';
 
-export default function useDropDown({ focus, debug, submit, ...rest }) {
+export default function useDropDown({ focus, debug, setFocus, submit, ...rest }) {
 	const hostRef = useRef(null);
 	//const spgRef = useSpringRef();
 	const listRef = useRef(null);
@@ -17,47 +17,62 @@ export default function useDropDown({ focus, debug, submit, ...rest }) {
 
 	const [offPage, setOffPage] = useState(0);
 	const [rendered, setRendered] = useState(false);
-	const [height, setHeight] = useState(0);
-	const [y, setY] = useState(0);
+	//const [height, setHeight] = useState(0);
+	//const [y, setY] = useState(0);
 	const open = () => setActive(true);
 	const [sprung, api] = useSpring(() => ({
 		config: config.gentle,
 		opacity: 0,
 		transform: `translateY(0px)`,
 	}));
-	const reset = () => api.start({ 
-		opacity: 0,
-		transform: `translateY(0px)`,
-		onRest: () => {setRendered(false); setOffPage(false); setExpanded(false); setActive(false); close(); }
-	});
-	const [index, close] = useKeyList({ active, focus, reset, expanded, open, submit, ...rest });
+	const [refStore, setRefStore] = useState(null);
+	const reset = func => {
+		api.start({ 
+			opacity: 0,
+			transform: `translateY(0px)`,
+			onRest: () => {
+				//console.log(document.activeElement);
+				setRendered(false);
+				setOffPage(false);
+				setExpanded(false); 
+				setActive(false);
+			}
+		});
+
+				if (func) func();
+	}
+	
+	const [index, close] = useKeyList({ active, focus, refStore, reset, expanded, open, submit, ...rest });
 	//const springRef = useSpringRef();
 
-	const jammt = () => console.log(offPage);
-
+	//const jammt = () => console.log(offPage);
 
 
 	
-	useOutside(listRef, close, debug);
-	console.log(rendered);
+	useOutside(listRef, close, debug, setFocus);
+	//console.log({focus, active, rendered, refStore, thing: document.activeElement});
 	useEffect(() => {
+		if (host && !refStore) { 
+			//console.log(host);
+			setRefStore(host);
+		}
 		if (active && !expanded) {
-			console.log('onnn');
+			//console.log('onnn');
 			setExpanded(true);
 		} 
 		if (expanded && !rendered) {
-			console.log('huh');
+			//console.log('huh');
 			let listBox = list.getBoundingClientRect();
 			let hostBox = host.getBoundingClientRect();
 			let listHeight = listBox.height;
 			let hosttHeight = host.offsetHeight;
 			let listCenter = host.offsetTop + (hosttHeight / 2);
 			let yOff = listCenter - (listHeight / 2);
-			
+			//console.log(host.nextSibling);
 			setOffset([host.offsetLeft, yOff]);
 			//console.log(hostBox.height, hosttHeight, window.innerHeight);
 			if ((hostBox.y + font + listHeight ) > window.innerHeight) {
-				console.log('heyyya');
+				//console.log('heyyya');
 				setOffset([host.offsetLeft, listCenter - listHeight]);
 			 	api.start({ opacity: 1,
 					transform: `translateY(${  -((hosttHeight / 2) + font) }px)` 
@@ -72,7 +87,7 @@ export default function useDropDown({ focus, debug, submit, ...rest }) {
 			setRendered(true);
 		}
 		if (!focus && !debug) {
-			console.log('tooot');
+			//console.log('tooot');
 			let hosttHeight = host ? host.offsetHeight : 0;
 			//close(); setRendered(false); setOffPage(false); setExpanded()
 		}
@@ -107,5 +122,5 @@ export default function useDropDown({ focus, debug, submit, ...rest }) {
 	},[list, rendered, setOffPage]);
 
 */
-	return { active, close, expanded, height, hostRef, index, listOffset, listRef, offPage, open, rendered, setExpanded, setOffset, setRendered, sprung, start: api.start};
+	return { active, close, expanded, hostRef, index, listOffset, listRef, offPage, open, rendered, setExpanded, setOffset, setRendered, sprung, start: api.start};
 };

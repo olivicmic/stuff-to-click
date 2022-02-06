@@ -24,7 +24,7 @@ export default function DropDown({ active, expanded, height, hostRef, items = []
 		}
 	},[expanded, rendered, setRendered]);
 */	
-	return active && items ? <animated.ul ref={listRef} className='stuff-faux-select-list' style={{
+	return active && items ? <animated.ul key='jammy' ref={listRef} tabIndex='-1' className='stuff-faux-select-list' style={{
 			//...props,
 			...listStyle,
 			...sprung,
