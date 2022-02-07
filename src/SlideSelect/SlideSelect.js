@@ -12,7 +12,7 @@ const SlideInput = ({ disabled, name, id, onChange, tabIndex, value, set = [], .
 	
 	return <SlideWrapper key='boom' { ...{ ...rest, disabled, list, name, onChange, tabIndex, value, set }} dropdown component={props => <React.Fragment>
 			<Selection {...{...attrSet, ...props, id}} key='jam'/>
-			<select {...{ disabled, name, onChange, tabIndex, value: props.value, key: 'native'}} >
+			<select {...{ disabled, name, onChange, tabIndex, value, key: 'native'}} >
 				<option value={null} disabled={true}> </option>
 				{hiddenList}
 			</select>

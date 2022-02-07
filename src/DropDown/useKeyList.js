@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 
-export default function useKeyInput({ focus, focusOff, refStore, reset, count = 0, expanded, open, pre = -1, submit }) {
+export default function useKeyInput({ count = 0, expanded, focus, focusOff, open, pre = -1,  refStore, reset, submit }) {
 	const [index, setIndex] = useState(pre);
 	const close = func => {	setIndex(-1); reset(func); };
 

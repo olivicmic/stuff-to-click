@@ -3,22 +3,16 @@ import { useTransition, animated, useSpring, config } from 'react-spring';
 import useKeyList  from '../DropDown/useKeyList';
 import useOutside  from '../DropDown/useOutside';
 
-export default function useDropDown({ focus, debug, setFocus, submit, ...rest }) {
+export default function useDropDown({ debug, name, onChange, options, set, setFocus, setValueName, value, ...rest }) {
 	const hostRef = useRef(null);
-	//const spgRef = useSpringRef();
 	const listRef = useRef(null);
 	const host = hostRef.current;
 	const list = listRef.current;
-	const hostHeight = host ? parseInt(host.getBoundingClientRect().height) : 0;
 	const font = host ? parseInt(getComputedStyle(host).getPropertyValue('font-size').slice(0,-2) ) : 0;
 	const [listOffset, setOffset] = useState([0,0]);
 	const [active, setActive] = useState(false);
 	const [expanded, setExpanded] = useState(false);
-
-	const [offPage, setOffPage] = useState(0);
 	const [rendered, setRendered] = useState(false);
-	//const [height, setHeight] = useState(0);
-	//const [y, setY] = useState(0);
 	const open = () => setActive(true);
 	const [sprung, api] = useSpring(() => ({
 		config: config.gentle,
@@ -31,96 +25,50 @@ export default function useDropDown({ focus, debug, setFocus, submit, ...rest })
 			opacity: 0,
 			transform: `translateY(0px)`,
 			onRest: () => {
-				//console.log(document.activeElement);
 				setRendered(false);
-				setOffPage(false);
 				setExpanded(false); 
 				setActive(false);
 			}
 		});
 
-				if (func) func();
+		if (func) func();
 	}
+	const submit = y => {
+		onChange({ target: {...set[y], name }});
+		setValueName(set[y].label);
+	};
+	const [index, close] = useKeyList({ count: set.length,  pre: set.indexOf(value), refStore, reset, expanded, open, submit, ...rest });
+	const items = options ? options({ close, index, value, submit }) : null;
+	const animateIn = (dir, y) => api.start({ 
+		opacity: 1, 
+		transform: `translateY(${ (dir || -1 )* (y + font) }px)` 
+	});
 	
-	const [index, close] = useKeyList({ active, focus, refStore, reset, expanded, open, submit, ...rest });
-	//const springRef = useSpringRef();
+	useOutside(close, setFocus, debug);
 
-	//const jammt = () => console.log(offPage);
-
-
-	
-	useOutside(listRef, close, debug, setFocus);
-	//console.log({focus, active, rendered, refStore, thing: document.activeElement});
 	useEffect(() => {
-		if (host && !refStore) { 
-			//console.log(host);
-			setRefStore(host);
-		}
-		if (active && !expanded) {
-			//console.log('onnn');
-			setExpanded(true);
-		} 
+		if (host && !refStore) setRefStore(host);
+		if (active && !expanded) setExpanded(true);
 		if (expanded && !rendered) {
-			//console.log('huh');
-			let listBox = list.getBoundingClientRect();
-			let hostBox = host.getBoundingClientRect();
-			let listHeight = listBox.height;
-			let hosttHeight = host.offsetHeight;
-			let listCenter = host.offsetTop + (hosttHeight / 2);
+			let hostY = host.getBoundingClientRect().y;
+			let listHeight = list.getBoundingClientRect().height;
+			let hostHeight = host.offsetHeight;
+			let hostHalf = hostHeight / 2;
+			let listCenter = host.offsetTop + hostHalf;
 			let yOff = listCenter - (listHeight / 2);
-			//console.log(host.nextSibling);
+
 			setOffset([host.offsetLeft, yOff]);
-			//console.log(hostBox.height, hosttHeight, window.innerHeight);
-			if ((hostBox.y + font + listHeight ) > window.innerHeight) {
-				//console.log('heyyya');
+
+			if ((hostY + font + listHeight ) > window.innerHeight) {
 				setOffset([host.offsetLeft, listCenter - listHeight]);
-			 	api.start({ opacity: 1,
-					transform: `translateY(${  -((hosttHeight / 2) + font) }px)` 
-				});
+			 	animateIn(0, hostHalf);
 				
 			} else  {
 				setOffset([host.offsetLeft, listCenter]);
-				api.start({ opacity: 1,
-					transform: `translateY(${  ((hosttHeight / 2) + font) }px)` 
-				});
+				animateIn(1, hostHalf);
 			}
 			setRendered(true);
 		}
-		if (!focus && !debug) {
-			//console.log('tooot');
-			let hosttHeight = host ? host.offsetHeight : 0;
-			//close(); setRendered(false); setOffPage(false); setExpanded()
-		}
 	});
-/*
-	useEffect(() => {
-
-	api.start({ transform: `translateY(${ (expanded ? ( offPage && rendered ) ? -(hostHeight + height + font ): font : -(height / 2)) + 'px' })` });
-		if (!focus && !debug) {close(); setRendered(false); setOffPage(false); setHeight(0); setY(0);}
-		if (active && !expanded) {
-			debug && console.log(host.offsetLeft, host.offsetTop, host.offsetHeight);
-			setOffset([host.offsetLeft, (host.offsetTop + host.offsetHeight)]);
-			
-			setExpanded(true);
-		}
-	},[expanded, list, focus, host, index, active]);
-
-	useEffect(() => {
-		if (rendered) {
-			if (list) {
-				//let listBox = list.getBoundingClientRect();
-				setHeight(parseInt(list.height));
-				setY(parseInt(list.y))
-				console.log(y, height, window.innerHeight, (y + height) > window.innerHeight);
-				if ((y + height) > window.innerHeight) {
-					console.log("bammmm");
-					setOffPage(true);
-				}
-			}
-
-		}
-	},[list, rendered, setOffPage]);
-
-*/
-	return { active, close, expanded, hostRef, index, listOffset, listRef, offPage, open, rendered, setExpanded, setOffset, setRendered, sprung, start: api.start};
+	return { active, close, expanded, hostRef, index, items, listOffset, listRef, open, setOffset, sprung };
 };

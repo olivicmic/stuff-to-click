@@ -1,14 +1,13 @@
-import React, { useState, useRef, useCallback } from 'react';
+import React, { useState } from 'react';
 import { useSpring, animated,config } from 'react-spring';
 
 export default function FauxOption({ close, index, position, item, submit, value }) {
 	const focus = position === index;
 	const [hover, setHover] = useState(false);
-	const ref = useRef(null);
-	const active = value === item.value;
+	const selected = value === item.value;
 	const indicator = () => {
-		if (active && ( hover || focus )) return 'translateX(-0.5em)';
-		else if (active) return 'translateX(0em)';
+		if (selected && ( hover || focus )) return 'translateX(-0.5em)';
+		else if (selected) return 'translateX(0em)';
 		else if (hover || focus ) return 'translateX(1em)';
 		else return 'translateX(1.5em)';
 	};
