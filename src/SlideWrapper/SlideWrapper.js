@@ -1,13 +1,12 @@
-import React, {useEffect, useRef, useState} from "react";
+import React from "react";
 import DropDown  from '../DropDown';
 import useDropDown from './useDropDown';
 import useInput from './useInput';
-import FauxOption  from '../DropDown/FauxOption';
 import './SlideWrapper.scss';
 
 const SlideWrapper = ({ component: Component, bar, dropdown, id, label, list, listStyle, name, onChange = () => {}, onClick = () => {}, required, set = [], style, valid, value, debug, ...rest}) => {
 	const { inProps, labelClass, mainClass, ...inpProps } = useInput({ valid, value });
-	const { hostRef, open, ...dropProps } = useDropDown({ ...inProps, debug, options: list, name, onChange, set, value });
+	const { hostRef, open, ...dropProps } = useDropDown({ ...inProps, debug, dropdown, options: list, name, onChange, set, value });
 	const sharedAttr = { set, name, onChange, value };
 	const click = () => { open(); onClick(); };
 

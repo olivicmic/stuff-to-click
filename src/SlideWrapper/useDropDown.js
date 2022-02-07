@@ -1,9 +1,9 @@
 import { useEffect, useRef, useState } from 'react';
-import { useTransition, animated, useSpring, config } from 'react-spring';
+import { useTransition, animated, easings, useSpring, config } from 'react-spring';
 import useKeyList  from '../DropDown/useKeyList';
 import useOutside  from '../DropDown/useOutside';
 
-export default function useDropDown({ debug, name, onChange, options, set, setFocus, setValueName, value, ...rest }) {
+export default function useDropDown({ debug, dropdown, name, onChange, options, set, setFocus, setValueName, value, ...rest }) {
 	const hostRef = useRef(null);
 	const listRef = useRef(null);
 	const host = hostRef.current;
@@ -15,13 +15,16 @@ export default function useDropDown({ debug, name, onChange, options, set, setFo
 	const [rendered, setRendered] = useState(false);
 	const open = () => setActive(true);
 	const [sprung, api] = useSpring(() => ({
-		config: config.gentle,
 		opacity: 0,
 		transform: `translateY(0px)`,
 	}));
 	const [refStore, setRefStore] = useState(null);
 	const reset = func => {
-		api.start({ 
+		api.start({
+			config: {			
+				duration: 700,
+				easing: easings.easeInQuart,
+			},
 			opacity: 0,
 			transform: `translateY(0px)`,
 			onRest: () => {
@@ -40,16 +43,20 @@ export default function useDropDown({ debug, name, onChange, options, set, setFo
 	const [index, close] = useKeyList({ count: set.length,  pre: set.indexOf(value), refStore, reset, expanded, open, submit, ...rest });
 	const items = options ? options({ close, index, value, submit }) : null;
 	const animateIn = (dir, y) => api.start({ 
+		config: {			
+			duration: 500,
+			easing: easings.easeOutCirc,
+		},
 		opacity: 1, 
-		transform: `translateY(${ (dir || -1 )* (y + font) }px)` 
+		transform: `translateY(${ (dir || -1 )* (y + font) }px)`
 	});
 	
 	useOutside(close, setFocus, debug);
 
 	useEffect(() => {
-		if (host && !refStore) setRefStore(host);
-		if (active && !expanded) setExpanded(true);
-		if (expanded && !rendered) {
+		if (dropdown && host && !refStore) setRefStore(host);
+		if (dropdown && active && !expanded) setExpanded(true);
+		if (dropdown && expanded && !rendered) {
 			let hostY = host.getBoundingClientRect().y;
 			let listHeight = list.getBoundingClientRect().height;
 			let hostHeight = host.offsetHeight;

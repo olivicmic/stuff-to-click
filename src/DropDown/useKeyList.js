@@ -9,7 +9,6 @@ export default function useKeyInput({ count = 0, expanded, focus, focusOff, open
 		else if (expanded && e.keyCode === 13) { // enter pressed
 			e.preventDefault();
 			submit(index);
-			setIndex(-1);
 			close();
 		} 
 		else if (e.keyCode === 40) { //down arrow
