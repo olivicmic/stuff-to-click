@@ -16,6 +16,9 @@ const App = () => {
 		color: '9acd33',
 		opacity: 75
 	});
+
+	const [fuk, fuku] = useState('');
+	const onFuku = (e) => {console.log(e.target.name); fuku(e.target.value)};
 	const onChange = (e) => {console.log(e.target.name); setSt({ ...apSt, [e.target.name]: e.target.value})};
 	const colorChange = (color) => setSt({ ...apSt, color: color});
 	const opacityChange = (opacity) => { console.log(opacity); setSt({ ...apSt, opacity: opacity}); };
@@ -95,10 +98,10 @@ const App = () => {
 				<SlideSelect value={apSt.text} onChange={onChange} label='Some text' name='text' set={selItems} bar={{}} tabIndex='1' style={{color: 'orange', fontSize: '30px'}} listStyle={{ backgroundColor: 'blue', color: 'red'}} debug/>
 				<textarea name="" id="" cols="30" rows="10"></textarea>
 			</Accordian>
-			<div key='ass'>
-				<SlideSelect value={apSt.text} onChange={onChange} label='Some text' name='text' id='sel-00' set={selItems} bar={{}} tabIndex='1' required/>
-				<SlideSelect value={apSt.text} onChange={onChange} label='Look at this how about it especially one more ok one more' name='text' id='sel-01' set={junk} bar={{}} tabIndex='2'/>
-				<SlideSelect value={apSt.text} onChange={onChange} label='Look at this how about it especially one more ok one more' name='text' id='sel-02' set={junk} bar={{}} tabIndex='3' arrow={arrow}/>
+			<div key='assjo'>
+				<SlideSelect value={fuk} onChange={onFuku} label='Some text' name='text' id='sel-00' tabIndex='1' set={selItems} bar={{}} key='jammy1' required/>
+				<SlideSelect value={fuk} onChange={onFuku} label='Look at this how about it especially one more ok one more' name='text' id='sel-01' set={junk} bar={{}} tabIndex='2' key='jammy2'/>
+				<SlideSelect value={fuk} onChange={onFuku} label='Look at this how about it especially one more ok one more' name='text' id='sel-02' set={junk} bar={{}} tabIndex='3' key='jammy3' arrow={arrow}/>
 			</div>
 			<br />
 			<br />

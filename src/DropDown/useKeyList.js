@@ -1,15 +1,17 @@
 import { useState, useEffect } from "react";
 
-export default function useKeyInput({ count = 0, expanded, focus, focusOff, open, pre = -1,  refStore, reset, submit }) {
+export default function useKeyInput({ count = 0, dropdown, expanded, focus, glob, focusOff, host, kid, open, pre = -1,  refStore, reset, submit }) {
 	const [index, setIndex] = useState(pre);
 	const close = func => {	setIndex(-1); reset(func); };
 
 	const handleKeyDown = e => {
-		if (e.keyCode === 9) focusOff(); // tab pressed
+		if (e.keyCode === 9) {console.log('huh');} // tab pressed}
 		else if (expanded && e.keyCode === 13) { // enter pressed
+			console.log("enter pressed");
 			e.preventDefault();
-			submit(index);
-			close();
+			console.log(e.target);
+			 kid.focus()
+			//submit(index);
 		} 
 		else if (e.keyCode === 40) { //down arrow
 			e.preventDefault();
@@ -24,22 +26,30 @@ export default function useKeyInput({ count = 0, expanded, focus, focusOff, open
 
 	const handleKeyUp = e => {
 		if (e.keyCode === 9) { // tab released
-			refStore.focus();
-			close();
+			//host.focus();
+			//close();
 		} else if (expanded && e.keyCode === 13) { // enter released
+
 			e.preventDefault();
-			refStore.nextSibling.focus();
+
+			submit(index);
+
+			close();
+			console.log('eneter reelseed', host, host.nextSibling);
+			//host.focus();
 		} 
 	};
 	useEffect(() => {
-		document.addEventListener("keydown", handleKeyDown, false);
-		document.addEventListener("keyup", handleKeyUp, false);
+		if (dropdown && glob) {  // set conditionally if not the input instance (check focus ref)
+			document.addEventListener("keydown", handleKeyDown, false);
+			document.addEventListener("keyup", handleKeyUp, false);
 
-		return () => {
-			document.removeEventListener("keydown", handleKeyDown, false);
-			document.removeEventListener("keyup", handleKeyUp, false);
-		};
-	}, [ handleKeyDown, handleKeyDown ]);
+			return () => {
+				document.removeEventListener("keydown", handleKeyDown, false);
+				document.removeEventListener("keyup", handleKeyUp, false);
+			};
+		}
+	}, [ dropdown, handleKeyDown, handleKeyDown ]);
 
-	return [index, close];
+	return [ index, close ];
 };

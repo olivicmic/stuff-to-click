@@ -3,14 +3,9 @@ import { useTransition, animated, easings, useSpring, config } from 'react-sprin
 import useKeyList  from '../DropDown/useKeyList';
 import useOutside  from '../DropDown/useOutside';
 
-export default function useDropDown({ debug, dropdown, name, onChange, options, set, setFocus, setValueName, value, ...rest }) {
-	const hostRef = useRef(null);
-	const listRef = useRef(null);
-	const host = hostRef.current;
-	const list = listRef.current;
+export default function useDropDown({ active, debug, dropdown, glob, host, hostRef, id, kid, list, name, onChange, options, set, setActive, setFocus, setValueName, value, ...rest }) {
 	const font = host ? parseInt(getComputedStyle(host).getPropertyValue('font-size').slice(0,-2) ) : 0;
 	const [listOffset, setOffset] = useState([0,0]);
-	const [active, setActive] = useState(false);
 	const [expanded, setExpanded] = useState(false);
 	const [rendered, setRendered] = useState(false);
 	const open = () => setActive(true);
@@ -28,19 +23,26 @@ export default function useDropDown({ debug, dropdown, name, onChange, options, 
 			opacity: 0,
 			transform: `translateY(0px)`,
 			onRest: () => {
+
+				console.log("eyy");
 				setRendered(false);
 				setExpanded(false); 
 				setActive(false);
+				console.log("CLOSED");
 			}
 		});
 
 		if (func) func();
 	}
 	const submit = y => {
+		console.log("SUBMITTING");
 		onChange({ target: {...set[y], name }});
+
+		console.log("SUBMITTED");
 		setValueName(set[y].label);
 	};
-	const [index, close] = useKeyList({ count: set.length,  pre: set.indexOf(value), refStore, reset, expanded, open, submit, ...rest });
+
+	const [index, close] = useKeyList({ count: set.length, dropdown, host, glob, id, kid, pre: set.indexOf(value), reset, expanded, open, submit, ...rest });
 	const items = options ? options({ close, index, value, submit }) : null;
 	const animateIn = (dir, y) => api.start({ 
 		config: {			
@@ -51,12 +53,12 @@ export default function useDropDown({ debug, dropdown, name, onChange, options, 
 		transform: `translateY(${ (dir || -1 )* (y + font) }px)`
 	});
 	
-	useOutside(close, setFocus, debug);
+	useOutside(close, setFocus, debug, host, id, glob);
 
 	useEffect(() => {
-		if (dropdown && host && !refStore) setRefStore(host);
+		//if (dropdown && host && !refStore) setRefStore(host);
 		if (dropdown && active && !expanded) setExpanded(true);
-		if (dropdown && expanded && !rendered) {
+		if (dropdown && list && expanded && !rendered) {
 			let hostY = host.getBoundingClientRect().y;
 			let listHeight = list.getBoundingClientRect().height;
 			let hostHeight = host.offsetHeight;
@@ -76,6 +78,6 @@ export default function useDropDown({ debug, dropdown, name, onChange, options, 
 			}
 			setRendered(true);
 		}
-	});
-	return { active, close, expanded, hostRef, index, items, listOffset, listRef, open, setOffset, sprung };
+	}, [active, animateIn, dropdown, expanded, font, host, refStore, rendered, setExpanded, setOffset, setRendered ]);
+	return { active, close, expanded, index, items, listOffset, open, setOffset, sprung };
 };
