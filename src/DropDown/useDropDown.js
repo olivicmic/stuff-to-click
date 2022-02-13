@@ -3,7 +3,7 @@ import { useTransition, animated, easings, useSpring, config } from 'react-sprin
 import useKeyList  from '../DropDown/useKeyList';
 import useOutside  from '../DropDown/useOutside';
 
-export default function useDropDown({ active, debug, dropdown, glob, host, hostRef, id, kid, list, name, onChange, options, set, setActive, setFocus, setValueName, value, ...rest }) {
+export default function useDropDown({ active, debug, dropdown, focus, host, focusChild, hostRef, id, list, name, onChange, options, set, setActive, setFocus, setValueName, value, ...rest }) {
 	const font = host ? parseInt(getComputedStyle(host).getPropertyValue('font-size').slice(0,-2) ) : 0;
 	const [listOffset, setOffset] = useState([0,0]);
 	const [expanded, setExpanded] = useState(false);
@@ -42,8 +42,10 @@ export default function useDropDown({ active, debug, dropdown, glob, host, hostR
 		setValueName(set[y].label);
 	};
 
-	const [index, close] = useKeyList({ count: set.length, dropdown, host, glob, id, kid, pre: set.indexOf(value), reset, expanded, open, submit, ...rest });
-	const items = options ? options({ close, index, value, submit }) : null;
+	const [index, close] = useKeyList({ count: set.length, dropdown, focus, host, id, pre: set.indexOf(value), reset, expanded, open, submit, ...rest });
+
+	//const inputFocus = () => kidRef.curent.focus
+	const items = options ? options({ close, focusChild, index, value, submit }) : null;
 	const animateIn = (dir, y) => api.start({ 
 		config: {			
 			duration: 500,
@@ -53,7 +55,7 @@ export default function useDropDown({ active, debug, dropdown, glob, host, hostR
 		transform: `translateY(${ (dir || -1 )* (y + font) }px)`
 	});
 	
-	useOutside(close, setFocus, debug, host, id, glob);
+	useOutside(close, setFocus, debug, host, id, focus);
 
 	useEffect(() => {
 		//if (dropdown && host && !refStore) setRefStore(host);
@@ -68,6 +70,8 @@ export default function useDropDown({ active, debug, dropdown, glob, host, hostR
 
 			setOffset([host.offsetLeft, yOff]);
 
+			setRendered(true);
+
 			if ((hostY + font + listHeight ) > window.innerHeight) {
 				setOffset([host.offsetLeft, listCenter - listHeight]);
 			 	animateIn(0, hostHalf);
@@ -76,8 +80,7 @@ export default function useDropDown({ active, debug, dropdown, glob, host, hostR
 				setOffset([host.offsetLeft, listCenter]);
 				animateIn(1, hostHalf);
 			}
-			setRendered(true);
 		}
 	}, [active, animateIn, dropdown, expanded, font, host, refStore, rendered, setExpanded, setOffset, setRendered ]);
-	return { active, close, expanded, index, items, listOffset, open, setOffset, sprung };
+	return { close, expanded, index, items, listOffset, open, setOffset, sprung };
 };

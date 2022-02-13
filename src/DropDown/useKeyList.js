@@ -1,16 +1,16 @@
 import { useState, useEffect } from "react";
 
-export default function useKeyInput({ count = 0, dropdown, expanded, focus, glob, focusOff, host, kid, open, pre = -1,  refStore, reset, submit }) {
+export default function useKeyInput({ count = 0, dropdown, expanded, focus, host, kid, open, pre = -1, reset, submit }) {
 	const [index, setIndex] = useState(pre);
 	const close = func => {	setIndex(-1); reset(func); };
 
 	const handleKeyDown = e => {
-		if (e.keyCode === 9) {console.log('huh');} // tab pressed}
+		if (e.keyCode === 9) close(); // tab pressed}
 		else if (expanded && e.keyCode === 13) { // enter pressed
 			console.log("enter pressed");
 			e.preventDefault();
 			console.log(e.target);
-			 kid.focus()
+			// kid.focus()
 			//submit(index);
 		} 
 		else if (e.keyCode === 40) { //down arrow
@@ -25,22 +25,16 @@ export default function useKeyInput({ count = 0, dropdown, expanded, focus, glob
 	};
 
 	const handleKeyUp = e => {
-		if (e.keyCode === 9) { // tab released
-			//host.focus();
-			//close();
-		} else if (expanded && e.keyCode === 13) { // enter released
-
+		if (expanded && e.keyCode === 13) { // enter released
 			e.preventDefault();
-
 			submit(index);
-
 			close();
 			console.log('eneter reelseed', host, host.nextSibling);
 			//host.focus();
 		} 
 	};
 	useEffect(() => {
-		if (dropdown && glob) {  // set conditionally if not the input instance (check focus ref)
+		if (dropdown && focus) {  // set conditionally if not the input instance (check focus ref)
 			document.addEventListener("keydown", handleKeyDown, false);
 			document.addEventListener("keyup", handleKeyUp, false);
 
