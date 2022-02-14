@@ -13,7 +13,6 @@ export default function useDropDown({ active, debug, dropdown, focus, host, focu
 		opacity: 0,
 		transform: `translateY(0px)`,
 	}));
-	const [refStore, setRefStore] = useState(null);
 	const reset = func => {
 		api.start({
 			config: {			
@@ -58,7 +57,6 @@ export default function useDropDown({ active, debug, dropdown, focus, host, focu
 	useOutside(close, setFocus, debug, host, id, focus);
 
 	useEffect(() => {
-		//if (dropdown && host && !refStore) setRefStore(host);
 		if (dropdown && active && !expanded) setExpanded(true);
 		if (dropdown && list && expanded && !rendered) {
 			let hostY = host.getBoundingClientRect().y;
@@ -81,6 +79,6 @@ export default function useDropDown({ active, debug, dropdown, focus, host, focu
 				animateIn(1, hostHalf);
 			}
 		}
-	}, [active, animateIn, dropdown, expanded, font, host, refStore, rendered, setExpanded, setOffset, setRendered ]);
+	}, [active, animateIn, dropdown, expanded, font, host, rendered, setExpanded, setOffset, setRendered ]);
 	return { close, expanded, index, items, listOffset, open, setOffset, sprung };
 };

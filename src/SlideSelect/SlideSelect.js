@@ -11,7 +11,6 @@ const SlideInput = ({ debug, disabled, name, id, onChange, tabIndex, value, set 
 	const attrSet = { disabled, name, onChange, set, tabIndex, value };
 	
 	return <SlideWrapper key='boom' { ...{ ...rest, disabled, id, list, name, onChange, tabIndex, value, set }} dropdown component={({ ...comProps}) => {
-		//console.log(comProps);
 		return <React.Fragment>
 				<Selection {...{...attrSet, ...comProps, id}} key='boops' />
 				<select {...{ disabled, name, onChange, tabIndex, value, key: 'native'}} >
