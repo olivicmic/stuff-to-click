@@ -1,16 +1,12 @@
 import { useEffect, useState } from 'react';
 
-export default function useInput({ valid, value }) {
+export default function useInput({ toDo = () => {}, valid, value }) {
 	const [focus, setFocus] = useState(false);
+	const [active, setActive] = useState(false);
 	const [valueName, setValueName] = useState(null);
-	const onFocus = () => {setFocus(true); console.log('focus on');}
-	const onBlur = () => {setFocus(false); console.log('focus off');}
-	const cls = ['','-active','-error','-label','-label-raised','-label-error'].map(item => 'stuff-slide-input' + item);
-	const isValid = (valid === undefined ) ? true : valid;
-	const errClass = (theClass) => isValid ? '' : cls[theClass];
-	const mainClass = `${cls[0]} ${focus ? cls[1] : ''} ${errClass(2)}`;
-	const labelRaise = (focus || value) ? cls[4] : '';
-	const labelClass = `${cls[3]} ${labelRaise} ${errClass(5)}`;
+	const onBlur = () => setFocus(false);
+	const onClick = () => setActive(true) && toDo();
+	const onFocus = () => setFocus(true);
 
-	return { inProps: { focus, setFocus, setValueName }, labelClass, mainClass, onBlur, onFocus, valueName };
+	return { inProps: { active, focus, setFocus, setActive, setValueName }, onBlur, onClick, onFocus,  valueName };
 };
