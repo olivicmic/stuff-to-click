@@ -82,11 +82,6 @@
 		white-space: nowrap;
 		display: flex;
 	}
-}
 
-.not-a-list {
-	display: block;
-	position: absolute;
-	background-color: red;
-	height: 500px;
+	.stuff-faux-select-list { outline: none }
 }

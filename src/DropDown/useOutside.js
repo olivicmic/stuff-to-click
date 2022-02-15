@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 
-export default function useOutside(close, setFocus, debug, host, id, focus) {
+export default function useOutside(close, setFocus, host, debug) {
 	useEffect(() => {
 		const handleClickOutside = (event) => {
 			setFocus(false);

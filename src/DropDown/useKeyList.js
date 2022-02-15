@@ -1,18 +1,12 @@
 import { useState, useEffect } from "react";
 
-export default function useKeyInput({ count = 0, dropdown, expanded, focus, host, kid, open, pre = -1, reset, submit }) {
+export default function useKeyInput({ count = 0, dropdown, expanded, focus, open, pre = -1, exit, submit }) {
 	const [index, setIndex] = useState(pre);
-	const close = func => {	setIndex(-1); reset(func); };
+	const close = func => {	setIndex(-1); exit(func); };
 
 	const handleKeyDown = e => {
 		if (e.keyCode === 9) close(); // tab pressed}
-		else if (expanded && e.keyCode === 13) { // enter pressed
-			console.log("enter pressed");
-			e.preventDefault();
-			console.log(e.target);
-			// kid.focus()
-			//submit(index);
-		} 
+		else if (expanded && e.keyCode === 13) e.preventDefault(); // enter pressed
 		else if (e.keyCode === 40) { //down arrow
 			e.preventDefault();
 			if (expanded) setIndex(index === count - 1 ? index : index + 1); // down limit
@@ -29,8 +23,6 @@ export default function useKeyInput({ count = 0, dropdown, expanded, focus, host
 			e.preventDefault();
 			submit(index);
 			close();
-			console.log('eneter reelseed', host, host.nextSibling);
-			//host.focus();
 		} 
 	};
 	useEffect(() => {
