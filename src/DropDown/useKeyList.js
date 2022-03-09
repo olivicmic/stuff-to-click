@@ -1,12 +1,10 @@
 import { useState, useEffect } from "react";
 
-export default function useKeyInput({ count = 0, dropdown, expanded, focus, open, pre = -1, exit, submit }) {
+export default function useKeyInput({ count = 0, dropdown, expanded, focus, open, pre = -1, close, submit }) {
 	const [index, setIndex] = useState(pre);
-	const close = func => {	setIndex(-1); exit(func); };
 
 	const handleKeyDown = e => {
-		if (e.keyCode === 9) close(); // tab pressed}
-		else if (expanded && e.keyCode === 13) e.preventDefault(); // enter pressed
+		if (expanded && e.keyCode === 13) e.preventDefault(); // enter pressed
 		else if (e.keyCode === 40) { //down arrow
 			e.preventDefault();
 			if (expanded) setIndex(index === count - 1 ? index : index + 1); // down limit

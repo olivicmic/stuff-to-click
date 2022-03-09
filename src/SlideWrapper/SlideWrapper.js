@@ -5,10 +5,11 @@ import useStuffClasses from './useStuffClasses';
 import useInput from './useInput';
 import './SlideWrapper.scss';
 
-const SlideWrapper = ({ component, bar, dropdown, id, label, list, listStyle, name, onChange = () => {}, onClick = () => {}, required, set = [], style, valid, value, debug, ...rest}) => {
+const SlideWrapper = ({ component, bar, dropdown, id, label, list, listStyle, name, onChange = () => {}, onClick = () => {}, required, set = [], style, valid, value, debug, active, focus, valueName, index, selState, expanded, setActive, setFocus, setValueName, events, sprung, enter, exit, close, ...rest}) => {
+	//const { active, focus, valueName } = inputProps;
 	const [host, ref] = useStateRef();
 	const [kid, kidRef] = useStateRef();
-	const [ { active, focus, valueName }, controls, events ] = useInput({ valid, value });
+	//const [ { active, focus, valueName }, controls, events ] = useInput({ valid, value });
 	const { labelClass, mainClass } = useStuffClasses({ focus, valid, value });
 	const shared = { debug, id, set, name, onChange, value };
 	const onFocus = () => kid?.focus() || {};
@@ -22,7 +23,7 @@ const SlideWrapper = ({ component, bar, dropdown, id, label, list, listStyle, na
 			{component({ ...events, ...rest, ...shared, ...( dropdown ? {kidRef} : {}), required, valueName })}
 			{ bar ? <div className='stuff-slide-bar' style={bar}></div> : null }
 		</div>
-		{ dropdown && host && set ? <DropDown { ...{...shared, ...controls, active, dropdown, focus, host, listStyle, onFocus, options: list  }} /> : null }
+		{ dropdown && host && set ? <DropDown { ...{...shared, index, selState, expanded, setActive, setFocus, setValueName, active, dropdown, focus, host, listStyle, onFocus, options: list, sprung, enter, exit, close }} /> : null }
 	</React.Fragment>;
 };
 
