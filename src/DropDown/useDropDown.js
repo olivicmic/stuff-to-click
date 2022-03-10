@@ -4,10 +4,10 @@ import useAnimatedDrop from './useAnimatedDrop';
 import useKeyList  from '../DropDown/useKeyList';
 import useOutside  from '../DropDown/useOutside';
 
-export default function useDropDown({ debug, dropdown, host, listHeight, selState, enter, ...rest }) {
+export default function useDropDown({ debug, dropdown, host, listHeight, selState, ...rest }) {
+	const { active, enter, expanded, setExpanded, rendered, setRendered, onRest } = selState;
 	const font = host ? parseInt(getComputedStyle(host).getPropertyValue('font-size').slice(0,-2) ) : 0;
 	const [listOffset, setOffset] = useState([0,0]);
-	const { active, expanded, setExpanded, rendered, setRendered, onRest } = selState;
 
 	useEffect(() => {
 		if (dropdown && active && !expanded) setExpanded(true);

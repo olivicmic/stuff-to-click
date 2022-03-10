@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React from 'react';
 
-export default function Selection({active, arrow: Arrow, focus, id, kidRef, listStyle, value, valueName, ...rest}) {
-	return <div className='stuff-faux-select' {...rest} key={id} ref={kidRef} >
+export default function Selection({active, arrow: Arrow, events, focus, id, kidRef, listStyle, value, valueName, ...rest}) {
+	return <div className='stuff-faux-select' {...{ ...events, ...rest }} key={id} ref={kidRef} >
 		<div className='stuff-faux-select-label'>
 			{ valueName || value || '' }
 		</div>
