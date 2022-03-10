@@ -91,10 +91,7 @@ const App = () => {
 				<h3>Hey</h3>
 				<p>Some stuff</p>
 			</Accordian>
-			<Accordian opened expander={({...rest}) => {
-				console.log(rest);
-				return <PlaceholderBtn {...rest} />
-			}}>
+			<Accordian opened expander={({...rest}) => <PlaceholderBtn {...rest} />}>
 				<SlideSelect value={apSt.text} onChange={onChange} label='Some text' name='text' set={selItems} bar={{}} tabIndex='1' style={{color: 'orange', fontSize: '30px'}} listStyle={{ backgroundColor: 'blue', color: 'red'}} debug/>
 				<textarea name="" id="" cols="30" rows="10"></textarea>
 			</Accordian>

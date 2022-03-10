@@ -5,14 +5,10 @@ import useStuffClasses from './useStuffClasses';
 import useInput from './useInput';
 import './SlideWrapper.scss';
 
-const SlideWrapper = ({ component, bar, dropdown, id, label, list, listStyle, name, onChange = () => {}, onClick = () => {}, required, set = [], style, valid, value, debug, active, focus, valueName, index, selState, expanded, setActive, setFocus, setValueName, events, sprung, enter, exit, close, ...rest}) => {
-	//const { active, focus, valueName } = inputProps;
+const SlideWrapper = ({ component, bar, dropdown, id, label, listStyle, name, required, set = [], style, valid, value, debug, focus, valueName, selState, events, sprung, enter, kidRef, onFocus, items, ...rest}) => {
 	const [host, ref] = useStateRef();
-	const [kid, kidRef] = useStateRef();
-	//const [ { active, focus, valueName }, controls, events ] = useInput({ valid, value });
 	const { labelClass, mainClass } = useStuffClasses({ focus, valid, value });
-	const shared = { debug, id, set, name, onChange, value };
-	const onFocus = () => kid?.focus() || {};
+	const shared = { debug, id, value };
 
 	return <React.Fragment>
 		<div { ...{ className: mainClass, key: id, id, onFocus, ref, style, }}>
@@ -20,10 +16,10 @@ const SlideWrapper = ({ component, bar, dropdown, id, label, list, listStyle, na
 				{ label }
 				{required ? <div className="stuff-slide-input-required"></div> : null}
 			</label>
-			{component({ ...events, ...rest, ...shared, ...( dropdown ? {kidRef} : {}), required, valueName })}
+			{component({ ...events, ...rest, ...shared, ...( dropdown ? {kidRef} : {}), name, required, set, valueName })}
 			{ bar ? <div className='stuff-slide-bar' style={bar}></div> : null }
 		</div>
-		{ dropdown && host && set ? <DropDown { ...{...shared, index, selState, expanded, setActive, setFocus, setValueName, active, dropdown, focus, host, listStyle, onFocus, options: list, sprung, enter, exit, close }} /> : null }
+		{ dropdown && host && set ? <DropDown { ...{...shared, selState, dropdown, host, listStyle, sprung, enter, items }} /> : null }
 	</React.Fragment>;
 };
 
