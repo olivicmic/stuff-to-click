@@ -27,8 +27,8 @@ export default function usePhasedInput({ name, onChange, set, toDo = () => {}, v
 	const items = list({ close, index, onFocus: unFocus, value, submit });
 
 	const keyInput = useKeySelect({ close, count: set.length, expanded, focus, index, open, setIndex, submit });
-	const wrapProps = { events: { onBlur, onClick, onFocus }, focus, items, kidRef, valueName, host, setHost };
+	const wrapProps = { events: { onBlur, onClick, onFocus }, focus, kidRef, valueName, setHost };
 	// focus, onFocus, events, items, kidRef, valueName, 
 	return {
-		active, expanded, keyInput, rendered, onFocus: unFocus, setExpanded, setRendered, sprung, enter, wrapProps };
+		active, expanded, host, items, keyInput, rendered, onFocus: unFocus, setExpanded, setRendered, sprung, enter, wrapProps };
 };

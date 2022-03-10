@@ -4,7 +4,6 @@ import useDropDown from './useDropDown';
 import { useStateRef } from 'hangers';
 
 export default function DropDown({ listStyle, selState, items, ...rest }) {
-	//console.log(rest);
 	const { active, sprung } = selState;
 	const [listHeight, listRef] = useStateRef(e => (e?.getBoundingClientRect().height || 0));
  	const { listOffset } = useDropDown({ ...rest, listHeight, selState });
