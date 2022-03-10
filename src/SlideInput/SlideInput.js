@@ -1,11 +1,14 @@
-import React, {useState} from "react";
+import React from "react";
 import SlideWrapper  from '../SlideWrapper';
-const Input = ({focus, extra: Extra, extraAttr, type = 'text', valueName, ...rest}) => 
+import useInput from '../resources/useInput';
+
+const Input = ({ events, extra: Extra, extraAttr, focus, type = 'text', valueName, ...rest}) => 
 	<div className='stuff-slide-input-content'>
-		<input type={type} {...rest}/>
+		<input { ...{ ...rest, ...events, type } }/>
 		{ Extra ? <Extra {...extraAttr} className='stuff-slide-input-extra'/> : null }
 	</div>;
 
-const SlideInput = ({ ...rest}) => <SlideWrapper {...rest} component={Input}/>;
-
-export default SlideInput;
+export default function SlideInput({ ...rest }) {
+	const { events, focus } = useInput({});
+	return <SlideWrapper { ...{ ...rest, events, focus, component: Input } } />;
+};

@@ -17,8 +17,8 @@ const App = () => {
 		opacity: 75
 	});
 
-	const [fuk, fuku] = useState('');
-	const onFuku = (e) => {console.log(e.target.name); fuku(e.target.value)};
+	const [selValue, setSel] = useState('');
+	const selectChange = (e) => {console.log(e.target.name); setSel(e.target.value)};
 	const onChange = (e) => {console.log(e.target.name); setSt({ ...apSt, [e.target.name]: e.target.value})};
 	const colorChange = (color) => setSt({ ...apSt, color: color});
 	const opacityChange = (opacity) => { console.log(opacity); setSt({ ...apSt, opacity: opacity}); };
@@ -96,15 +96,15 @@ const App = () => {
 				<textarea name="" id="" cols="30" rows="10"></textarea>
 			</Accordian>
 			<div key='assjo'>
-				<SlideSelect value={fuk} onChange={onFuku} label='Some text' name='text' id='sel-00' tabIndex='1' set={selItems} bar={{}} key='jammy1' required/>
-				<SlideSelect value={fuk} onChange={onFuku} label='Look at this how about it especially one more ok one more' name='text' id='sel-01' set={junk} bar={{}} tabIndex='2' key='jammy2'/>
-				<SlideSelect value={fuk} onChange={onFuku} label='Look at this how about it especially one more ok one more' name='text' id='sel-02' set={junk} bar={{}} tabIndex='3' key='jammy3' arrow={arrow}/>
+				<SlideSelect value={selValue} onChange={selectChange} label='Some text' name='text' id='sel-00' tabIndex='1' set={selItems} bar={{}} key='jammy1' required/>
+				<SlideSelect value={selValue} onChange={selectChange} label='Look at this how about it especially one more ok one more' name='text' id='sel-01' set={junk} bar={{}} tabIndex='2' key='jammy2'/>
+				<SlideSelect value={selValue} onChange={selectChange} label='Look at this how about it especially one more ok one more' name='text' id='sel-02' set={junk} bar={{}} tabIndex='3' key='jammy3' arrow={arrow}/>
 			</div>
 			<br />
 			<br />
 			<br />
 			<SlideInput type="text" value={apSt.text} onChange={onChange} name='text' style={testStyle} id="howdy" label='Some text'/>
-			<SlideInput type="text" value={apSt.text} onChange={onChange} name='text' style={testStyle} id="howdy" label='Some text' extra={btnPair}/>
+			<SlideInput type="text" value={apSt.text} onChange={onChange} name='text' style={testStyle} id="hola" label='Some text' extra={btnPair}/>
 			<SlideInput type="password" value={apSt.password} onChange={onChange} name='password' required bar={{}} label='A Password'/>
 			<SlideInput type="tel" value={apSt.tel} onChange={onChange} name='phonenumber' required bar={{backgroundColor: 'blue'}} style={{ fontSize: '1.75rem', display: 'block' }} valid={false} label='phone'/>
 			<SlideInput type="email" value={apSt.email} onChange={onChange} name='email' required bar={{}} style={{ fontSize: '1.5rem' }} autoComplete="false" label="An Email"/>

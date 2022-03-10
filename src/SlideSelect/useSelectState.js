@@ -1,12 +1,10 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
-export default function useSelectState({ setActive }) {
-	const [expanded, setExpanded] = useState(false);
-	const [rendered, setRendered] = useState(false);
-	const onRest = () => {
-		setRendered(false);
-		setExpanded(false); 
-		setActive(false);
-	};
-	return { expanded, setExpanded, rendered, setRendered, onRest };
+export default function useSelectState(initial) {
+	const [active, setActive] = useState(false); // select is focused, dropdown rendered but not visible
+	const [rendered, setRendered] = useState(false); // select is focused, dropdown visible
+	const [index, setIndex] = useState(initial); // numerical value of currently selected option -1 = none
+	const [valueName, setValueName] = useState(null); // name for currently selected option
+
+	return { active, index, rendered, setActive, setIndex, setRendered, setValueName, valueName };
 };

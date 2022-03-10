@@ -1,4 +1,4 @@
-import React, { useEffect, useState }  from 'react';
+import React  from 'react';
 import { animated } from 'react-spring';
 import useDropDown from './useDropDown';
 import { useStateRef } from 'hangers';

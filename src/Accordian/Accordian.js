@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useSpring, animated }  from 'react-spring';
 import PlaceholderBtn from '../PlaceholderBtn';
 import useResizeAware from 'react-resize-aware';
