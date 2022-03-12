@@ -9,7 +9,6 @@ const SlideInput = ({ debug, disabled, name, id, onChange, tabIndex, value, set 
 	const hiddenList = set && set.map((item,i) => <option value={item.value} key={i}>{item.label}</option>);
 	const { host, items, keyInput, wrapProps, ...selState } = useSelect({ name, onChange, set, value });
 	const attrSet = { disabled, id, name, tabIndex, value };
-	const shared = { };
 
 	return <React.Fragment>
 		<SlideWrapper { ...{ ...rest, ...wrapProps, disabled, name, id, tabIndex, value, set }} dropdown component={( comProps ) => <React.Fragment>

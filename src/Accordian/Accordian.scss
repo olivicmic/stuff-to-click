@@ -9,7 +9,7 @@
 	}
 
 	.stuff-accordian {
-		overflow: hidden;
+		&.accordian-busy, &.accordian-closed, {overflow: hidden;}
 	}
 
 	.stuff-accordian-content {
@@ -17,8 +17,6 @@
 		box-sizing: border-box;
 		width: 100%;
 		position: relative;
-
-
 
 		.stuff-accordian-footer {
 			margin: 0;

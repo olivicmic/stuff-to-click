@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useBusy } from 'hangers';
 import { useSpring, animated }  from 'react-spring';
 import PlaceholderBtn from '../PlaceholderBtn';
 import useResizeAware from 'react-resize-aware';
@@ -18,13 +19,15 @@ export default function Accordian({
 	...rest
 }) {
 	let defaultHeight = 0;
+	const [busy, statusControls] = useBusy({});
 	const [expanded, toggle] = useState(opened);
 	const [contentHeight, setContentHeight] = useState(defaultHeight);
 	const [resizeListener, sizes] = useResizeAware();
 	const expand = useSpring({
 		config: { friction: 50, tension: 350 },
 		from: { height: 0 },
-		to: {height: expanded ? contentHeight : 0}
+		to: {height: expanded ? contentHeight : 0},
+		...statusControls
 	});
 
 	const makeChange = () => onChange(expanded);
@@ -43,6 +46,7 @@ export default function Accordian({
 		if (!expanded) onClosed(expanded);
 		onChange(expanded);
 	},[expanded]);
+	console.log(busy);
 
 	return(
 		<div className={`stuff-accordian-container${ className ? ' ' + className : ''}`} {...rest} >
@@ -50,7 +54,7 @@ export default function Accordian({
 				{Header ? <Header /> : ''}
 				{Expander ? <Expander active={expanded}/> : <PlaceholderBtn active={expanded}/>}
 			</header>
-			<animated.div className='stuff-accordian' style={expand} >
+			<animated.div className={`stuff-accordian${ busy ? ' accordian-busy' : ''}${ !expanded ? ' accordian-closed' : ''}`} style={expand} >
 				<div className='stuff-accordian-content'>
 					<hr className='stuff-accordian-seperator'/>
 					{resizeListener}

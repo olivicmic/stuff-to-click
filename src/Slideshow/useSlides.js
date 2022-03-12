@@ -3,7 +3,7 @@ import { useTransition, config } from 'react-spring';
 import { useBusy } from 'hangers';
 import transform from './transform';
 
-export default function useSlides({ axis='x', direction = 1, enter = {}, fade = 1, from = {}, leave = {}, override, page, paused, range = 100, spring = 'slot' }) {
+export default function useSlides({ axis='x', direction = 1, enter = {}, fade = 1, from = {}, leave = {}, override, page, parentCtrls, paused, range = 100, spring = 'slot' }) {
 	const springs = { 
 		...config,
 		slot: {
@@ -16,7 +16,8 @@ export default function useSlides({ axis='x', direction = 1, enter = {}, fade = 
 			mass: 0.4
 		}
 	};
-	const [busy, statusControls] = useBusy({});
+	const [busy, slideCtrls] = useBusy({});
+	const doDuo = onWhat => { parentCtrls[onWhat](); slideCtrls[onWhat](); };
 	const phases = { enter, from, leave };
 	const selAxis = ['x','y','xy'].indexOf(axis);
 	const onOff = (rng, off) => paused ? off : rng;
@@ -36,8 +37,9 @@ export default function useSlides({ axis='x', direction = 1, enter = {}, fade = 
 	const makeStyles = () => Object.fromEntries(['enter', ...ways].map((item,i) => [ item, keyStyle(item) ]));
 	const transitions = useTransition(page, {
 		...makeStyles(),
-		...statusControls,
 		config: springs[spring] || spring || springs['slot'],
+		onStart: () => doDuo('onStart'),
+		onRest: () => doDuo('onRest'),
 		keys: null,
 		...override
 	});
