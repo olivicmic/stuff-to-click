@@ -1,4 +1,4 @@
-.stuff-slide-input {
+.stuff-input-wrapper {
 	color: inherit;
 	position: relative;
 	display: inline-block;
@@ -14,12 +14,12 @@
 	transition: .25s border-color ease-in-out;
 	vertical-align: bottom;
 
-	&.stuff-slide-input-active {
+	&.stuff-input-active {
 		border-color: currentColor;
-		.stuff-slide-bar { border-radius: 4px }
+		.stuff-input-bar { border-radius: 4px }
 	}
 	
-	.stuff-slide-input-label {
+	.stuff-input-label {
 		pointer-events: none;
 		font-size: .75em;
 		height: 1.5em;
@@ -33,7 +33,7 @@
 		left: .4em;
 	}
 
-	.stuff-slide-input-required {
+	.stuff-input-required {
 		display: inline-block;
 		margin: auto .5em;
 		height: .5em;
@@ -42,7 +42,7 @@
 		background-color: #f00;
 	}
 
-	.stuff-slide-input-label-raised { bottom: 1.5em; }
+	.stuff-input-label-raised { bottom: 1.5em; }
 
 	input[type=text], input[type=email], input[type=tel], input[type=password], .stuff-faux-select-label {
 		padding: 1.1em 1em .25em .25em;
@@ -62,11 +62,11 @@
 		height: 2.5em;
 	}
 
-	.stuff-slide-input-content {
+	.stuff-input-content {
 		display: flex;
 	}
 
-	.stuff-slide-bar {
+	.stuff-input-bar {
 		display: block;
 		background-color: currentColor;
 		width: 100%;
@@ -76,7 +76,7 @@
 		bottom: 0;
 	}
 
-	.stuff-slide-input-extra {
+	.stuff-input-extra {
 		margin: auto 1em auto auto;
 		white-space: nowrap;
 		display: flex;

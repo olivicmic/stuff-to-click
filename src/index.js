@@ -4,13 +4,14 @@ import ColorDragSlider from './ColorDragSlider';
 import DragSlider from './DragSlider';
 import DropDown from './DropDown';
 import HexInput from './HexInput';
+import Input from './Input';
+import InputWrap from './InputWrap';
 import NumInput from './NumInput';
+import Option from './Option';
 import PlaceholderBtn from './PlaceholderBtn';
 import RGBInput from './RGBInput';
+import Select from './Select';
 import Selection from './Selection';
-import SlideInput from './SlideInput';
-import SlideSelect from './SlideSelect';
 import Slideshow from './Slideshow';
-import SlideWrapper from './SlideWrapper';
 
-export { Accordian, HexInput, DragSlider, DropDown, ColorDragSlider, NumInput, PlaceholderBtn, RGBInput, SlideInput, SlideSelect, Slideshow, SlideWrapper };
+export { Accordian, DragSlider, DropDown, ColorDragSlider, HexInput, Input, InputWrap, NumInput, Option, PlaceholderBtn, RGBInput, Select, Selection, Slideshow };

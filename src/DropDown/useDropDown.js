@@ -1,8 +1,4 @@
 import { useEffect, useState } from 'react';
-import { useTransition, animated, easings, useSpring, config } from 'react-spring';
-import useAnimatedDrop from './useAnimatedDrop';
-import useKeyList  from '../DropDown/useKeyList';
-import useOutside  from '../DropDown/useOutside';
 
 export default function useDropDown({ debug, host, listHeight, selState }) {
 	const { active, enter, rendered, setRendered, onRest } = selState;

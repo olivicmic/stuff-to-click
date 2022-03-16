@@ -8,7 +8,7 @@ export default function ExampleSlide({ atStart, atEnd, back, busy, goTo, num, pa
 		<div>
 			<div>Busy: {`${busy}`}</div>
 			<div>{ num + ': ' + value }</div>
-			{ num === 2 ? <textarea name="" id="" cols="30" rows="10" value='' readOnly/> : null}
+			{ num === 2 ? <textarea className='ex-slide-txt' cols="30" rows="10" /> : null}
 			<input type='number' value={reqPg} onChange={e => setReqPg(e.target.value)} disabled={busy}/>
 			<button onClick={() => goTo(reqPg)} disabled={busy}>Go to page</button>
 		</div>			

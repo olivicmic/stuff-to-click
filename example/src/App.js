@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 
-import { Accordian, Slideshow, DragSlider, HexInput, SlideInput, ColorDragSlider, RGBInput, NumInput, PlaceholderBtn, SlideSelect } from 'stuff-to-click';
+import { Accordian, Slideshow, DragSlider, HexInput, Input, ColorDragSlider, RGBInput, NumInput, PlaceholderBtn, Select } from 'stuff-to-click';
 
 import ExampleSlide from './ExampleSlide';
 
-import 'stuff-to-click/dist/index.css'
+import './index.css';
+import 'stuff-to-click/dist/index.css';
 
 const App = () => {
 	const [apSt, setSt] = useState({
@@ -92,24 +93,24 @@ const App = () => {
 				<p>Some stuff</p>
 			</Accordian>
 			<Accordian opened expander={({...rest}) => <PlaceholderBtn {...rest} />}>
-				<SlideSelect value={apSt.text} onChange={onChange} label='Some text' name='text' set={selItems} bar={{}} tabIndex='1' style={{color: 'orange', fontSize: '30px'}} listStyle={{ backgroundColor: 'blue', color: 'red'}} debug/>
+				<Select value={apSt.text} onChange={onChange} label='Some text' name='text' set={selItems} bar={{}} tabIndex='1' style={{color: 'orange', fontSize: '30px'}} listStyle={{ backgroundColor: 'blue', color: 'red'}} debug/>
 				<textarea name="" id="" cols="30" rows="10"></textarea>
 			</Accordian>
 			<div key='assjo'>
-				<SlideSelect value={selValue} onChange={selectChange} label='Some text' name='text' id='sel-00' tabIndex='1' set={selItems} bar={{}} key='jammy1' required/>
-				<SlideSelect value={selValue} onChange={selectChange} label='Look at this how about it especially one more ok one more' name='text' id='sel-01' set={junk} bar={{}} tabIndex='2' key='jammy2'/>
-				<SlideSelect value={selValue} onChange={selectChange} label='Look at this how about it especially one more ok one more' name='text' id='sel-02' set={junk} bar={{}} tabIndex='3' key='jammy3' arrow={arrow}/>
+				<Select value={selValue} onChange={selectChange} label='Some text' name='text' id='sel-00' tabIndex='1' set={selItems} bar={{}} key='jammy1' required/>
+				<Select value={selValue} onChange={selectChange} label='Look at this how about it especially one more ok one more' name='text' id='sel-01' set={junk} bar={{}} tabIndex='2' key='jammy2'/>
+				<Select value={selValue} onChange={selectChange} label='Look at this how about it especially one more ok one more' name='text' id='sel-02' set={junk} bar={{}} tabIndex='3' key='jammy3' arrow={arrow}/>
 			</div>
 			<br />
 			<br />
 			<br />
-			<SlideInput type="text" value={apSt.text} onChange={onChange} name='text' style={testStyle} id="howdy" label='Some text'/>
-			<SlideInput type="text" value={apSt.text} onChange={onChange} name='text' style={testStyle} id="hola" label='Some text' extra={btnPair}/>
-			<SlideInput type="password" value={apSt.password} onChange={onChange} name='password' required bar={{}} label='A Password'/>
-			<SlideInput type="tel" value={apSt.tel} onChange={onChange} name='phonenumber' required bar={{backgroundColor: 'blue'}} style={{ fontSize: '1.75rem', display: 'block' }} valid={false} label='phone'/>
-			<SlideInput type="email" value={apSt.email} onChange={onChange} name='email' required bar={{}} style={{ fontSize: '1.5rem' }} autoComplete="false" label="An Email"/>
+			<Input type="text" value={apSt.text} onChange={onChange} name='text' style={testStyle} id="howdy" label='Some text'/>
+			<Input type="text" value={apSt.text} onChange={onChange} name='text' style={testStyle} id="hola" label='Some text' extra={btnPair}/>
+			<Input type="password" value={apSt.password} onChange={onChange} name='password' required bar={{}} label='A Password'/>
+			<Input type="tel" value={apSt.tel} onChange={onChange} name='phonenumber' required bar={{backgroundColor: 'blue'}} style={{ fontSize: '1.75rem', display: 'block' }} valid={false} label='phone'/>
+			<Input type="email" value={apSt.email} onChange={onChange} name='email' required bar={{}} style={{ fontSize: '1.5rem' }} autoComplete="false" label="An Email"/>
 			<div style={{margin: '30px'}} label="A Phone Number">
-				<SlideInput type="text" value={apSt.extraTxt} onChange={onChange} name='extraTxt' required bar={{}} style={{ fontSize: '1.5rem' }} autoComplete="false" label="Some Text"/>
+				<Input type="text" value={apSt.extraTxt} onChange={onChange} name='extraTxt' required bar={{}} style={{ fontSize: '1.5rem' }} autoComplete="false" label="Some Text"/>
 			</div>
 			<div>
 				<h3>HexInput, DragSlider, RGBInput & ColorSlider</h3>

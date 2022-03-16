@@ -46,7 +46,6 @@ export default function Accordian({
 		if (!expanded) onClosed(expanded);
 		onChange(expanded);
 	},[expanded]);
-	console.log(busy);
 
 	return(
 		<div className={`stuff-accordian-container${ className ? ' ' + className : ''}`} {...rest} >

@@ -1,4 +1,4 @@
-.stuff-slide-input {
+.stuff-input-wrapper {
 	select {
 		top: 0;
 		left: 0;
@@ -19,10 +19,6 @@
 	display: flex;
 	cursor: pointer;
 
-	.stuff-faux-select-label {
-		display: inline-block;
-	}
-
 	.stuff-faux-select-marker {
 		display: inline-block;
 		margin: auto 1em auto auto;
@@ -41,10 +37,6 @@
 
 }
 
-.thethang {
-	position: relative;
-}
-
 .stuff-faux-select-list {	
 	background-color: #000;
 	border-radius: 4px;
@@ -59,7 +51,6 @@
 	color: #fff;
 	margin: 0;
 	outline: none;
-	//top: 3em;
 
 	li {
 		display: flex;

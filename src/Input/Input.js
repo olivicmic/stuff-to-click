@@ -1,6 +1,6 @@
 import React from "react";
-import SlideWrapper  from '../SlideWrapper';
-import useInput from '../resources/useInput';
+import InputWrap  from '../InputWrap';
+import { useInput } from '../hooks';
 
 const Input = ({ events, extra: Extra, extraAttr, focus, type = 'text', valueName, ...rest}) => 
 	<div className='stuff-slide-input-content'>
@@ -10,5 +10,5 @@ const Input = ({ events, extra: Extra, extraAttr, focus, type = 'text', valueNam
 
 export default function SlideInput({ ...rest }) {
 	const { events, focus } = useInput({});
-	return <SlideWrapper { ...{ ...rest, events, focus, component: Input } } />;
+	return <InputWrap { ...{ ...rest, events, focus, component: Input } } />;
 };
