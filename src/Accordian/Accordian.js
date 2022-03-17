@@ -48,7 +48,7 @@ export default function Accordian({
 	},[expanded]);
 
 	return(
-		<div className={`stuff-accordian-container${ className ? ' ' + className : ''}`} {...rest} >
+		<div className={`stuff-accordian${ className ? ' ' + className : ''}`} {...rest} >
 			<header className='stuff-accordian-header' onClick={openClose}>
 				{Header ? <Header /> : ''}
 				{Expander ? <Expander active={expanded}/> : <PlaceholderBtn active={expanded}/>}

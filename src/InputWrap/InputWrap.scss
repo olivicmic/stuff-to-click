@@ -1,4 +1,4 @@
-.stuff-input-wrapper {
+.stuff-input, .stuff-email, .stuff-password, .stuff-select, .stuff-tel, .stuff-text {
 	color: inherit;
 	position: relative;
 	display: inline-block;
@@ -14,12 +14,12 @@
 	transition: .25s border-color ease-in-out;
 	vertical-align: bottom;
 
-	&.stuff-input-active {
+	&.stuff-input-focus, &.stuff-email-focus, &.stuff-password-focus, &.stuff-select-focus, &.stuff-tel-focus, &.stuff-text-focus  {
 		border-color: currentColor;
 		.stuff-input-bar { border-radius: 4px }
 	}
 	
-	.stuff-input-label {
+	.stuff-label {
 		pointer-events: none;
 		font-size: .75em;
 		height: 1.5em;
@@ -33,7 +33,7 @@
 		left: .4em;
 	}
 
-	.stuff-input-required {
+	.stuff-required {
 		display: inline-block;
 		margin: auto .5em;
 		height: .5em;
@@ -41,8 +41,6 @@
 		border-radius: 50%;
 		background-color: #f00;
 	}
-
-	.stuff-input-label-raised { bottom: 1.5em; }
 
 	input[type=text], input[type=email], input[type=tel], input[type=password], .stuff-faux-select-label {
 		padding: 1.1em 1em .25em .25em;
@@ -66,7 +64,7 @@
 		display: flex;
 	}
 
-	.stuff-input-bar {
+	.stuff-bar {
 		display: block;
 		background-color: currentColor;
 		width: 100%;

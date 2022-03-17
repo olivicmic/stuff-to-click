@@ -3,9 +3,9 @@ import InputWrap  from '../InputWrap';
 import { useInput } from '../hooks';
 
 const Input = ({ events, extra: Extra, extraAttr, focus, type = 'text', valueName, ...rest}) => 
-	<div className='stuff-slide-input-content'>
+	<div className='stuff-input-content'>
 		<input { ...{ ...rest, ...events, type } }/>
-		{ Extra ? <Extra {...extraAttr} className='stuff-slide-input-extra'/> : null }
+		{ Extra ? <Extra {...extraAttr} className='stuff-input-extra'/> : null }
 	</div>;
 
 export default function SlideInput({ ...rest }) {

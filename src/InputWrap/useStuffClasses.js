@@ -1,10 +1,10 @@
-export default function useStuffClasses({ focus, valid, }) {
-	const classes = ['-wrapper','-active','-error','-label','-label-error'].map(item => 'stuff-input' + item);
+export default function useStuffClasses({ focus, valid, type = 'input' }) {
+	const classes = (i, kind) => ['','-focus','-error'].map(item => 'stuff-' + kind + item)[i];
 	const isValid = !valid ? true : valid;
-	const errClass = n => isValid ? '' : classes[n];
+	const errClass = (n, kind) => isValid ? '' : ' ' + classes(n, kind);
 
 	return {
-		labelClass: `${classes[3]} ${errClass(4)}`,
-		mainClass: `${classes[0]} ${focus ? classes[1] : ''} ${errClass(2)}`
+		labelClass: `${ classes( 0, 'label' ) }${ errClass(2, 'label') }`,
+		mainClass: `${ classes(0, type) }${ focus ?  ' ' + classes(1, type) : '' }${ errClass(2, type) }`
 	};
 };

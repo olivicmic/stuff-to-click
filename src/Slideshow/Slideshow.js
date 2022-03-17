@@ -14,7 +14,7 @@ export default function Slideshow({ children, className, ...rest }) {
 	});
 
 	return(
-		<animated.div className={`${ className ? className + ' ' : ''}stuff-slideshow-container${ busy || contentHeight === 0 ? ' slideshow-busy' : '' }`}  style={expand}>
+		<animated.div className={`${ className ? className + ' ' : ''}stuff-slideshow${ busy || contentHeight === 0 ? ' slideshow-busy' : '' }`}  style={expand}>
 			<Slides { ...{ ...rest, parentCtrls, setHeight,} } >
 				{ children }
 			</Slides>

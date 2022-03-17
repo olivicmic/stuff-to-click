@@ -1,5 +1,5 @@
-.stuff-slideshow-container {
-	&.slideshow-busy, &.slideshow-closed, {overflow: hidden;}
+.stuff-slideshow {
+	&.slideshow-busy, &.slideshow-closed, { overflow: hidden; }
 }
 .stuff-slideshow-content {
 	position: relative;

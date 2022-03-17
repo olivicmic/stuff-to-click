@@ -18,8 +18,8 @@ export default function useAnimatedDrop({ onRest }) {
 		(func = () => {}) => {
 		animate.start({ // exit
 				config: {			
-					duration: 700,
-					easing: easings.easeInQuart,
+					duration: 800,
+					easing: easings.easeInOutQuart,
 				},
 				opacity: 0,
 				transform: `translateY(0px)`,

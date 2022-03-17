@@ -18,11 +18,11 @@ export default function useDropDown({ debug, host, listHeight, selState }) {
 
 			if ((hostY + font + listHeight ) > window.innerHeight) {
 				setOffset([host.offsetLeft, listCenter - listHeight]);
-			 	enter(0, hostHalf + font);
+			 	enter(0, hostHalf + (font / 2));
 				
 			} else  {
 				setOffset([host.offsetLeft, listCenter]);
-				enter(1, hostHalf + font);
+				enter(1, hostHalf + (font / 2));
 			}
 		}
 	}, [active, enter, font, host, listHeight, rendered, setOffset, setRendered ]);

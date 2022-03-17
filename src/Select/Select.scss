@@ -1,4 +1,4 @@
-.stuff-input-wrapper {
+.stuff-select {
 	select {
 		top: 0;
 		left: 0;
@@ -19,9 +19,14 @@
 	display: flex;
 	cursor: pointer;
 
-	.stuff-faux-select-marker {
+	.stuff-select-value {
 		display: inline-block;
-		margin: auto 1em auto auto;
+		margin: auto auto .25em .25em;
+	}
+
+	.stuff-select-marker {
+		display: inline-block;
+		margin: auto 1em;
 		height: .5em;
 		width: .5em;
 	}
