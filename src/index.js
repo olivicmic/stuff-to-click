@@ -8,6 +8,7 @@ import Input from './Input';
 import InputWrap from './InputWrap';
 import Modal from './Modal';
 import ModalTrigger from './ModalTrigger';
+import ModalView from './ModalView';
 import NumInput from './NumInput';
 import Option from './Option';
 import PlaceholderBtn from './PlaceholderBtn';
@@ -16,4 +17,4 @@ import Select from './Select';
 import Selection from './Selection';
 import Slideshow from './Slideshow';
 
-export { Accordian, DragSlider, DropDown, ColorDragSlider, HexInput, Input, InputWrap, Modal, ModalTrigger, NumInput, Option, PlaceholderBtn, RGBInput, Select, Selection, Slideshow };
+export { Accordian, DragSlider, DropDown, ColorDragSlider, HexInput, Input, InputWrap, Modal, ModalTrigger, ModalView, NumInput, Option, PlaceholderBtn, RGBInput, Select, Selection, Slideshow };

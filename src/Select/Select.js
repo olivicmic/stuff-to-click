@@ -7,7 +7,7 @@ import './Select.scss'
 
 export default function Select({ debug, disabled, name, id, onChange, tabIndex, value, set = [], ...rest }) {
 	const hiddenList = set && set.map((item,i) => <option value={item.value} key={i}>{item.label}</option>);
-	const { host, items, keyInput, wrapProps, ...selState } = useSelect({ name, onChange, set, value });
+	const { keyInput, wrapProps } = useSelect({ name, onChange, set, value });
 	const attrSet = { disabled, id, name, tabIndex, value };
 
 	return <React.Fragment>
@@ -18,6 +18,6 @@ export default function Select({ debug, disabled, name, id, onChange, tabIndex, 
 				{hiddenList}
 			</select>
 		</React.Fragment > } />
-		{ host && set ? <DropDown { ...{  debug, host, id, items, selState, value, }} /> : null }
+		{ /* host && set ? <DropDown { ...{  debug, host, id, items, selState, value, }} /> : null */ }
 	</React.Fragment >
 };

@@ -1,19 +1,19 @@
 import { useSpring, easings } from 'react-spring';
 
-export default function useAnimatedDrop({ onRest }) {
+export default function useAnimatedDrop({ onRest = () => {}, from = [0,0], to = [0,0] }) {
 	const [sprung, animate] = useSpring(() => ({
 		opacity: 0,
-		transform: `translateY(0px)`,
+		transform: `translate(${from[0]}px, ${from[1]}px)`,
 	}));
 
 	return [ sprung, // props
-		(dir, y) => animate.start({ // enter
+		dir => animate.start({ // enter
 			config: {			
 				duration: 500,
 				easing: easings.easeOutCirc,
 			},
 			opacity: 1, 
-			transform: `translateY(${ (dir || -1 )* (y) }px)`
+			transform: `translate(${ (dir || -1 )* (to[0]) }px, ${ (dir || -1 )* (to[1]) }px)`
 		}),
 		(func = () => {}) => {
 		animate.start({ // exit
@@ -22,7 +22,7 @@ export default function useAnimatedDrop({ onRest }) {
 					easing: easings.easeInOutQuart,
 				},
 				opacity: 0,
-				transform: `translateY(0px)`,
+				transform: `translateY(${from[0]}px, ${from[1]}px)`,
 				onRest
 			});
 
