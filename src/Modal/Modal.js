@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { animated } from 'react-spring';
 import { useAnimatedDrop } from '../hooks';
 
-export default function Modal({ children, cutModal, modID, modState, setMod, x = 0, y = 0, kill, position, setKill, ...rest }) {
+export default function Modal({ component: Component, content, cutModal, modID, x = 0, y = 0, kill, position, setKill, ...rest }) {
 	console.log(rest);
 	//const [modState, setMod] = useState();
 	const [rendered, setRendered] = useState(false);
@@ -11,7 +11,8 @@ export default function Modal({ children, cutModal, modID, modState, setMod, x =
 		to: [x,y], 
 		onRest: () => { cutModal(position); setRendered(false); }
 	});
-	const NewChild = { ...children, props: { ...children?.props, modID, modState, setMod, position, setKill } };
+	//const child = { ...component, props: { modID, position, setKill, ...content } };
+	//const Children = () =>  component;
 	useEffect(() => {
 		if (kill === position) { setKill(-1); exit(); }
 	}, [kill, position]);
@@ -19,5 +20,7 @@ export default function Modal({ children, cutModal, modID, modState, setMod, x =
 		if (!rendered) { enter(1); setRendered(true); }
 	});
 
-	return <animated.div className='stuff-modal' style={sprung}>{ NewChild }</animated.div>;
+	return <animated.div className='stuff-modal' style={sprung}>
+		<Component { ...{ ...rest, modID, position, setKill, ...content }} />
+	</animated.div>;
 };
