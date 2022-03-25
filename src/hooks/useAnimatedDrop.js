@@ -13,7 +13,7 @@ export default function useAnimatedDrop({ onRest = () => {}, from = [0,0], to = 
 				easing: easings.easeOutCirc,
 			},
 			opacity: 1, 
-			transform: `translate(${ (dir || -1 )* (to[0]) }px, ${ (dir || -1 )* (to[1]) }px)`
+			transform: `translate(0px, 0px)`
 		}),
 		(func = () => {}) => {
 		animate.start({ // exit

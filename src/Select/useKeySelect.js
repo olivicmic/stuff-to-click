@@ -1,7 +1,6 @@
 import { useKeyInput } from 'hangers';
 
 export default function useKeySelect({ active, close, count, focus, index, open, setIndices, submit }) {
-	console.log(focus);
 	const keySet = {
 		'9': { keydown: () => close() },
 		'13': { keyup: e => { // enter released

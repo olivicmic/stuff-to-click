@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { useSpring, animated,config } from 'react-spring';
 
-export default function Option({ onFocus, modState, position, index, item, submit, value }) {
+export default function Option({ onFocus, modState, position, item, submit }) {
 	const focus = position === modState.index;
 	const [hover, setHover] = useState(false);
-	const selected = (value || modState.value) === item.value;
+	const selected = modState.value === item.value;
 	const indicator = () => {
 		if (selected && ( hover || focus )) return 'translateX(-0.5em)';
 		else if (selected) return 'translateX(0em)';
@@ -17,14 +17,7 @@ export default function Option({ onFocus, modState, position, index, item, submi
 	});
 
 	return(
-		<li value={item.value} onClick={e => {
-
-			console.log(e);
-
-			submit(position); 
-			onFocus(); 
-			//close()
-		}} onMouseEnter={() => setHover(true)} onMouseLeave={() => setHover(false)} >
+		<li value={item.value} onClick={e => { submit(position); onFocus();	}} onMouseEnter={() => setHover(true)} onMouseLeave={() => setHover(false)} >
 			<span>{item.label}</span>
 			<animated.div className='faux-select-indicator' style={indSpring}></animated.div>
 		</li>

@@ -77,7 +77,6 @@ const App = () => {
 	const theThings = (props) => things.map((thing, i) => <ExampleSlide num={i} value={thing} key={i} {...props}/>);
 
 	return (
-		<div>
 			<ModalView>
 				<ModalTrigger />
 				<h1>Click These Things!</h1>
@@ -128,7 +127,6 @@ const App = () => {
 				<NumInput value={apSt.opacity} max={100} onChange={opacityChange}/>
 				<NumInput value={apSt.opacity} max={100} onChange={opacityChange}/>
 			</ModalView>
-		</div>
 	);
 }
 

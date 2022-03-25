@@ -1,7 +1,6 @@
 import React from 'react';
 import InputWrap  from '../InputWrap';
 import Selection  from '../Selection';
-import DropDown  from '../DropDown';
 import useSelect from './useSelect';
 import './Select.scss'
 
@@ -18,6 +17,5 @@ export default function Select({ debug, disabled, name, id, onChange, tabIndex, 
 				{hiddenList}
 			</select>
 		</React.Fragment > } />
-		{ /* host && set ? <DropDown { ...{  debug, host, id, items, selState, value, }} /> : null */ }
 	</React.Fragment >
 };

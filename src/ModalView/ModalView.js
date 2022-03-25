@@ -1,44 +1,22 @@
-import React, { useEffect, useState } from 'react';
-import { generateUnique } from 'lal';
+import React from 'react';
 import { ModalContext } from '../Context';
 import Modal from '../Modal';
 import ModalTrigger from '../ModalTrigger';
+import useModalState from './useModalState';
 import './ModalView.scss'
 
 
 export default function ModalView({ children }) {
-	const [modals, setModals] = useState([]);
-	const [kill, setKill] = useState(-1);
-	const [modState, setMod] = useState([]);
-	const [current, setCurrent] = useState(-1);
-	const cutModal = i => {
-		setMod([ ...modState ].filter((item, n) => n !== i));
-		setModals([ ...modals ].filter((item, n) => n !== i));
-		setCurrent(-1);
-	};
-	const addModal = ({ to = [0,0], from = [0,0], ...rest  }) => {
-		let modID = generateUnique({ charCount: 5 });
-		setMod([ ...modState, {} ]);
-		setCurrent(modals.length);
-		setModals([ ...modals, { ...{
-			...rest,
-			modID, 
-			x: to[0],
-			y: to[1]
-		}}]);
-	};
+	const { modals, ...rest  } = useModalState();
 	const modalList = modals.map(( item, i ) => <Modal{ ...{
 		...item,
-		cutModal,
 		key: i, 
-		kill,
-		modState,
+		modals,
 		position: i, 
-		setKill,
-		setMod,
+		...rest
 	} }/>);
 
-	return <ModalContext.Provider value={{ addModal, current, cutModal, modals, modState, setKill, setMod, setModals }}>
+	return <ModalContext.Provider value={{ modals, ...rest }}>
 		{ children }
 		{modals.length !== 0 ? <div className='stuff-modal-view'>
 			<ModalTrigger />
