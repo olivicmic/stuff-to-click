@@ -1,6 +1,7 @@
 import { useSpring, easings } from 'react-spring';
 
-export default function useAnimatedDrop({ onRest = () => {}, from = [0,0], to = [0,0] }) {
+export default function useAnimatedDrop({ modals, modID, onRest = () => {}, from = [0,0], to = [0,0] }) {
+	console.log('useAnimatedDrop base', modID, modals);
 	const [sprung, animate] = useSpring(() => ({
 		opacity: 0,
 		transform: `translate(${from[0]}px, ${from[1]}px)`,
@@ -23,10 +24,8 @@ export default function useAnimatedDrop({ onRest = () => {}, from = [0,0], to = 
 				},
 				opacity: 0,
 				transform: `translateY(${from[0]}px, ${from[1]}px)`,
-				onRest
+				onRest: () => { console.log('useAnimatedDrop exit onRest', modID, modals); onRest(); func(); }
 			});
-
-			if (func) func();
 		}
 	];
 };

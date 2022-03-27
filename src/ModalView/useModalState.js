@@ -3,21 +3,37 @@ import { generateUnique } from 'lal';
 import { useStateRef } from 'hangers';
 
 export default function UseModalState() {
-	const [modals, setModals] = useState([]);
-	const [kill, setKill] = useState(-1);
-	const [current, setCurrent] = useState(-1);
-	const cutModal = i => {
-		setModals([ ...modals ].filter((item, n) => n !== i));
-		setCurrent(-1);
-	};
-	const addModal = ({ ...rest  }) => {
+	//const [kill, killModal] = useState([]);
+	//const [killed, setKilled] = useState([]);
+	const [current, setCurrent] = useState();
+	const [modals, modModal] = useState([]);
+	const [modState, setModState] = useState([]);
+	const setModals = (s, type) => { console.log('✴️ Core modal change', type, s); modModal(s); }
+	//const setKill = l => { let jam =  console.log(l); killModal([ ...kill, l ]); }
+
+	const addModal = ({ state, ...rest  }) => {
 		let modID = generateUnique({ charCount: 5 });
-		setCurrent(modals.length);
-		setModals([ ...modals, { ...{
-			...rest,
-			modID,
-		}}]);
+		let position = modals.length;
+		setCurrent(position);
+		setModals([ ...modals, { ...rest, modID, position, fade: 0}], 'NEW MODAL');
+		setModState([ ...modState, { ...state }])
+		console.log('➕ useModalState.js, New modal made', modID, modals);
+	};
+	const updateModal = (index, d) => {
+		setModState(modState.map((state, i ) =>
+			current === i ? { ...state, ...d, from: [0,0], fade: 1, index} : state 
+		), 'UPDATE MODAL');
+	}
+
+	const deleteModal = (which, alive = 0) => {
+
+		let newModals = [...modals].filter((modal, i) => i !== which);
+		let newModState = [...modState].filter((state, i) => i !== which);
+		setModals(newModals, 'DELETE MODAL');
+		setModState(newModState);
 	};
 
-	return { addModal, current, cutModal, kill, modals, setKill, setModals };
+	//const cutModal = i => { console.log('killing', i); setKilled([ ...killed, i ]); };
+
+	return { addModal, current, deleteModal, modals, modState, setModals, updateModal };
 };

@@ -6,8 +6,9 @@ export default function useOverlayAnchor() {
 	const size = [host?.offsetWidth || 0, host?.offsetHeight || 0];
 	const yCenter = [xy[0], xy[1] + (size[1] / 2)];
 	const font = host ? parseInt(getComputedStyle(host).getPropertyValue('font-size').slice(0,-2) ) : 0;
-	const to = [xy[0], xy[1] + size[1] + font];
-	const from = [0, -(to[1] - yCenter[1])];
+	const at = [xy[0], xy[1] + size[1] + font];
+	const from = [0, -(at[1] - yCenter[1])];
+	const position = { at, from };
 
-	return { from, font, setHost, size, to, xy };
+	return { font, position, setHost, size, xy };
 };
