@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useTransition, easings, config } from 'react-spring';
 import { ModalContext } from '../Context';
+import { useActiveElement } from '../hooks';
 import Modal from '../Modal';
 import ModalTrigger from '../ModalTrigger';
 import useModalState from './useModalState';
@@ -10,25 +11,20 @@ import './ModalView.scss'
 export default function ModalView({ children }) {
 	const { modals, killed, ...rest  } = useModalState();
 	  const transitions = useTransition(modals, {
-    from: { opacity: 0 },
-    enter: { opacity: 1 },
-    leave: { opacity: 0 },
-    config: config.gentle,
-  })
-	//console.log(killed);
-	/*
-	const modalList = modals.map(( item, i ) => {
-		const isAlive = item.alive !== 0;
-		console.log(item, item.alive, isAlive, i);
-		//console.log('🚾', killed, item, isAlive);
-		return isAlive ? <Modal{ ...{
-			...item,
-			key: i, 
-			modals,
-			position: i, 
-			...rest
-		} }/> : null;
-	} );
+		from: { opacity: 0 },
+		enter: { opacity: 1 },
+		leave: { opacity: 0 },
+		config: config.gentle,
+	});
+ /*
+	    const focusedElement = useActiveElement();
+ 
+	useEffect(() => {
+		if (focusedElement) {
+			focusedElement.value && console.log('🍔 Active element', focusedElement.value);
+		}
+		console.log(focusedElement);
+	}, [focusedElement]);
 */
 	return <ModalContext.Provider value={{ modals, ...rest }}>
 		{ children }

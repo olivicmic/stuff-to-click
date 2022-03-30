@@ -12,9 +12,8 @@ export default function useSelect({ name, onChange, set, valid, value }) {
 	const { addModal, current, deleteModal, modals, updateModal } = useContext(ModalContext);
 	const { setHost, position } = useOverlayAnchor();
 	const [input, inputRef] = useStateRef();
-	const unFocus = () => { console.log("😡"); input?.focus() || {} };
+	const unFocus = () => { input?.focus() || {} };
 	const { active, index, setActive, setIndex, setValueName, valueName } = useSelectState(set.indexOf(value));
-
 	const setIndices = (i) => {
 		console.log('🔢 useSelect setIndices', modals);
 		updateModal(i);
@@ -24,7 +23,6 @@ export default function useSelect({ name, onChange, set, valid, value }) {
 		console.log('➡️ useSelect submit', modals);
 		onChange({ target: {...set[y], name }});
 		setValueName(set[y].label);
-		//setKill(current);
 		setIndex(y); 
 	};
 	const keySubmit = y => {
@@ -43,8 +41,8 @@ export default function useSelect({ name, onChange, set, valid, value }) {
 		}) 
 	};
 
-	const close = func => { console.log('😴 useSelect.js, closing modal', modals, current); setActive(false); deleteModal(current, 1); setIndex(-1); };
-	const { events, focus } = useInput({ close, click: open });
+	const close = () => { console.log('😴 useSelect.js, closing modal'); setActive(false); deleteModal(current, 1); setIndex(-1); };
+	const { events, focus } = useInput({ close, click: open, hostid: modals?.[current]?.modID });
 	const keyInput = useKeySelect({ active, current, close, count: set.length, focus, index, open, setIndices, submit: keySubmit });
 	const wrapProps = { events, focus, inputRef, valueName, setHost };
 

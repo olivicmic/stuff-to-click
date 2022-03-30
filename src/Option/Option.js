@@ -17,7 +17,7 @@ export default function Option({ onFocus, modState, position, item, submit }) {
 	});
 
 	return(
-		<li value={item.value} onClick={e => { submit(position); onFocus();	}} onMouseEnter={() => setHover(true)} onMouseLeave={() => setHover(false)} >
+		<li value={item.value} onClick={e => { console.log('CLEEKED'); onFocus(); submit(position); 	}} onMouseEnter={() => setHover(true)} onMouseLeave={() => setHover(false)} >
 			<span>{item.label}</span>
 			<animated.div className='faux-select-indicator' style={indSpring}></animated.div>
 		</li>

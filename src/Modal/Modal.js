@@ -3,7 +3,7 @@ import { animated } from 'react-spring';
 import { useAnimatedDrop } from '../hooks';
 
 export default function Modal({ component: Component, fade = 0, modals, modID, modState, opacity, position, setKill, at = [0,0], from = [0,0], ...rest }) {
-	console.log(modals);
+	//console.log(modals);
 	const [rendered, setRendered] = useState(false);
 
 	return <animated.div className={`stuff-modal${ modID ? ' modalID-' + modID : '' }`} style={{ 
@@ -12,6 +12,6 @@ export default function Modal({ component: Component, fade = 0, modals, modID, m
 		top: `${at[1]}px`, 
 		left: `${at[0]}px` 
 	}}>
-		<Component { ...{ ...rest, modID, modals, position, state: modState[position] || {},  setKill }} />
+		<Component { ...{ ...rest, modID, modals, position, state: modState[position],  setKill }} />
 	</animated.div>;
 };

@@ -8,7 +8,8 @@ export default function UseModalState() {
 	const [current, setCurrent] = useState();
 	const [modals, modModal] = useState([]);
 	const [modState, setModState] = useState([]);
-	const setModals = (s, type) => { console.log('✴️ Core modal change', type, s); modModal(s); }
+	console.log('❇️', modals, modState);
+	const setModals = (s, type) => { console.log('✴️ !!! Core modal change', type, s); modModal(s); }
 	//const setKill = l => { let jam =  console.log(l); killModal([ ...kill, l ]); }
 
 	const addModal = ({ state, ...rest  }) => {
@@ -17,12 +18,15 @@ export default function UseModalState() {
 		setCurrent(position);
 		setModals([ ...modals, { ...rest, modID, position, fade: 0}], 'NEW MODAL');
 		setModState([ ...modState, { ...state }])
-		console.log('➕ useModalState.js, New modal made', modID, modals);
+		console.log('➕ useModalState.js, New modal made', modID, modals, modState);
 	};
 	const updateModal = (index, d) => {
-		setModState(modState.map((state, i ) =>
+		console.log('UPDATING MODAL 😶‍🌫️', index, d);
+		let newState = modState.map((state, i ) =>
 			current === i ? { ...state, ...d, from: [0,0], fade: 1, index} : state 
-		), 'UPDATE MODAL');
+		);
+		console.log(current, d, newState);
+		setModState(newState, 'UPDATE MODAL');
 	}
 
 	const deleteModal = (which, alive = 0) => {

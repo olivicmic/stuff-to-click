@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import { Accordian, Slideshow, DragSlider, HexInput, Input, ColorDragSlider, RGBInput, ModalView, ModalTrigger, NumInput, PlaceholderBtn, Select } from 'stuff-to-click';
 
