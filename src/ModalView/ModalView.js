@@ -9,7 +9,7 @@ import './ModalView.scss'
 
 
 export default function ModalView({ children }) {
-	const { modals, killed, ...rest  } = useModalState();
+	const { modals, ...rest  } = useModalState();
 	  const transitions = useTransition(modals, {
 		from: { opacity: 0 },
 		enter: { opacity: 1 },

@@ -1,6 +1,7 @@
 .stuff-accordian {
 	border: 2px solid currentColor;
 	box-sizing: border-box;
+	position: relative;
 
 	.stuff-accordian-header, .stuff-accordian-footer { cursor: pointer; }
 

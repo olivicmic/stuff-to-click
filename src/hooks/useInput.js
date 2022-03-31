@@ -6,7 +6,10 @@ export default function useInput({ close = b, click = b, during = b, hostid = 'c
 	return {
 		events: {
 			onBlur: e => {
-				if (e?.relatedTarget?.attributes?.hostid?.value !== hostid) { setFocus(false); close(e); }; 
+				if (e?.relatedTarget?.attributes?.hostid?.value !== hostid) { 
+					console.log('bad blur 🩸', hostid, e.relatedTarget, e); 
+					setFocus(false); close(e); }
+				else { console.log('input clear ✅'); } 
 			},
 			onClick: e => click(e),
 			onFocus: e => { setFocus(true); during(e) }

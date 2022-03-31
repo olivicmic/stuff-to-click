@@ -3,18 +3,16 @@ import { generateUnique } from 'lal';
 import { useStateRef } from 'hangers';
 
 export default function UseModalState() {
-	//const [kill, killModal] = useState([]);
-	//const [killed, setKilled] = useState([]);
 	const [current, setCurrent] = useState();
 	const [modals, modModal] = useState([]);
 	const [modState, setModState] = useState([]);
+	const [killList, setKillList] = useState([]);
 	console.log('❇️', modals, modState);
 	const setModals = (s, type) => { console.log('✴️ !!! Core modal change', type, s); modModal(s); }
-	//const setKill = l => { let jam =  console.log(l); killModal([ ...kill, l ]); }
 
 	const addModal = ({ state, ...rest  }) => {
 		let modID = generateUnique({ charCount: 5 });
-		let position = modals.length;
+		let position = modState.length;
 		setCurrent(position);
 		setModals([ ...modals, { ...rest, modID, position, fade: 0}], 'NEW MODAL');
 		setModState([ ...modState, { ...state }])
@@ -29,15 +27,30 @@ export default function UseModalState() {
 		setModState(newState, 'UPDATE MODAL');
 	}
 
-	const deleteModal = (which, alive = 0) => {
+	const [trash, setTrash] = useState(false);
+	const  timer1 = () => setTimeout(() => {
+		if (modals.length === 0) setTrash(true);
+	}, 1000);
+	useEffect(() => {
 
-		let newModals = [...modals].filter((modal, i) => i !== which);
-		let newModState = [...modState].filter((state, i) => i !== which);
-		setModals(newModals, 'DELETE MODAL');
-		setModState(newModState);
-	};
+		if (modals.length === 0 && modState.length > 0 && !trash) {
+			console.log('🧭 length mismatch, cleaning timer started', modals, modState);
+			timer1();
+		} else { clearTimeout(timer1); }
+		if (modals.length === 0 && trash) {
+			console.log('time elapsed, clearning modals 😨', modals, modState);
+			setTrash(false);
+			setModState([]);
+			setCurrent();
+		} else if (modState.length > 0 && trash) {
+			console.log('modal state spared 😮‍💨');
+			setTrash(false);
+		}
 
-	//const cutModal = i => { console.log('killing', i); setKilled([ ...killed, i ]); };
+		return () => { clearTimeout(timer1); }
+	}, [modals, modState, trash]);
 
-	return { addModal, current, deleteModal, modals, modState, setModals, updateModal };
+	const deleteModal = which => setModals([...modals].filter((modal, i) => i !== modals.length - 1), 'DELETING MODAL: ' + which);
+
+	return { addModal, current, deleteModal, modals, modState, updateModal };
 };

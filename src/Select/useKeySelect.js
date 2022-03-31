@@ -6,7 +6,6 @@ export default function useKeySelect({ active, close, count, focus, index, open,
 		'13': { keyup: e => { // enter released
 			e.preventDefault();
 			submit(index);
-			close();
 		}},
 		'38': { keydown: e => {
 			e.preventDefault();
