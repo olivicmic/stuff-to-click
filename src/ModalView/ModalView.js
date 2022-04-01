@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect  } from 'react';
 import { useTransition, easings, config } from 'react-spring';
 import { ModalContext } from '../Context';
 import { useActiveElement } from '../hooks';
@@ -29,7 +29,6 @@ export default function ModalView({ children }) {
 	return <ModalContext.Provider value={{ modals, ...rest }}>
 		{ children }
 		<div className='stuff-modal-view'>
-			<ModalTrigger />
 			{ transitions(({ opacity }, modal) => <Modal{ ...{
 			...modal,
 			modals,

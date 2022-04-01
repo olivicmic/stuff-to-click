@@ -1,36 +1,20 @@
 import { useKeyInput } from 'hangers';
 
 export default function useKeySelect({ active, close, count, focus, index, open, setIndices, submit }) {
+	const keyAction = (e, i) => {
+		e.preventDefault();
+		if (active) setIndices(i);
+		else if (focus) open();
+	};
+
 	const keySet = {
-		'9': { keydown: () => close() },
+		'9': { keydown: () => close() }, // tab
 		'13': { keyup: e => { // enter released
 			e.preventDefault();
 			submit(index);
 		}},
-		'38': { keydown: e => {
-			e.preventDefault();
-			console.log('is active', active);
-			if (active) {
-				console.log('ACTIVE, UP KEY, NEW INDEX');
-				setIndices(index <= 0 ? 0: index - 1);
-			} // up limit
-			else if (focus) {
-				console.log('IN FOCUS, UP KEY, OPENING');
-				open();
-			}
-		}},
-		'40': { keydown: e => {
-			e.preventDefault();
-			console.log('is active', active);
-			if (active) {
-				console.log('ACTIVE, DOWN KEY, NEW INDEX');
-				setIndices(index === count - 1 ? index : index + 1);
-				} // down limit
-			else if (focus) { 
-				console.log('IN FOCUS, DOWN KEY, OPENING');
-				open(); 
-			}
-		}},
+		'38': { keydown: e => keyAction(e, index <= 0 ? 0: index - 1) }, // up
+		'40': { keydown: e => keyAction(e, index === count - 1 ? index : index + 1) }, // down
 	};
 
 	return useKeyInput({ keySet });
