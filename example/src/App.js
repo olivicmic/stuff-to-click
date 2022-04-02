@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-import { Accordian, Slideshow, DragSlider, HexInput, Input, ColorDragSlider, RGBInput, ModalView, ModalTrigger, NumInput, PlaceholderBtn, Select } from 'stuff-to-click';
+import { Accordian, Slideshow, DragSlider, HexInput, Input, ColorDragSlider, RGBInput, OverLayer, ModalTrigger, NumInput, PlaceholderBtn, Select } from 'stuff-to-click';
 
 import ExampleSlide from './ExampleSlide';
 
@@ -77,7 +77,7 @@ const App = () => {
 	const theThings = (props) => things.map((thing, i) => <ExampleSlide num={i} value={thing} key={i} {...props}/>);
 
 	return (
-			<ModalView>
+			<OverLayer>
 				<ModalTrigger />
 				<h1>Click These Things!</h1>
 				<ul>
@@ -126,7 +126,7 @@ const App = () => {
 				</div>
 				<NumInput value={apSt.opacity} max={100} onChange={opacityChange}/>
 				<NumInput value={apSt.opacity} max={100} onChange={opacityChange}/>
-			</ModalView>
+			</OverLayer>
 	);
 }
 

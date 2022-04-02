@@ -1,3 +1,3 @@
-import ModalContext from './ModalContext';
+import OverlayContext from './OverlayContext';
 
-export { ModalContext };
+export { OverlayContext };

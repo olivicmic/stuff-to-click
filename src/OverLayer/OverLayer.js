@@ -1,16 +1,15 @@
 import React, { useEffect  } from 'react';
 import { useTransition, easings, config } from 'react-spring';
-import { ModalContext } from '../Context';
+import { OverlayContext } from '../Context';
 import { useActiveElement } from '../hooks';
-import Modal from '../Modal';
-import ModalTrigger from '../ModalTrigger';
-import useModalState from './useModalState';
-import './ModalView.scss'
+import Overlay from '../Overlay';
+import useOverlays from './useOverlays';
+import './OverLayer.scss'
 
 
-export default function ModalView({ children }) {
-	const { modals, ...rest  } = useModalState();
-	  const transitions = useTransition(modals, {
+export default function OverLayer({ children }) {
+	const { overlays, ...rest  } = useOverlays();
+	  const transitions = useTransition(overlays, {
 		from: { opacity: 0 },
 		enter: { opacity: 1 },
 		leave: { opacity: 0 },
@@ -26,15 +25,15 @@ export default function ModalView({ children }) {
 		console.log(focusedElement);
 	}, [focusedElement]);
 */
-	return <ModalContext.Provider value={{ modals, ...rest }}>
+	return <OverlayContext.Provider value={{ overlays, ...rest }}>
 		{ children }
-		<div className='stuff-modal-view'>
-			{ transitions(({ opacity }, modal) => <Modal{ ...{
-			...modal,
-			modals,
+		<div className='stuff-overlays'>
+			{ transitions(({ opacity }, overlay) => <Overlay{ ...{
+			...overlay,
+			overlays,
 			opacity,
 			...rest
 		} }/> ) }
 		</div>
-	</ModalContext.Provider>;
+	</OverlayContext.Provider>;
 };

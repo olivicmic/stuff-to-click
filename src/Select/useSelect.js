@@ -4,46 +4,35 @@ import useKeySelect from './useKeySelect';
 import useOverlayAnchor from './useOverlayAnchor';
 import useSelectState from './useSelectState';
 import Picker  from '../Picker';
-import { ModalContext } from '../Context';
+import { OverlayContext } from '../Context';
 import { useInput } from '../hooks';
 
 export default function useSelect({ name, onChange, set, valid, value }) {
-	const { addModal, current, deleteModal, modals, updateModal } = useContext(ModalContext);
+	const { addOverlay, current, deleteOverlay, overlays, updateOverlay } = useContext(OverlayContext);
 	const { setHost, host } = useOverlayAnchor();
 	const [input, inputRef] = useStateRef();
-	const unFocus = () => { input?.focus() || {} };
-	const { active, index, setActive, setIndex, setValueName, valueName } = useSelectState(set.indexOf(value));
-	const setIndices = (i) => {
-		updateModal(i);
-		setIndex(i);
-	};
-	const close = () => { setActive(false); deleteModal(current, 1); setIndex(-1); };
-	const submit = y => {
-		onChange({ target: {...set[y], name }});
-		setValueName(set[y].label);
-		setIndex(y);
-		close();
-	};
-	const keySubmit = y => {
-		updateModal(y, set[y]);
-		submit(y);
-	};
+	const { active, index, setActive, setIndex, valueName } = useSelectState(value, set);
+
+	const onFocus = () => { input?.focus() || {} };
+	const setIndices = (i) => { updateOverlay(i); setIndex(i); };
+	const close = () => { setActive(false); deleteOverlay(current); setIndex(-1); };
+	const submit = y => { onChange({ target: {...set[y], name }}); close(); };
+	const keySubmit = y => { updateOverlay(y, set[y]); submit(y); };
 
 	const open = () => {
 		if (!active) {
 			setActive(true); 
-			addModal({
-				host,
+			addOverlay({
 				component: Picker,
-				onFocus: unFocus,
+				host,
+				onFocus,
 				state: { focus, set, submit, value, index }
 			});
 		} else close();
 	};
 
-	const { events, focus } = useInput({ close, click: open, hostid: modals?.[current]?.modID });
+	const { events, focus } = useInput({ close, click: open, hostid: overlays?.[current]?.overlayID });
 	const keyInput = useKeySelect({ active, close, count: set.length, focus, index, open, setIndices, submit: keySubmit });
-	const wrapProps = { events, focus, inputRef, valueName, setHost };
 
-	return { keyInput, wrapProps };
+	return { keyInput, wrapProps: { events, focus, inputRef, valueName, setHost } };
 };

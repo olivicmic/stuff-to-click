@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useStateRef } from 'hangers';
 import { animated } from 'react-spring';
 
-export default function Modal({ component: Component, fade = 0, modID, modState, opacity, position, springRef, host, ...rest }) {
+export default function Overlay({ component: Component, fade = 0, overlayID, overState, opacity, position, springRef, host, ...rest }) {
 	const [rendered, setRendered] = useState(false);
 	const [offPage, setOffpage] = useState();
 	const [ref, setRef] = useStateRef();
@@ -20,12 +20,12 @@ export default function Modal({ component: Component, fade = 0, modID, modState,
 			setOffpage([ comp.bottom > window.innerHeight ? 1 : 0 ]);
 		}
 	},[rendered, comp, offPage]);
-	return <animated.div className={`stuff-modal${ modID ? ' modalID-' + modID : '' }`} style={{ 
+	return <animated.div className={`stuff-overlay${ overlayID ? ' modalID-' + overlayID : '' }`} style={{ 
 		opacity: opacity.to(y => Math.max(y,fade)),
 		transform: opacity.to(y => `translate(0px, ${(1 - y) * inOut}px)`),
 		top: `${ at }px`, 
 		left: `${ host.x }px` 
 	}}>
-		<Component { ...{ ...rest, modID, position, setRef, state: modState[position], }} />
+		<Component { ...{ ...rest, overlayID, position, setRef, state: overState[position], }} />
 	</animated.div>;
 };
