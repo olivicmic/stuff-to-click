@@ -1,8 +1,8 @@
 # stuff-to-click
 
-> A library of react components by vics.pics 😎
-
 [![NPM](https://img.shields.io/npm/v/stuff-to-click.svg)](https://www.npmjs.com/package/stuff-to-click) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
+
+A collection of experimental React components.
 
 ## Install
 
@@ -101,6 +101,83 @@ doThis = (newValue) => setState(newValue);
 <NumInput value={state} max='300' onChange={doThis} />
 
 ```
+
+## OverLayer
+
+Overlayer injects componenents as overlays above page content, providing controls and shared state to the injected component as props, or via the useOverlayContext hook for any other components. Required by Select. Positioning is determined by providing the coordinates and size of a host component, and will appear below or above the component if it goes off the edge of the viewport vertically.
+
+```jsx
+import { OverLayer } from 'stuff-to-click';
+
+export default function App({}) {
+	return <OverLayer>
+	// your content
+	</OverLayer>;
+};
+
+// in any component ...
+
+import { useOverlayContext } from 'stuff-to-click';
+import MyOverlay from './MyOverlay'
+
+export default function MyComponent({}) {
+	const [rendered, setRendered] = useState(false);
+	const { addOverlay } = useOverlayContext();
+	const content = 'hello world';
+
+	useEffect(() => {
+		if (!rendered) {
+			addOverlay({
+				component: MyOverlay,
+				host: { gap: 8, height: 45, width: 250, x: 100, y: 50 }, // will determine position
+				...rest // other values will be passed to yout overlay
+				state: { content }
+			}); // because overlays are in a different scope these values will not update dynamically, use overState/updateOverlay to share state.
+		}
+	},[rendered]);
+
+	return <div>Hello World.</div>;
+};
+
+// your overlay
+
+export default function MyOverlay({ 
+	current, // provided to overlay by overLayer
+	deleteOverlay,
+	state // saved to overlay state when created above
+}) {
+
+	return <div>
+		{ state.content || null }
+		<button onClick={() => deleteOverlay(current)} >Close</button>
+	</div>;
+};
+```
+
+### Shared overlay context values
+- `addOverlay (function)`: Create a new overlay with the parameter object below:
+	- `Component (React component)`: The component to be rendered within OverLayer.
+	- `host (object)`: Object dictating positioning of the overlay.
+		- `gap (number)`: Distance from the overlay and the host after animating.
+		- `height (number)`: Height of host component (determines animation origin).
+		- `width (number)`: Width of host component (determines animation origin).
+		- `x (number)`: X value of where the top left of corner the host component sits.
+		- `Y (number)`: Y X value of where the top left of corner the host component sits.
+- `current (number)`: Represents the index of the most recently created overlay.
+- `deleteOverlay (function)`: Sets the overlay at a given index to be deleted.
+- `overlays (array)`: An array of objects representing each overlay.
+- `overState (array)`: An array of objects per each overlay.
+- `updateOverlay (function)`: Update an overlay state with the following params:
+	1. Index number of overlay to update.
+	2. Object containing values to update the overlay state with.
+
+### Additional props passed to custom overlays
+- `busy (boolean)`: True while any overlay is animating.
+- `overlay (object)`: the shared state for the current overlay.
+- `overlayID (string)`: A string unique to each modal.
+- `overlayRef (function)`: Set as the ref for your overlay, neccesary to animate within the viewport.
+- `position (number)`: The position of the overlay within the overlay array.
+
 ## RGBInput
 
 RGBInput an input which uses NumInput, and when given a hex value alongside a 'red', 'green', or 'blue' mode, will display the 0-255 value of the selected channel. When the number is changed, it will return an updated full hex color via the onChange function, with the unselected channels unaltered.
@@ -119,13 +196,15 @@ return <RGBInput value={state} onChange={colorChange} mode='red' /> // value = #
 
 ## Select
 
-Select is a select/picker with an integrated label like Input. It updates a parent state via an onChange function which is passed an e.target callback object like standard input. Options are provided via an array of objects, each with a 'value' and 'label' property. The label property is what is displayed on the component but does not have to reflect the value exactly.
+Select is a select/picker with an integrated label like Input. It updates a parent state via an onChange function which is passed an event callback. Options are provided via an array of objects, each with a 'value' and 'label' property. The label property is what is displayed on the component but does not have to reflect the value exactly.
 
 The valid attribute takes a boolean which will assign error classes 'stuff-select-error' and 'stuff-label-error' which can be styled any which way to indicate an error. The main select input, the option list, and the optional bottom bar can be styled by providing 
 
 A component can be inserted via the 'arrow' attribute to replace the default arrow.
 
 It can be controlled via the up and down arrows, and a selection can be made with the enter key. On mobile devices the system select interface will activate rather than the custom styled list.
+
+Usage requires Select is within the OverLayer component above.
 
 ```jsx
 
@@ -171,7 +250,7 @@ const mySlides = ({ atStart, atEnd, back, busy, page, forward, ...more }) => [ .
 
 ```
 
-### Parameters
+### Slideshow input props
 - `axis (string, default 'x')`: Set the orientation of movement between 'x', 'y', and 'xy'.
 - `direction (number 0 - 1 default 1,)`: Flip the direction, for example a value of 1 advances right, reverses left, but alternates with 0.
 - `fade (number 0 - 1 default 1)`: Set the opacity on the from/leave steps simultaneously.
@@ -184,7 +263,7 @@ const mySlides = ({ atStart, atEnd, back, busy, page, forward, ...more }) => [ .
 - `range (any number, including negative default 100)`: Set the range on the from/leave steps simultaneously.
 - `spring (object/string, default 'slot')`: Set spring config, including default react-spring configs, or pass your own config object.
 
-### Slide Callbacks
+### Slide recieved props
 - `active (boolean)`: Initially false, will be true on the first page change.
 - `atEnd (boolean)`: Will be true if on the last page.
 - `atStart (boolean)`: Will be true if on the first page.

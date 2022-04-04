@@ -5,14 +5,12 @@ import { animated } from 'react-spring';
 export default function Overlay({ component: Component, fade = 0, overlayID, overState, opacity, position, springRef, host, ...rest }) {
 	const [rendered, setRendered] = useState(false);
 	const [offPage, setOffpage] = useState();
-	const [ref, setRef] = useStateRef();
+	const [ref, overlayRef] = useStateRef();
 	const comp = ref?.getBoundingClientRect() || { bottom: 0, height: 0 };
-	const margin = host.font / 2;
-	const compTomp = [host.y + host.height + margin, host.y - comp.height - margin ];
+	const gap = host.gap;
+	const compTomp = [host.y + host.height + gap, host.y - comp.height - gap ];
 	const at = compTomp[offPage?.[0] || 0];
-	const center = host.y + (host.height / 2);
-	const travel = compTomp[0] - center;
-	const inOut = [-travel, travel][offPage?.[0] || 0];
+	const inOut = [-gap, gap][offPage?.[0] || 0];
 
 	useEffect(() => {
 		if (!rendered) setRendered(true);
@@ -20,12 +18,12 @@ export default function Overlay({ component: Component, fade = 0, overlayID, ove
 			setOffpage([ comp.bottom > window.innerHeight ? 1 : 0 ]);
 		}
 	},[rendered, comp, offPage]);
-	return <animated.div className={`stuff-overlay${ overlayID ? ' modalID-' + overlayID : '' }`} style={{ 
+	return <animated.div className={`stuff-overlay${ overlayID ? ' modalID-' + overlayID : '' }`} style={{
 		opacity: opacity.to(y => Math.max(y,fade)),
 		transform: opacity.to(y => `translate(0px, ${(1 - y) * inOut}px)`),
 		top: `${ at }px`, 
 		left: `${ host.x }px` 
 	}}>
-		<Component { ...{ ...rest, overlayID, position, setRef, state: overState[position], }} />
+		<Component { ...{ ...rest, opacity, overlayID, position, overlayRef, overlay: overState[position], }} />
 	</animated.div>;
 };

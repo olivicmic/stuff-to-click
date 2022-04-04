@@ -1,14 +1,14 @@
 import React from 'react';
 import Option  from '../Option';
 
-export default function Picker({ overlayID: hostid, onFocus, position, setRef, state, updateOverlay, ...rest }) {
+export default function Picker({ busy, overlayID: hostid, onFocus, overlay, overlayRef, updateOverlay, ...rest }) {
 	const click = i => {
 		onFocus();
-		state.submit(i);
-		updateOverlay(i, state.set[i]);
+		overlay.submit(i);
+		updateOverlay(i, overlay.set[i]);
 	}; 
-	const list = state ? state.set.map((item, key) => <Option { ...{ item, key, position: key, click, ...state } }/>) : null;
-	return <ul className='stuff-faux-select-list' { ...{ hostid, onFocus, tabIndex: -1, ref: setRef }}>
+	const list = overlay ? overlay.set.map((item, key) => <Option { ...{ busy, item, key, position: key, click, ...overlay } }/>) : null;
+	return <ul className='stuff-faux-select-list' { ...{ hostid, onFocus, tabIndex: -1, ref: overlayRef }}>
 		{ list || null }
 	</ul>;
 };

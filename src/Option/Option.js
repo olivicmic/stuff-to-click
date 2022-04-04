@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useSpring, animated,config } from 'react-spring';
 
-export default function Option({ position, index, item, click, value }) {
+export default function Option({ busy, opacity, position, index, item, click, value }) {
 	const focus = position === index;
 	const [hover, setHover] = useState(false);
 	const selected = value === item.value;
@@ -16,8 +16,17 @@ export default function Option({ position, index, item, click, value }) {
 		config: config.wobbly
 	});
 
+	const ifBusy = (func, v) => busy ? () => {} : () => func(v);
+
+	const itemProps = { 
+		onClick: ifBusy(click, position),
+		onMouseEnter: ifBusy(setHover, true),
+		onMouseLeave: ifBusy(setHover, false),
+		value: item.value,
+	};
+
 	return(
-		<li value={item.value} onClick={e => click(position)} onMouseEnter={() => setHover(true)} onMouseLeave={() => setHover(false)} >
+		<li { ...itemProps } >
 			<span>{item.label}</span>
 			<animated.div className='faux-select-indicator' style={indSpring}></animated.div>
 		</li>

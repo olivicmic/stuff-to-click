@@ -1,14 +1,13 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { useStateRef } from 'hangers';
 import useKeySelect from './useKeySelect';
 import useOverlayAnchor from './useOverlayAnchor';
 import useSelectState from './useSelectState';
 import Picker  from '../Picker';
-import { OverlayContext } from '../Context';
-import { useInput } from '../hooks';
+import { useInput, useOverlayContext } from '../hooks';
 
 export default function useSelect({ name, onChange, set, valid, value }) {
-	const { addOverlay, current, deleteOverlay, overlays, updateOverlay } = useContext(OverlayContext);
+	const { addOverlay, current, deleteOverlay, overlays, updateOverlay } = useOverlayContext();
 	const { setHost, host } = useOverlayAnchor();
 	const [input, inputRef] = useStateRef();
 	const { active, index, setActive, setIndex, valueName } = useSelectState(value, set);

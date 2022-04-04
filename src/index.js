@@ -16,5 +16,6 @@ import RGBInput from './RGBInput';
 import Select from './Select';
 import Selection from './Selection';
 import Slideshow from './Slideshow';
+import { useOverlayContext } from './hooks';
 
-export { Accordian, DragSlider, DropDown, ColorDragSlider, HexInput, Input, InputWrap, ModalTrigger, NumInput, Option, Overlay, OverLayer, PlaceholderBtn, RGBInput, Select, Selection, Slideshow };
+export { Accordian, DragSlider, DropDown, ColorDragSlider, HexInput, Input, InputWrap, ModalTrigger, NumInput, Option, Overlay, OverLayer, PlaceholderBtn, RGBInput, Select, Selection, Slideshow, useOverlayContext };
