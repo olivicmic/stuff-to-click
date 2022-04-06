@@ -98,9 +98,9 @@ const App = () => {
 					<textarea name="" id="" cols="30" rows="10"></textarea>
 				</Accordian>
 				<div key='assjo'>
-					<Select value={selValue} onChange={selectChange} label='Some text' name='text' id='sel-00' tabIndex='1' set={selItems} bar={{}} key='jammy1' required/>
-					<Select value={selValue} onChange={selectChange} label='Look at this how about it especially one more ok one more' name='text' id='sel-01' set={junk} bar={{}} tabIndex='2' key='jammy2'/>
-					<Select value={selValue} onChange={selectChange} label='Look at this how about it especially one more ok one more' name='text' id='sel-02' set={junk} bar={{}} tabIndex='3' key='jammy3' arrow={arrow}/>
+					<Select value={selValue} onChange={selectChange} label='Some text' name='text' id='sel-00' set={selItems} bar={{}} required/>
+					<Select value={selValue} onChange={selectChange} label='Look at this how about it especially one more ok one more' name='text' id='sel-01' set={junk} bar={{}} debug={{ value: true, focus: true }}/>
+					<Select value={selValue} onChange={selectChange} label='Look at this how about it especially one more ok one more' name='text' id='sel-02' set={junk} bar={{}}  arrow={arrow}/>
 				</div>
 				<br />
 				<br />

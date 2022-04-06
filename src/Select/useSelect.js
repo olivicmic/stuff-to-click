@@ -6,7 +6,7 @@ import useSelectState from './useSelectState';
 import Picker  from '../Picker';
 import { useInput, useOverlayContext } from '../hooks';
 
-export default function useSelect({ name, onChange, set, valid, value }) {
+export default function useSelect({ debug, name, onChange, set, valid, value }) {
 	const { addOverlay, current, deleteOverlay, overlays, updateOverlay } = useOverlayContext();
 	const { setHost, host } = useOverlayAnchor();
 	const [input, inputRef] = useStateRef();
@@ -30,8 +30,8 @@ export default function useSelect({ name, onChange, set, valid, value }) {
 		} else close();
 	};
 
-	const { events, focus } = useInput({ close, click: open, hostid: overlays?.[current]?.overlayID });
+	const { events, focus } = useInput({ close, click: open, debug: debug?.focus, hostid: overlays?.[current]?.overlayID });
 	const keyInput = useKeySelect({ active, close, count: set.length, focus, index, open, setIndices, submit: keySubmit });
-
+	if (debug?.value && value) console.log(value, valueName);
 	return { keyInput, wrapProps: { events, focus, inputRef, valueName, setHost } };
 };
