@@ -9,7 +9,7 @@
 		padding: 1em;
 	}
 
-	.stuff-accordian {
+	.stuff-accordian-body {
 		&.accordian-busy, &.accordian-closed, {overflow: hidden;}
 	}
 

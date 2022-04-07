@@ -53,7 +53,7 @@ export default function Accordian({
 				{Header ? <Header /> : ''}
 				{Expander ? <Expander active={expanded}/> : <PlaceholderBtn active={expanded}/>}
 			</header>
-			<animated.div className={`stuff-accordian${ busy ? ' accordian-busy' : ''}${ !expanded ? ' accordian-closed' : ''}`} style={expand} >
+			<animated.div className={`stuff-accordian-body${ busy ? ' accordian-busy' : ''}${ !expanded ? ' accordian-closed' : ''}`} style={expand} >
 				<div className='stuff-accordian-content'>
 					<hr className='stuff-accordian-seperator'/>
 					{resizeListener}
