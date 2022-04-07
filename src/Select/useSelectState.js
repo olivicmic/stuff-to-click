@@ -4,7 +4,8 @@ export default function useSelectState(value, set) {
 	const [active, setActive] = useState(false); // select is focused, dropdown rendered but not visible
 	const [index, setIndex] = useState(set.indexOf(value)); // number of currently selected -1 = none
 	const [valueName, setValueName] = useState(null); // name for currently selected option
-
+	const [hostid, setHostID] = useState('clear'); // a unique ID set when creating an overlay
+	const setID = h => h ? setHostID(h) : setHostID('clear');
 	useEffect(() => {
 		if (set && value) {
 			let i = set.indexOf(value);
@@ -13,5 +14,5 @@ export default function useSelectState(value, set) {
 		}
 	},[value, set]);
 
-	return { active, index, setActive, setIndex, valueName };
+	return { active, hostid, index, setActive, setID, setIndex, valueName };
 };

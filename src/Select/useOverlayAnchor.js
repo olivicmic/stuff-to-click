@@ -1,21 +1,20 @@
 import { useRef } from 'react';
-import { useStateRef } from 'hangers';
 
 export default function useOverlayAnchor() {
 	const body = document.body;
-	const ref = useRef();
-	const box = ref?.current?.getBoundingClientRect() || { left: 0, top: 0 };
-	const scrollTop = window.pageYOffset || ref?.current?.scrollTop || body.scrollTop;
-    const scrollLeft = window.pageXOffset || ref?.current?.scrollLeft || body.scrollLeft;
-    const client = [ref?.current?.clientLeft || body.clientLeft || 0, ref?.current?.clientTop || body.clientTop || 0];
-	const host = {
-		gap: ref?.current ? 
-			parseInt(getComputedStyle(ref.current).getPropertyValue('font-size').slice(0,-2)) / 2 : 0,
-		height: ref?.current?.offsetHeight || 0,
-		width: ref?.current?.offsetWidth || 0,
-		x: box.left + scrollLeft - client[0] || 0,
-		y: box.top +  scrollTop - client[1] || 0 
-	};
+	const setHost = useRef();
+	const ref = setHost?.current;
+	const box = ref?.getBoundingClientRect() || { left: 0, top: 0 };
+    const scrollLeft = window.pageXOffset || ref?.scrollLeft || body.scrollLeft;
+	const scrollTop = window.pageYOffset || ref?.scrollTop || body.scrollTop;
+    const client = [ref?.clientLeft || body.clientLeft || 0, ref?.clientTop || body.clientTop || 0];
+	const host = ref ? {
+		gap: parseInt(getComputedStyle(ref).getPropertyValue('font-size').slice(0,-2)) / 2,
+		height: ref.offsetHeight,
+		width: ref.offsetWidth,
+		x: box.left + scrollLeft - client[0],
+		y: box.top +  scrollTop - client[1] 
+	} : { gap: 0, height: 0, width: 0, x: 0, y: 0 };
 
-	return { host, setHost: ref };
+	return { host, setHost };
 };

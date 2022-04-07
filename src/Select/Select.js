@@ -6,7 +6,7 @@ import './Select.scss'
 
 export default function Select({ debug, disabled, name, id, onChange, tabIndex, value, set = [], ...rest }) {
 	const hiddenList = set && set.map((item,i) => <option value={item.value} key={i}>{item.label}</option>);
-	const { keyInput, wrapProps } = useSelect({ debug, name, onChange, set, value });
+	const { keyInput, wrapProps } = useSelect({ debug, id, name, onChange, set, value });
 	const attrSet = { disabled, id, name, tabIndex, value };
 
 	return <React.Fragment>

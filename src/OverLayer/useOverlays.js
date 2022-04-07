@@ -7,12 +7,13 @@ export default function useOverlays() {
 	const [overState, reOverState] = useState([]);
 	const [trash, setTrash] = useState(false);
 
-	const addOverlay = ({ state, ...rest  }) => {
+	const addOverlay = ({ state, ...rest  }, toDo = () => {}) => {
 		let overlayID = generateUnique({ charCount: 5 });
 		let position = overState.length;
 		setCurrent(position);
 		setOverlays([ ...overlays, { ...rest, overlayID, position, fade: 0}]);
 		reOverState([ ...overState, { ...state }]);
+		toDo(overlayID);
 	};
 	const updateOverlay = (index, d) => reOverState(overState.map((state, i ) =>
 		current === i ? { ...state, ...d, from: [0,0], fade: 1, index} : state 
