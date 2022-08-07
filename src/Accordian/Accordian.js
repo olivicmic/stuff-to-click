@@ -12,6 +12,7 @@ export default function Accordian({
 	footer: Footer,
 	footExpander = true,
 	header: Header,
+	headerStyle,
 	opened = false,
 	onChange = () => {},
 	onClosed = () => {},
@@ -49,7 +50,7 @@ export default function Accordian({
 
 	return(
 		<div className={`stuff-accordian${ className ? ' ' + className : ''}`} {...rest} >
-			<header className='stuff-accordian-header' onClick={openClose}>
+			<header className='stuff-accordian-header' onClick={openClose} headerStyle={headerStyle}>
 				{Header ? <Header /> : ''}
 				{Expander ? <Expander active={expanded}/> : <PlaceholderBtn active={expanded}/>}
 			</header>
