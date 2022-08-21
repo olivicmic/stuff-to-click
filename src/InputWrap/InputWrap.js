@@ -15,7 +15,7 @@ export default function InputWrap({ bar = {}, component, events, focus, debug, d
 				{ label }
 				{required ? <div className="stuff-required"></div> : null}
 			</animated.label>
-			{component({ ...rest, ...( dropdown ? {inputRef} : {}), debug, id, value, events, name, required, tabIndex, valueName })}
+			{component({ ...rest, ...( dropdown ? {inputRef} : {}), debug, id, value, events, name, required, tabIndex, type, valueName })}
 			{ bar ? <div className='stuff-bar' style={bar}></div> : null }
 		</div>
 	</React.Fragment>;

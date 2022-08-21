@@ -15,7 +15,8 @@ const App = () => {
 		phonenumber: '',
 		extraTxt: '',
 		color: '9acd33',
-		opacity: 75
+		opacity: 75,
+		num: ''
 	});
 
 	const [selValue, setSel] = useState('');
@@ -105,6 +106,7 @@ const App = () => {
 				<br />
 				<br />
 				<br />
+				<Input type="number" value={apSt.num} onChange={onChange} name='num' style={testStyle} label='Some number'/>
 				<Input type="text" value={apSt.text} onChange={onChange} name='text' style={testStyle} id="howdy" label='Some text'/>
 				<Input type="text" value={apSt.text} onChange={onChange} name='text' style={testStyle} id="hola" label='Some text' extra={btnPair}/>
 				<Input type="password" value={apSt.password} onChange={onChange} name='password' required bar={{}} label='A Password'/>

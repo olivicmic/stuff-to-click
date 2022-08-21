@@ -1,4 +1,4 @@
-.stuff-input, .stuff-email, .stuff-password, .stuff-select, .stuff-tel, .stuff-text {
+.stuff-input, .stuff-email, .stuff-number, .stuff-password, .stuff-select, .stuff-tel, .stuff-text {
 	color: inherit;
 	position: relative;
 	display: inline-block;
@@ -14,7 +14,7 @@
 	transition: .25s border-color ease-in-out;
 	vertical-align: bottom;
 
-	&.stuff-input-focus, &.stuff-email-focus, &.stuff-password-focus, &.stuff-select-focus, &.stuff-tel-focus, &.stuff-text-focus  {
+	&.stuff-input-focus, &.stuff-email-focus, &.stuff-email-focus, &.stuff-password-focus, &.stuff-select-focus, &.stuff-tel-focus, &.stuff-text-focus  {
 		border-color: currentColor;
 		.stuff-input-bar { border-radius: 4px }
 	}
@@ -42,11 +42,11 @@
 		background-color: #f00;
 	}
 
-	input[type=text], input[type=email], input[type=tel], input[type=password], .stuff-faux-select-label {
+	 input[type=email], input[type=number],  input[type=password], input[type=tel],  input[type=text], .stuff-faux-select-label {
 		padding: 1.1em 1em .25em .25em;
 	}
 
-	input[type=text], input[type=email], input[type=tel], input[type=password], select, .stuff-faux-select {
+	 input[type=email], input[type=number], input[type=password],  input[type=tel],  input[type=text],  select, .stuff-faux-select {
 		color: inherit;
 		appearance: none;
 		border: none;
