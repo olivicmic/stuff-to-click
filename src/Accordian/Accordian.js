@@ -17,53 +17,54 @@ export default function Accordian({
 	onChange = () => {},
 	onClosed = () => {},
 	onOpened = () => {},
-	toggle = () => {},
 	...rest
 }) {
 	let defaultHeight = 0;
 	const [busy, statusControls] = useBusy({});
-	//const [expanded, toggle] = useState(opened);
+	const [expanded, toggle] = useState(opened);
+	const [rendered, setRendered] = useState(false);
 	const [contentHeight, setContentHeight] = useState(defaultHeight);
 	const [resizeListener, sizes] = useResizeAware();
 	const expand = useSpring({
 		config: { friction: 50, tension: 350 },
 		from: { height: 0 },
-		to: {height: opened ? contentHeight : 0},
+		to: {height: expanded ? contentHeight : 0},
 		...statusControls
 	});
 
-	const makeChange = () => onChange(opened);
+	const makeChange = () => onChange(expanded);
 
 	const openClose = () => {
-		if (opened) document.activeElement.blur();
-		toggle(!opened);
+		if (expanded) document.activeElement.blur();
+		toggle(!expanded);
 	};
 
 	useEffect(() => {
+		setRendered(true);
 		if (sizes.height) setContentHeight(sizes.height);
-	});
+	},[sizes]);
 
 	useEffect(() => {
-		if (opened) onOpened(opened);
-		if (!opened) onClosed(opened);
-		onChange(opened);
-	},[opened]);
+		if (expanded) onOpened(expanded);
+		if (!expanded) onClosed(expanded);
+		onChange(expanded);
+	},[expanded]);
 
 	return(
 		<div className={`stuff-accordian${ className ? ' ' + className : ''}`} {...rest} >
 			<header className='stuff-accordian-header' onClick={openClose} style={headerStyle}>
 				{Header ? <Header /> : ''}
-				{Expander ? <Expander active={opened}/> : <PlaceholderBtn active={opened}/>}
+				{Expander ? <Expander active={expanded}/> : <PlaceholderBtn active={expanded}/>}
 			</header>
-			<animated.div className={`stuff-accordian-body${ busy ? ' accordian-busy' : ''}${ !opened ? ' accordian-closed' : ''}`} style={expand} >
+			<animated.div className={`stuff-accordian-body${ busy ? ' accordian-busy' : ''}${ !expanded ? ' accordian-closed' : ''}`} style={expand} >
 				<div className='stuff-accordian-content'>
 					<hr className='stuff-accordian-seperator'/>
 					{resizeListener}
-					{children || null}
+					{rendered && children ? children : null}
 					<footer className='stuff-accordian-footer' onClick={openClose}>
 						{ Footer ? <Footer /> : ''}
 						{ footExpander ? 
-							Expander ? <Expander active={opened}/> : <PlaceholderBtn active={opened}/>
+							Expander ? <Expander active={expanded}/> : <PlaceholderBtn active={expanded}/>
 						: null }
 					</footer>
 				</div>
