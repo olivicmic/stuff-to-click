@@ -58,7 +58,7 @@ export default function Accordian({
 				<div className='stuff-accordian-content'>
 					<hr className='stuff-accordian-seperator'/>
 					{resizeListener}
-					{children}
+					{children || null}
 					<footer className='stuff-accordian-footer' onClick={openClose}>
 						{ Footer ? <Footer /> : ''}
 						{ footExpander ? 
