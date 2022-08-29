@@ -1,9 +1,9 @@
 import React, { useEffect  } from 'react';
 import { useTransition, easings, config } from 'react-spring';
 import { useBusy } from 'hangers';
-import { OverlayContext } from '../Context';
 import { useActiveElement } from '../hooks';
 import Overlay from '../Overlay';
+import OverlayContext from '../OverlayContext';
 import useOverlays from './useOverlays';
 import './OverLayer.scss'
 

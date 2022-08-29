@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { OverlayContext } from '../Context';
+import OverlayContext from '../OverlayContext';
 
 export default function ModalTrigger({}) {
 	const { addModal, modals, cutModal, setKill } = useContext(OverlayContext);
