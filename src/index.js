@@ -4,7 +4,6 @@ import ColorDragSlider from './ColorDragSlider';
 import DragSlider from './DragSlider';
 import DropDown from './DropDown';
 import HexInput from './HexInput';
-import hooks from './hooks';
 import Input from './Input';
 import InputWrap from './InputWrap';
 import ModalTrigger from './ModalTrigger';
@@ -20,4 +19,4 @@ import Selection from './Selection';
 import Slideshow from './Slideshow';
 import { useOverlayContext } from './hooks';
 
-export { Accordian, DragSlider, DropDown, ColorDragSlider, HexInput, hooks, Input, InputWrap, ModalTrigger, NumInput, Option, Overlay, OverlayContext, OverLayer, PlaceholderBtn, RGBInput, Select, Selection, Slideshow, useOverlayContext };
+export { Accordian, DragSlider, DropDown, ColorDragSlider, HexInput, Input, InputWrap, ModalTrigger, NumInput, Option, Overlay, OverlayContext, OverLayer, PlaceholderBtn, RGBInput, Select, Selection, Slideshow, useOverlayContext };
