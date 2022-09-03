@@ -10,6 +10,6 @@ export default createContext({
 	modalState: [],
 	overlays: [],
 	overState: [],
-	updateModal: f
+	updateModal: f,
 	updateOverlay: f
 });
