@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useStateRef } from 'hangers';
 import { animated } from 'react-spring';
 
-export default function Overlay({ component: Component, fade = 0, overlayID, overState, opacity, position, springRef, host, ...rest }) {
+export default function Overlay({ component: Component, fade = 0, overlayID, state, opacity, position, springRef, host, ...rest }) {
 	const [rendered, setRendered] = useState(false);
 	const [offPage, setOffpage] = useState();
 	const [ref, overlayRef] = useStateRef();
@@ -24,6 +24,6 @@ export default function Overlay({ component: Component, fade = 0, overlayID, ove
 		top: `${ at }px`, 
 		left: `${ host.x }px` 
 	}}>
-		<Component { ...{ ...rest, opacity, overlayID, position, overlayRef, overlay: overState[position], }} />
+		<Component { ...{ ...rest, opacity, overlayID, position, overlayRef, overlay: state[position], }} />
 	</animated.div>;
 };

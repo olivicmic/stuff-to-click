@@ -9,9 +9,9 @@ import './OverLayer.scss'
 
 
 export default function OverLayer({ children }) {
-	const { overlays, ...rest  } = useOverlays();
+	const overlays = useOverlays();
 	const [busy, setBusy] = useBusy({});
-	  const transitions = useTransition(overlays, {
+	  const transitions = useTransition(overlays.items, {
 		//config: config.stiff,
 	  	config: { easing: easings.easeInOutQuad, duration: 250 },
 		from: { opacity: 0 },
@@ -19,25 +19,15 @@ export default function OverLayer({ children }) {
 		leave: { opacity: 0 },
 		...setBusy,
 	});
- /*
-	    const focusedElement = useActiveElement();
- 
-	useEffect(() => {
-		if (focusedElement) {
-			focusedElement.value && console.log('🍔 Active element', focusedElement.value);
-		}
-		console.log(focusedElement);
-	}, [focusedElement]);
-*/
-	return <OverlayContext.Provider value={{ overlays, ...rest }}>
+
+	return <OverlayContext.Provider value={{ overlays }}>
 		{ children }
 		<div className='stuff-overlays'>
 			{ transitions(({ opacity }, overlay) => <Overlay{ ...{
 			...overlay,
 			busy,
-			overlays,
 			opacity,
-			...rest
+			...overlays
 		} }/> ) }
 		</div>
 	</OverlayContext.Provider>;
