@@ -22,30 +22,51 @@ export default function Accordian({
 	let defaultHeight = 0;
 	const [busy, statusControls] = useBusy({});
 	const [expanded, toggle] = useState(opened);
-	const [contentHeight, setContentHeight] = useState(defaultHeight);
+	const [updated, setUpdated] = useState(false);
+	const [switched, setSwitched] = useState(false);
+	const [height, setHeight] = useState(defaultHeight);
+	const [rendered, setRendered] = useState(false);
 	const [resizeListener, sizes] = useResizeAware();
+	const makeHeight = () => {
+		if (!expanded) return { height: 0 };
+		else {
+			if (updated) return { height };
+			return {};
+		}
+	};
 	const expand = useSpring({
 		config: { friction: 50, tension: 350 },
-		...( !expanded ? { height: 0 } : contentHeight ? { height: contentHeight } : {} ),
+		...( !expanded ? { height: 0 } : updated ? { height } : {} : {} ),
 		...statusControls
 	});
 
 	const makeChange = () => onChange(expanded);
 
 	const openClose = () => {
-		if (expanded) document.activeElement.blur();
-		toggle(!expanded);
+		setUpdated(true);
+		setSwitched(true);
+		onChange(expanded);
 	};
 
 	useEffect(() => {
-		if (sizes.height) setContentHeight(sizes.height);
-	},[sizes]);
+		if (switched && expanded) {
+			setSwitched(false);
+			toggle(false);
+			onOpened(false);
+			document.activeElement.blur();
+		}
+		if (switched && !expanded) {
+			setSwitched(false);
+			toggle(true);
+			onClosed(true);
+		};
+	},[switched, expanded]);
 
 	useEffect(() => {
-		if (expanded) onOpened(expanded);
-		if (!expanded) onClosed(expanded);
-		onChange(expanded);
-	},[expanded]);
+		setRendered(true);
+		if (sizes.height) setHeight(sizes.height);
+	},[sizes, setRendered]);
+
 
 	return<div className={`stuff-accordian${ className ? ' ' + className : ''}`} {...rest}>
 		<header className='stuff-accordian-header' onClick={openClose} style={headerStyle}>
@@ -56,7 +77,7 @@ export default function Accordian({
 				<div className='stuff-accordian-content'>
 					<hr className='stuff-accordian-seperator'/>
 					{ resizeListener }
-					{ children }
+					{ rendered ? children : null }
 					<footer className='stuff-accordian-footer' onClick={openClose}>
 						{ Footer ? <Footer /> : ''}
 						{ footExpander ? 

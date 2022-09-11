@@ -4,17 +4,22 @@ import { useBusy } from 'hangers';
 import Slides from './Slides';
 import './Slideshow.scss'
 
-export default function Slideshow({ children, className, ...rest }) {
+export default function Slideshow({ children, className, onChange = () => {}, ...rest }) {
 	const [busy, parentCtrls] = useBusy({});
-	const [contentHeight, setHeight] = useState(0);
+	const [updated, setUpdated] = useState(false);
+	const [height, setHeight] = useState(0);
 	const expand = useSpring({
 		config: { friction: 50, tension: 350 },
-		...( contentHeight ? { height: contentHeight } : {} ),
+		...( updated ? height ? { height } : {} : {}),
 		...parentCtrls
 	});
+	const newChange = e => {
+		setUpdated(true);
+		onChange(e);
+	};
 
-	return children && children().length > 0 ? <animated.div className={`${ className ? className + ' ' : ''}stuff-slideshow${ busy || contentHeight === 0 ? ' slideshow-busy' : '' }`}  style={expand}>
-			<Slides { ...{ ...rest, parentCtrls, setHeight,} } >
+	return children && children().length > 0 ? <animated.div className={`${ className ? className + ' ' : ''}stuff-slideshow${ busy || height === 0 ? ' slideshow-busy' : '' }`}  style={expand}>
+			<Slides { ...{ ...rest, onChange: newChange, parentCtrls, setHeight,} } >
 				{ children }
 			</Slides>
 		</animated.div> : null;
