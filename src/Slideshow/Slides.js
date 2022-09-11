@@ -6,7 +6,7 @@ import useSlides from './useSlides';
 
 export default function Slides({ children, initial, onChange, setHeight = () => {}, ...slideProps }) {
 	const { active, direction, page, ...pagination } = usePagination({ 
-		count: children && children().length, 
+		count: children ? children().length : 0, 
 		initial, 
 		onChange
 	});
