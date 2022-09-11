@@ -22,13 +22,11 @@ export default function Accordian({
 	let defaultHeight = 0;
 	const [busy, statusControls] = useBusy({});
 	const [expanded, toggle] = useState(opened);
-	const [rendered, setRendered] = useState(false);
 	const [contentHeight, setContentHeight] = useState(defaultHeight);
 	const [resizeListener, sizes] = useResizeAware();
 	const expand = useSpring({
 		config: { friction: 50, tension: 350 },
-		from: { height: 0 },
-		to: {height: expanded ? contentHeight : 0},
+		...( !expanded ? { height: 0 } : contentHeight ? { height: contentHeight } : {} ),
 		...statusControls
 	});
 
@@ -40,7 +38,6 @@ export default function Accordian({
 	};
 
 	useEffect(() => {
-		setRendered(true);
 		if (sizes.height) setContentHeight(sizes.height);
 	},[sizes]);
 
@@ -50,17 +47,16 @@ export default function Accordian({
 		onChange(expanded);
 	},[expanded]);
 
-	return(
-		<div className={`stuff-accordian${ className ? ' ' + className : ''}`} {...rest} >
-			<header className='stuff-accordian-header' onClick={openClose} style={headerStyle}>
-				{Header ? <Header /> : ''}
-				{Expander ? <Expander active={expanded}/> : <PlaceholderBtn active={expanded}/>}
-			</header>
-			<animated.div className={`stuff-accordian-body${ busy ? ' accordian-busy' : ''}${ !expanded ? ' accordian-closed' : ''}`} style={expand} >
+	return<div className={`stuff-accordian${ className ? ' ' + className : ''}`} {...rest}>
+		<header className='stuff-accordian-header' onClick={openClose} style={headerStyle}>
+			{ Header ? <Header /> : '' }
+			{ Expander ? <Expander active={expanded}/> : <PlaceholderBtn active={expanded}/> }
+		</header>
+		{ children ? <animated.div className={`stuff-accordian-body${ busy ? ' accordian-busy' : ''}${ !expanded ? ' accordian-closed' : ''}`} style={expand} >
 				<div className='stuff-accordian-content'>
 					<hr className='stuff-accordian-seperator'/>
-					{resizeListener}
-					{rendered && children ? children : null}
+					{ resizeListener }
+					{ children }
 					<footer className='stuff-accordian-footer' onClick={openClose}>
 						{ Footer ? <Footer /> : ''}
 						{ footExpander ? 
@@ -68,7 +64,6 @@ export default function Accordian({
 						: null }
 					</footer>
 				</div>
-			</animated.div>
-		</div>
-	);
+			</animated.div> : null }
+	</div>;
 };

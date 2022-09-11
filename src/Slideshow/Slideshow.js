@@ -9,15 +9,13 @@ export default function Slideshow({ children, className, ...rest }) {
 	const [contentHeight, setHeight] = useState(0);
 	const expand = useSpring({
 		config: { friction: 50, tension: 350 },
-		height: contentHeight || 0,
+		...( contentHeight ? { height: contentHeight } : {} ),
 		...parentCtrls
 	});
 
-	return(
-		<animated.div className={`${ className ? className + ' ' : ''}stuff-slideshow${ busy || contentHeight === 0 ? ' slideshow-busy' : '' }`}  style={expand}>
+	return children && children().length > 0 ? <animated.div className={`${ className ? className + ' ' : ''}stuff-slideshow${ busy || contentHeight === 0 ? ' slideshow-busy' : '' }`}  style={expand}>
 			<Slides { ...{ ...rest, parentCtrls, setHeight,} } >
 				{ children }
 			</Slides>
-		</animated.div>
-	);
+		</animated.div> : null;
 };
