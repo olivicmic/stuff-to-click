@@ -4,7 +4,7 @@ import useResizeAware from 'react-resize-aware';
 import { usePagination } from 'hangers';
 import useSlides from './useSlides';
 
-export default function Slides({ children, initial, onChange, setHeight = () => {}, ...slideProps }) {
+export default function Slides({ children, initial, onChange, setHeight = () => {}, updated, ...slideProps }) {
 	const { active, direction, page, ...pagination } = usePagination({ 
 		count: children ? children().length : 0, 
 		initial, 
@@ -26,7 +26,7 @@ export default function Slides({ children, initial, onChange, setHeight = () => 
 		</animated.div>
 	);
 	return <div className='stuff-slideshow-content'>
-		{ resizeListener }
+		{ updated ? resizeListener : null }
 		{
 			rendered ? transitions((style, i) => {
 				const Slide = slides[i];

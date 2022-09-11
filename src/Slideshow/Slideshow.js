@@ -20,7 +20,7 @@ export default function Slideshow({ debug = false, children, className, onChange
 	if (debug) console.log('slideshow debug',{ updated });
 
 	return children && children().length > 0 ? <animated.div className={`${ className ? className + ' ' : ''}stuff-slideshow${ busy || height === 0 ? ' slideshow-busy' : '' }`}  style={expand}>
-			<Slides { ...{ ...rest, onChange: newChange, parentCtrls, setHeight,} } >
+			<Slides { ...{ ...rest, onChange: newChange, parentCtrls, setHeight, updated } } >
 				{ children }
 			</Slides>
 		</animated.div> : null;
