@@ -49,7 +49,7 @@ export default function Accordian({
 		onChange(expanded);
 	};
 
-	if (debug) console('accordian debug',{ opened, expanded, updated, switched });
+	if (debug) console.log('accordian debug',{ opened, expanded, updated, switched });
 
 	useEffect(() => {
 		if (switched && expanded) {
