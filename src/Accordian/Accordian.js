@@ -8,6 +8,7 @@ import './Accordian.scss'
 export default function Accordian({ 
 	children,
 	className,
+	debug = false,
 	expander: Expander,
 	footer: Footer,
 	footExpander = true,
@@ -47,6 +48,8 @@ export default function Accordian({
 		setSwitched(true);
 		onChange(expanded);
 	};
+
+	if (debug) console('accordian debug',{ opened, expanded, updated, switched });
 
 	useEffect(() => {
 		if (switched && expanded) {
