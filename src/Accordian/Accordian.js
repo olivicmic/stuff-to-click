@@ -67,8 +67,9 @@ export default function Accordian({
 
 	useEffect(() => {
 		setRendered(true);
-		if (sizes.height) setHeight(sizes.height);
-	},[sizes, setRendered]);
+		if (rendered && sizes.height) setHeight(sizes.height);
+		return () => setRendered(false);
+	},[sizes, rendered, setRendered]);
 
 
 	return<div className={`stuff-accordian${ className ? ' ' + className : ''}`} {...rest}>
