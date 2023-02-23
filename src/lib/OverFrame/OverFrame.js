@@ -4,7 +4,7 @@ import { useInOut } from 'hangers';
 import { is, makeClasses } from 'lal';
 import { useHost } from '../hooks';
 
-export default function OverFrame({ autoBoundary, className, config, debug, enter, exit, overlay, style, type: Type, zBase = 0, ...rest }) {
+export default function OverFrame({ autoBoundary, className, config, debug, enter, exit, overlay, overlays, style, type: Type, zBase = 0, ...rest }) {
 	const { definedZero, defined } = is;
 	const [rendered, setRendered] = useState(false);
 	const [off, offSet] = useState([0,0]);
@@ -49,13 +49,14 @@ export default function OverFrame({ autoBoundary, className, config, debug, ente
 		style: {
 			...style,
 			transform: style.opacity.to(o => `translate(${ setTransform(o,0) }px, ${ setTransform(o,1) }px)`),
-			zIndex: overlay.isTop ? zBase + 1 : zBase
+			zIndex: zBase + overlays.order.indexOf(overlay.id)
 		} 
 	}}>
 		<Type { ...{ 
 			...rest,
 			debug,
 			overlay,
+			overlays,
 			mainRef,
 			style: {
 				...config && {
