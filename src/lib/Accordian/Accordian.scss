@@ -1,0 +1,37 @@
+.stuff-accordian {
+	border: 2px solid currentColor;
+	box-sizing: border-box;
+	position: relative;
+
+	header.stuff-accordian-header, footer.stuff-accordian-footer { cursor: default; } // delete eventually
+
+	.stuff-accordian-toggle {
+		cursor: pointer;
+	}
+
+	.stuff-accordian-body {
+		overflow: hidden;
+		min-height: fit-content;
+		&.accordian-busy, &.accordian-closed, {overflow: hidden; min-height: 0}
+	}
+
+	.stuff-accordian-content {
+		padding: 0 1em;
+		box-sizing: border-box;
+		width: 100%;
+		position: relative;
+
+		.stuff-accordian-footer {
+			margin: 0;
+			padding: 1em 0;
+		}
+	}
+
+	.stuff-accordian-seperator {
+		margin: 0 0 1em;
+		appearance: none;
+		height: 2px;
+		border-radius: 2px;
+		border: none;
+	}
+}

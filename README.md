@@ -2,6 +2,8 @@
 
 [![NPM](https://img.shields.io/npm/v/stuff-to-click.svg)](https://www.npmjs.com/package/stuff-to-click) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
 
+ReadMe not updates for v4, use at your own risk.
+
 A collection of experimental React components.
 
 ## Install
@@ -27,19 +29,6 @@ const myButton = ({ active, onClick}) => <button type='button' onClick={onClick}
 
 ```
 
-## ColorDragSlider
-
-ColorDragSlider (below) is similar to DragSlider except that it accepts a 6 digit hex color as its value, and will return a new hex color depending on which color string ('red','green', or 'blue') is assigned to the mode attribute. The color returned via the onChange function will be a hex color including a hash. The unselected channels will be unaltered.
-
-```jsx
-
-import { ColorDragSlider } from 'stuff-to-click'; // outside parent component
-
-doThis = (newValue) => setState(newValue);
-
-<ColorDragSlider value={state} max={100} onChange={doThis} slide={{/* css */}} mode='red'/>
-
-```
 
 ## DragSlider
 
@@ -53,22 +42,6 @@ doThis = (newValue) => setState(newValue);
 
 ```
 
-
-## HexInput
-
-Hex input is a text input that accepts a hex color as its value. It anicipates a 6 digit hex with hash, but displays without the hash for ease of copying, but the hash will be returned via the onChange function. It blocks any invalid characters (not 0-9 or a-f);
-
-Standard text input attributes can be passed down to the input.
-
-```jsx
-
-import { HexInput } from 'stuff-to-click'; // outside parent component
-
-doThis = (newValue) => setState(newValue);
-
-<HexInput value={state} onChange={doThis} />
-
-```
 
 ## Input
 
@@ -86,21 +59,6 @@ doThis = (newValue) => setState(newValue);
 
 ```
 
-## NumInput
-
-NumInput is used in place of standard number inputs, to avoid leading zeros, allowing for more natural typing input, while excluding unwanted input (such as letters). It will use numpad/keypad input on mobile. By applying a max prop, you can set a maximum input allowed (default 100).
-
-Additional input props will be passed down to the input.
-
-```jsx
-
-import { NumInput } from 'stuff-to-click'; // outside parent component
-
-doThis = (newValue) => setState(newValue);
-
-<NumInput value={state} max='300' onChange={doThis} />
-
-```
 
 ## OverLayer
 
@@ -178,21 +136,6 @@ export default function MyOverlay({
 - `overlayRef (function)`: Set as the ref for your overlay, neccesary to animate within the viewport.
 - `position (number)`: The position of the overlay within the overlay array.
 
-## RGBInput
-
-RGBInput an input which uses NumInput, and when given a hex value alongside a 'red', 'green', or 'blue' mode, will display the 0-255 value of the selected channel. When the number is changed, it will return an updated full hex color via the onChange function, with the unselected channels unaltered.
-
-Additional input props will be passed down to the input.
-
-```jsx
-
-import { RGBInput } from 'stuff-to-click'; // outside parent component
-
-doThis = (newValue) => setState(newValue); // newValue = # hex string 
-
-return <RGBInput value={state} onChange={colorChange} mode='red' /> // value = # hex string 
-
-```
 
 ## Select
 

@@ -1,0 +1,75 @@
+.drag-slider {
+	display: flex;
+	width: 300px;
+	height: 2rem;
+	padding: 0 1rem;
+
+	.drag-slider-track-container {
+		align-items: center;
+		display: flex;
+		width: 100%;
+		height: 2rem;
+		margin: auto 0;
+	}
+
+	.drag-slider-track {
+		border-radius: 1px;
+		width: 100%;
+		height: 2px;
+	}
+
+	.drag-slider-thumb {
+		cursor: pointer;
+		outline: none;
+		user-select: none;
+		border: currentColor 2px solid;
+		border-radius: 4px;
+		box-sizing: border-box;
+		position: relative;
+		display: flex;
+		height: 2rem;
+		width: 2rem;
+
+		.drag-slider-thumb-cap {
+			display: flex;
+			width: 100%;
+			height: 100%;
+		}
+
+		.drag-slider-center {
+			width: 2px;
+			height: 1rem;
+			background-color: currentColor;
+			margin: auto;
+			border-radius: 1px;
+		}
+	}
+}
+
+.drag-slider-color-red .drag-slider-track {background: linear-gradient(90deg, rgb(0,0,0) 0%, rgb(255,0,0) 100%)}
+.drag-slider-color-green .drag-slider-track {background: linear-gradient(90deg, rgb(0,0,0) 0%, rgb(0,255,0) 100%)}
+.drag-slider-color-blue .drag-slider-track {background: linear-gradient(90deg, rgb(0,0,0) 0%, rgb(0,0,255) 100%)}
+.drag-slider-color-hue .drag-slider-track {background: linear-gradient(90deg, 
+		hsl(0,100%,50%) 0%,
+		hsl(18,100%,50%) 5%, 
+		hsl(36,100%,50%) 10%,
+		hsl(54,100%,50%) 15%,
+		hsl(72,100%,50%) 20%,
+		hsl(90,100%,50%) 25%,
+		hsl(108,100%,50%) 30%,
+		hsl(126,100%,50%) 35%,
+		hsl(144,100%,50%) 40%,
+		hsl(162,100%,50%) 45%,
+		hsl(180,100%,50%) 50%,
+		hsl(198,100%,50%) 55%,
+		hsl(216,100%,50%) 60%,
+		hsl(234,100%,50%) 65%,
+		hsl(252,100%,50%) 70%,
+		hsl(270,100%,50%) 75%,
+		hsl(288,100%,50%) 80%,
+		hsl(306,100%,50%) 85%,
+		hsl(324,100%,50%) 90%,
+		hsl(342,100%,50%) 95%,
+		hsl(360,100%,50%) 100%
+	);}
+
