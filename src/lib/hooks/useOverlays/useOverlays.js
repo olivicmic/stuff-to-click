@@ -40,7 +40,6 @@ export default function useOverlays(presets = {}, debug) {
 	const currentSet = inputID => orderSet([ ...filterID([...order], inputID), inputID]);
 
 	const remove = inputID => {
-		order.length > 1 && orderSet(filterID([ ...order], inputID));
 		setItems(filterID([...items], inputID));
 		completedSet([...completed, ...inputID && [inputID] ]);
 	}
