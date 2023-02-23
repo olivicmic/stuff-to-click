@@ -4690,10 +4690,10 @@ handle-thing@^2.0.0:
   resolved "https://registry.yarnpkg.com/handle-thing/-/handle-thing-2.0.1.tgz#857f79ce359580c340d43081cc648970d0bb234e"
   integrity sha512-9Qn4yBxelxoh2Ow62nP+Ka/kMnOXRi8BXnRaUwezLNhqelnN49xKz4F/dPP8OYLxLxq6JDtZb2i9XznUQbNPTg==
 
-hangers@^3.0.11:
-  version "3.0.11"
-  resolved "https://registry.yarnpkg.com/hangers/-/hangers-3.0.11.tgz#5ed8469f97bb370d56d298656f38b94f117df920"
-  integrity sha512-s7gVmrcXW1s6Wb5VMcBOYtOkp+LnMjS2TvDBNM6nSjyKIY9RkkHdfFLoLQih7tl7rrjuC5BSaN6jAU8qjG7Qkg==
+hangers@^3.0.12:
+  version "3.0.12"
+  resolved "https://registry.yarnpkg.com/hangers/-/hangers-3.0.12.tgz#d56ee6dcc25a3efe1ef5ab863624167a2727941b"
+  integrity sha512-RCj9cxzrUV4hFClFXVqfjSAo8Xur2BrSuFI5SLbRT8y3ZMiJ3SILYilaTAU6KY7VG6AN04l37i4lXOMPgRHq0w==
   dependencies:
     axios "^1.3.3"
     lal "^7.0.3"

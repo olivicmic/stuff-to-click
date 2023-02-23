@@ -43,7 +43,7 @@
     ]
   },
   "dependencies": {
-    "hangers": "^3.0.11",
+    "hangers": "^3.0.12",
     "lal": "^7.0.3",
     "react-range": "^1.8.14",
     "react-spring": "^9.6.1",
