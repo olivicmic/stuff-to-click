@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useSpring, animated } from 'react-spring';
 import { useBusy } from 'hangers';
 import { useSlides } from '../hooks';
-import { Slide } from 'lib';
+import { Slide } from '..';
 
 export default function CoreSlideshow({ busy, className, debug, extraFixed, extraResize, pagination, paused: inPaused, slides = [], lockHeight, lockWidth, resizeSpring, slideState, ...rest }) {
 	const [slideMask, parentCtrls] = useBusy({});
