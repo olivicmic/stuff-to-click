@@ -79,7 +79,7 @@ const Body = ({ modalActive, ...rest }) => {
 
 const App = () => {
 	const layerState = { 
-		modals: useOverlays({ smile: { config: { closeOutside: true } }}),
+		modals: useOverlays({ smile: { child: { closeOutside: true } }}),
 		popout: useOverlays(configPopouts)
 	};
 	const layers = [

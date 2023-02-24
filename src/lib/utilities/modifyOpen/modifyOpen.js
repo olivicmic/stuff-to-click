@@ -1,15 +1,18 @@
 import { is } from 'lal';
 
-const props = ['bottom', 'centerX', 'closeOutside', 'cornerX', 'cornerY', 'debug', 'height', 'padX', 'padY', 'right', 'top', 'width', 'x', 'y'];
+const parentKeys = ['bottom', 'centerX', 'cornerX', 'cornerY', 'debug', 'height', 'padX', 'padY', 'right', 'top', 'width', 'x', 'y'];
+const childKeys = ['closeOutside','tint','spring'];
 
-const modifyOpen = ({ baseConfig, target: inTarget, config, ...openRest }) => {
-	const base = baseConfig || {};
+const modifyOpen = ({ eventChild = {}, eventParent = {}, presetChild = {}, presetParent = {}, target: inTarget, ...openRest }) => {
+	const parents = [eventParent, presetParent];
+	const children = [eventChild, presetChild];
 	const target = inTarget?.getBoundingClientRect() || {};
-	const { gapX, gapY, ...overwrite } = config || {};
-	const primaryProps = props.reduce((obj, prop) => ({ 
+	const setupProps = (arr, input) => arr.reduce((obj, prop) => ({ 
 		...obj,
-		...is.defined(a => ({  [prop]: a }), overwrite[prop],target[prop],base[prop])
+		...is.defined(a => ({  [prop]: a }), input[0][prop],target[prop],input[1][prop])
 	}),{});
+	const childProps = setupProps(childKeys, children);
+	const parentProps = setupProps(parentKeys, parents);
 
 	const fontSize = parseInt(( inTarget ? 
 		getComputedStyle(inTarget) :
@@ -18,15 +21,17 @@ const modifyOpen = ({ baseConfig, target: inTarget, config, ...openRest }) => {
 
 	const gap = ['gapX','gapY'];
 	const multiply = ['gapXMultiply','gapYMultiply'];
-	const animate = (n,i) =>({ [gap[i]]: n * is.defined(overwrite[multiply[i]], base[multiply[i]], 0) });
+	const animate = (n,i) =>({ [gap[i]]: n * is.defined(eventParent[multiply[i]], presetParent[multiply[i]], 0) });
+	const hasProps = obj => !!Object.keys(obj).length;
 
 	return {
-		...(baseConfig || config || inTarget) && { 
+		...(hasProps(presetParent) || hasProps(eventParent) || hasProps(presetChild) || inTarget) && { 
 			config: {
-				...primaryProps,
+				...childProps,
+				...parentProps,
 				enter: [0,-50],
-				...is.defined(n => animate(n,0), gapX, base.gapX, fontSize),
-				...is.defined(n => animate(n,1), gapY, base.gapY, fontSize) 
+				...is.defined(n => animate(n,0), eventParent.gapX, presetParent.gapX, fontSize),
+				...is.defined(n => animate(n,1), eventParent.gapY, presetParent.gapY, fontSize) 
 			},
 		},
 		...openRest,

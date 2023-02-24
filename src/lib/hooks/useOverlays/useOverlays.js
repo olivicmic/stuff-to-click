@@ -15,6 +15,7 @@ export default function useOverlays(presets = {}, debug) {
 	const filterID = (arr, inputID) => arr.filter((overlay,i) => (overlay?.overlayID || overlay) !== inputID);
 	const tint = Object.values(tintReqs).find(t => t);
 	const add = ({ disableTint, initial, ...rest  }, toDo = () => {}) => {
+		console.log('🩸',rest);
 		let overlayID = generateUnique({ charCount: 5 });
 		tintReqsSet({ ...tintReqs, [overlayID]: !disableTint });
 		orderSet([ ...order, overlayID ])
@@ -23,12 +24,17 @@ export default function useOverlays(presets = {}, debug) {
 		toDo(overlayID);
 	};
 	const open = (type, setup, toDo) => {
-		let { config, modifyOpen = defaultOpen, ...preset } = presets[type] || {};
+		let { child, parent, modifyOpen = defaultOpen, ...preset } = presets[type] || {};
+		let { child: eventChild, parent: eventParent, ...setupExtra } = setup || {};
+		console.log('🦠',setup, presets[type]);
 		if (presets[type]) add({
 			...preset,
 			...modifyOpen({ 
-				...setup,
-				...config && { baseConfig: config }
+				...setupExtra,
+				eventChild,
+				eventParent,
+				...child && { presetChild: child },
+				...parent && { presetParent: parent }
 			}) 
 		}, toDo);
 	};
