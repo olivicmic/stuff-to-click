@@ -25,8 +25,8 @@ export default function OverLayer({ layers = [], layerState, render: Render, ren
 	useChain([tintRef, moduleRef], isTinted ? [0,.25] : [0,0] );
 
 	return <OverlayContext.Provider value={layerState}>
-		<Render { ...{ ...renderProps, modalActive: isTinted, style: { zIndex: zBase } } }/>
-		<div className={`stuff-overlays${ isTinted ? ' stuff-over-active' : '' }`}>
+		<Render { ...{ ...renderProps, modalActive: isTinted } }/>
+		<div {...{ className: `stuff-overlays${ isTinted ? ' stuff-over-active' : '' }`, style: { zIndex: zBase } }}>
 			{ tintTransition((tinter, shade) => 
 				shade && <animated.div {...{ className: 'stuff-tint', style: { ...tinter, ...tintStyle} }} />) }
 			{ layers.map(({ overLayerName, ...layer }, key ) => 
