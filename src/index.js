@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { createRoot } from 'react-dom/client';
-import { Accordian, configPopouts, DragSlider, Input, modifyOpen, OverLayer, Picker, Select, Slideshow, useOverlayContext, useOverlays } from './lib';
+import { Accordian, configPopouts, DragSlider, Input, OverLayer, Picker, Select, Slideshow, useOverlayContext, useOverlays } from './lib';
 import { AccHeader, ExampleSlide } from './dev';
 import './index.scss';
 import './sanitize.css';
@@ -30,12 +30,7 @@ const Body = ({ modalActive, ...rest }) => {
 	const onClosed = (oState) => console.log('closed');
 	const onOpened = (oState) => console.log('opened');
 	const { modals } = useOverlayContext();
-	const openSmile = ({ target }) => modals.add({
-			initial: {
-				//q
-			},
-			...modifyOpen({ target, config: { closeOutside: true } })
-		});
+	const openSmile = ({ target }) => modals.open('smile',{ target });
 
 	const selItems = [{
 		value: 'pizza',
@@ -83,10 +78,13 @@ const Body = ({ modalActive, ...rest }) => {
 };
 
 const App = () => {
-	const layerState = { modals: useOverlays(), popout: useOverlays(configPopouts) };
+	const layerState = { 
+		modals: useOverlays({ smile: { config: { closeOutside: true } }}),
+		popout: useOverlays(configPopouts)
+	};
 	const layers = [
-		{ overLayerName: 'modals', type: Smile, autoBoundary: 16 },
-		{ overLayerName: 'popout', type: Picker, }
+		{ overLayerName: 'modals', type: Smile },
+		{ overLayerName: 'popout', type: Picker }
 	];
 	return <OverLayer {...{ layers, layerState, render: Body }}/>;
 };

@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { generateUnique } from 'lal';
 import { useBusy } from 'hangers';
+import { modifyOpen as defaultOpen } from '../..';
 
 export default function useOverlays(presets = {}, debug) {
 	const [completed, completedSet] = useState([]);
@@ -22,13 +23,13 @@ export default function useOverlays(presets = {}, debug) {
 		toDo(overlayID);
 	};
 	const open = (type, setup, toDo) => {
-		let { config, modifyOpen, ...preset } = presets[type] || {};
+		let { config, modifyOpen = defaultOpen, ...preset } = presets[type] || {};
 		if (presets[type]) add({
 			...preset,
-			...modifyOpen ? modifyOpen({ 
+			...modifyOpen({ 
 				...setup,
 				...config && { baseConfig: config }
-			}) : setup
+			}) 
 		}, toDo);
 	};
 	
