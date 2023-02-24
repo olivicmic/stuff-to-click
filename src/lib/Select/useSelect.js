@@ -20,7 +20,6 @@ export default function useSelect({ debug, id, name, onChange, set, valid, value
 			setActive(true);
 
 			popout.open('picker',{
-				parent: { cornerX: 0, padX: 4 },
 				debug: 'select picker',
 				onFocus,
 				initial: { focus, set, submit, value, index },

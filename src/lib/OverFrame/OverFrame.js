@@ -15,9 +15,10 @@ export default function OverFrame({ autoBoundary, child, className, debug, enter
 	const definedBounds = definedZero(autoBoundary);
 	const height = defined(main[1],0);
 	const width = defined(main[0],0);
+	const hostAlign = ax => host.size[ax] * (.01 * host.alignment[ax]);
 	const orientation = (ax, fl) => !fl ? 
-		host.xy[ax] + (host.corner[ax] ? host.size[ax] : 0) + host.gap[ax] :
-		host.win[ax] - (host.xy[ax] + (host.corner[ax] ? 0 : host.size[ax]) - host.gap[ax]);
+		host.xy[ax] + hostAlign(ax) + host.gap[ax] :
+		host.win[ax] - (host.xy[ax] + (host.size[ax] - hostAlign(ax)) - host.gap[ax]);
 	const setPos = (ax, fl = 0) => `${(orientation(ax,fl) || 0) - off[ax] + host.gap[ax]}px`;
 	const setTransform  = (step, axis)  => ((1 - step) * (overlay.phase ? 
 		defined(child?.exit?.[axis],[0,0]) : defined(child?.enter?.[axis],[0,0])) * (host.orientation[axis] ? -1 : 1 ));

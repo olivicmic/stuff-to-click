@@ -1,6 +1,6 @@
 import { is } from 'lal';
 
-const parentKeys = ['bottom', 'centerX', 'cornerX', 'cornerY', 'debug', 'height', 'padX', 'padY', 'right', 'top', 'width', 'x', 'y'];
+const parentKeys = ['alignX', 'alignY', 'bottom', 'centerX', 'cornerX', 'cornerY', 'debug', 'height', 'padX', 'padY', 'right', 'top', 'width', 'x', 'y'];
 const childKeys = ['closeOutside','disableTint','spring'];
 
 const modifyOpen = ({ eventChild = {}, eventParent = {}, presetChild = {}, presetParent = {}, target: inTarget, ...openRest }) => {
@@ -29,13 +29,6 @@ const modifyOpen = ({ eventChild = {}, eventParent = {}, presetChild = {}, prese
 			child: {
 				...childProps,
 				enter: [0,-50],
-			},
-			config: {
-				...childProps,
-				...parentProps,
-				enter: [0,-50],
-				...is.defined(n => animate(n,0), eventParent.gapX, presetParent.gapX, fontSize),
-				...is.defined(n => animate(n,1), eventParent.gapY, presetParent.gapY, fontSize) 
 			},
 			parent: {
 				...parentProps,
