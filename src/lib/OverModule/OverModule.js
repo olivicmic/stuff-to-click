@@ -6,7 +6,7 @@ import { OverFrame } from '..';
 export default function OverModule({ busy, debug, overlayerBusy, overLayerName, moduleRef, overlays, tinted, tintedSet = () => {}, ...rest }) {
 	const [moduleBusy, setBusy] = useBusy({ onRest: overlays.clean });
 	const overlayTransitions = useTransition(overlays.items, {
-		config: overlays.spring || { tension: 150, friction: 14 },
+		config: ({ child }) => child.spring || { tension: 150, friction: 14 },
 		from: { opacity: 0 },
 		enter: { opacity: 1 },
 		leave: { opacity: 0 },

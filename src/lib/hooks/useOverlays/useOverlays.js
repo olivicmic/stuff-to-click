@@ -14,12 +14,12 @@ export default function useOverlays(presets = {}, debug) {
 	const top = order[order.length - 1];
 	const filterID = (arr, inputID) => arr.filter((overlay,i) => (overlay?.overlayID || overlay) !== inputID);
 	const tint = Object.values(tintReqs).find(t => t);
-	const add = ({ disableTint, initial, ...rest  }, toDo = () => {}) => {
+	const add = ({ child, initial, ...rest  }, toDo = () => {}) => {
 		console.log('🩸',rest);
 		let overlayID = generateUnique({ charCount: 5 });
-		tintReqsSet({ ...tintReqs, [overlayID]: !disableTint });
+		tintReqsSet({ ...tintReqs, [overlayID]: !child.disableTint });
 		orderSet([ ...order, overlayID ])
-		setItems([ ...items, { ...rest, overlayID }]);
+		setItems([ ...items, { ...rest, child, overlayID }]);
 		dataSet({ ...data, [overlayID]: initial });
 		toDo(overlayID);
 	};
