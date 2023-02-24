@@ -4,7 +4,7 @@ import { useBusy } from 'hangers';
 import { OverlayContext, OverModule } from '..';
 import './OverLayer.scss'
 
-export default function OverLayer({ layers = [], layerState, render: Render, renderProps, tintStyle, ...rest }) {
+export default function OverLayer({ layers = [], layerState, render: Render, renderProps, tintStyle, zBase = 1000, ...rest }) {
 	const [tinted, tintedSet] = useState([]);
 	const [overlayerBusy, overlayerBusySet] = useBusy();
 	const isTinted = !!tinted.length;
@@ -25,12 +25,12 @@ export default function OverLayer({ layers = [], layerState, render: Render, ren
 	useChain([tintRef, moduleRef], isTinted ? [0,.25] : [0,0] );
 
 	return <OverlayContext.Provider value={layerState}>
-		<Render { ...{ ...renderProps, modalActive: isTinted } }/>
+		<Render { ...{ ...renderProps, modalActive: isTinted, style: { zIndex: zBase } } }/>
 		<div className={`stuff-overlays${ isTinted ? ' stuff-over-active' : '' }`}>
 			{ tintTransition((tinter, shade) => 
-				shade && <animated.div {...{ className: 'stuff-tint', style: { ...tinter, ...tintStyle } }} />) }
+				shade && <animated.div {...{ className: 'stuff-tint', style: { ...tinter, ...tintStyle} }} />) }
 			{ layers.map(({ overLayerName, ...layer }, key ) => 
-				<OverModule { ...{ ...layer, className: `overlay-${overLayerName}`, key, moduleRef, overlayerBusy, overLayerName, overlays: layerState[overLayerName], tinted, tintedSet, zBase: (1000 * (1 + key)) }}/>
+				<OverModule { ...{ ...layer, className: `overlay-${overLayerName}`, key, moduleRef, overlayerBusy, overLayerName, overlays: layerState[overLayerName], tinted, tintedSet, zBase: zBase * (1 + key) }}/>
 			) }
 		</div>
 	</OverlayContext.Provider>;
