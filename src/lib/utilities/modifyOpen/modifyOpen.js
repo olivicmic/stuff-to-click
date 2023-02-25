@@ -1,7 +1,7 @@
 import { is } from 'lal';
 
 const parentKeys = ['alignX', 'alignY', 'bottom', 'centerX', 'cornerX', 'cornerY', 'debug', 'height', 'padX', 'padY', 'right', 'top', 'width', 'x', 'y'];
-const childKeys = ['closeOutside','disableTint','spring'];
+const childKeys = ['alignX', 'alignY','closeOutside','disableTint','spring'];
 
 const modifyOpen = ({ eventChild = {}, eventParent = {}, presetChild = {}, presetParent = {}, target: inTarget, ...openRest }) => {
 	const parents = [eventParent, presetParent];
@@ -13,7 +13,6 @@ const modifyOpen = ({ eventChild = {}, eventParent = {}, presetChild = {}, prese
 	}),{});
 	const childProps = setupProps(childKeys, children);
 	const parentProps = setupProps(parentKeys, parents);
-	console.log('presetChild', childProps);
 
 	const fontSize = parseInt(( inTarget ? 
 		getComputedStyle(inTarget) :

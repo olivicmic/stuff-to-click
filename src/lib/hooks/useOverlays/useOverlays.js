@@ -15,7 +15,6 @@ export default function useOverlays(presets = {}, debug) {
 	const filterID = (arr, inputID) => arr.filter((overlay,i) => (overlay?.overlayID || overlay) !== inputID);
 	const tint = Object.values(tintReqs).find(t => t);
 	const add = ({ child, initial, ...rest  }, toDo = () => {}) => {
-		console.log('🩸',rest);
 		let overlayID = generateUnique({ charCount: 5 });
 		tintReqsSet({ ...tintReqs, [overlayID]: !child.disableTint });
 		orderSet([ ...order, overlayID ])
@@ -26,7 +25,6 @@ export default function useOverlays(presets = {}, debug) {
 	const open = (type, setup, toDo) => {
 		let { child, parent, modifyOpen = defaultOpen, ...preset } = presets[type] || {};
 		let { child: eventChild, parent: eventParent, ...setupExtra } = setup || {};
-		console.log('🦠',setup, presets[type]);
 		if (presets[type]) add({
 			...preset,
 			...modifyOpen({ 
@@ -58,8 +56,6 @@ export default function useOverlays(presets = {}, debug) {
 		}
 	};
 
-	const spring = presets.spring;
-
 	useEffect(() => {
 		if (trash) {
 			orderSet(filterID([...order], trash));
@@ -75,5 +71,5 @@ export default function useOverlays(presets = {}, debug) {
 	},[completed, data, tintReqs, trash, order]);
 
 
-	return { add, busy, busySet, clean, completed, currentSet, data, items, open, order, remove, spring, tint, top, update };
+	return { add, busy, busySet, clean, completed, currentSet, data, items, open, order, remove, tint, top, update };
 };
