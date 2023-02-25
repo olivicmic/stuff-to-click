@@ -16,7 +16,7 @@ export default function OverFrame({ autoBoundary, child, className, debug, enter
 		host.win[ax] - (host.xy[ax] + (host.size[ax] - hostAlign(ax)) - host.gap[ax]);
 	const setPos = (ax, fl = 0) => `${(orientation(ax,fl) || 0) - off[ax] + host.gap[ax]}px`;
 	const setTransform  = (step, axis)  => ((1 - step) * (overlay.phase ? 
-		defined(child?.exit?.[axis],[0,0]) : defined(child?.enter?.[axis],[0,0])) * (host.orientation[axis] ? -1 : 1 ));
+		defined(child?.exit?.[axis],0) : defined(child?.enter?.[axis],0)) * (host.orientation[axis] ? -1 : 1 ));
 	const idName = 'over-frame-id-' + overlay.id;
 
 	useInOut({ debug: true, boundary: idName, disabled: !child?.closeOutside, onOut: overlay.close });

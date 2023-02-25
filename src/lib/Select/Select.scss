@@ -27,11 +27,13 @@
 	.stuff-select-marker {
 		display: inline-block;
 		margin: auto 1em;
+		pointer-events: none;
 		height: .5em;
 		width: .5em;
 	}
 
 	.stuff-faux-arrow {
+		pointer-events: none;
 		border: solid currentColor;
 		border-width: 0 2px 2px 0;
 		box-sizing: border-box;

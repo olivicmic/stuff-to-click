@@ -1,7 +1,7 @@
 import { is } from 'lal';
 
 const parentKeys = ['alignX', 'alignY', 'bottom', 'centerX', 'cornerX', 'cornerY', 'debug', 'height', 'padX', 'padY', 'right', 'top', 'width', 'x', 'y'];
-const childKeys = ['alignX', 'alignY','closeOutside','disableTint','spring'];
+const childKeys = ['alignX', 'alignY', 'closeOutside', 'disableTint', 'enter', 'exit', 'spring'];
 
 const modifyOpen = ({ eventChild = {}, eventParent = {}, presetChild = {}, presetParent = {}, target: inTarget, ...openRest }) => {
 	const parents = [eventParent, presetParent];
@@ -25,10 +25,7 @@ const modifyOpen = ({ eventChild = {}, eventParent = {}, presetChild = {}, prese
 
 	return {
 		...( parents.concat(children).find(a => !!Object.keys(a).length) || inTarget) && {
-			child: {
-				...childProps,
-				enter: [0,-50],
-			},
+			...childProps && { child: childProps },
 			parent: {
 				...parentProps,
 				...is.defined(n => animate(n,0), eventParent.gapX, presetParent.gapX, fontSize),
