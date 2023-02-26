@@ -3,7 +3,9 @@ import { is } from 'lal';
 const parentKeys = ['alignX', 'alignY', 'bottom', 'centerX', 'cornerX', 'cornerY', 'debug', 'height', 'padX', 'padY', 'right', 'top', 'width', 'x', 'y'];
 const childKeys = ['alignX', 'alignY', 'closeOutside', 'disableTint', 'enter', 'exit', 'spring'];
 
-const modifyOpen = ({ eventChild = {}, eventParent = {}, presetChild = {}, presetParent = {}, target: inTarget, ...openRest }) => {
+const modifyOpen = ({ eventConfig, preConfig, target: inTarget }) => {
+	const { child: presetChild = {}, parent: presetParent = {} } = preConfig || {};
+	const { child: eventChild = {}, parent: eventParent = {} } = eventConfig || {};
 	const parents = [eventParent, presetParent];
 	const children = [eventChild, presetChild];
 	const target = inTarget?.getBoundingClientRect() || {};
@@ -31,7 +33,6 @@ const modifyOpen = ({ eventChild = {}, eventParent = {}, presetChild = {}, prese
 				...is.defined(n => animate(n,0), eventParent.gapX, presetParent.gapX, fontSize),
 				...is.defined(n => animate(n,1), eventParent.gapY, presetParent.gapY, fontSize) 
 			},
-			...openRest,
 		}
 	};
 };

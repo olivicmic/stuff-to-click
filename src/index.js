@@ -30,7 +30,10 @@ const Body = ({ modalActive, ...rest }) => {
 	const onClosed = (oState) => console.log('closed');
 	const onOpened = (oState) => console.log('opened');
 	const { modals } = useOverlayContext();
-	const openSmile = ({ target }) => modals.open('smile',{ target });
+	const openSmile = ({ target }) => modals.open('smile',{ 
+		target,
+		tint: true,
+		onClosed: (e,j) => console.log('event onClosed',e,j) });
 
 	const selItems = [{
 		value: 'pizza',
@@ -79,7 +82,12 @@ const Body = ({ modalActive, ...rest }) => {
 
 const App = () => {
 	const layerState = { 
-		modals: useOverlays({ smile: { child: { enter: [500,200], alignX: 50, alignY: 50, closeOutside: true }, parent: { alignX: 50, alignY: 50 } }}),
+		modals: useOverlays({ smile: { 
+			initial: {bootY: true},
+			child: { enter: [500,200], alignX: 50, alignY: 50, closeOutside: true },
+			parent: { alignX: 50, alignY: 50 },
+			onOpened: e => console.log('preset onOpened',e)
+		}}),
 		popout: useOverlays(configPopouts)
 	};
 	const layers = [

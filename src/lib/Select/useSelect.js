@@ -22,9 +22,10 @@ export default function useSelect({ debug, id, name, onChange, set, valid, value
 			popout.open('picker',{
 				debug: 'select picker',
 				onFocus,
+				onOpened: setID,
 				initial: { focus, set, submit, value, index },
 				target
-			}, setID);
+			});
 		} else close(hostid);
 	};
 
