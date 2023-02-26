@@ -32,7 +32,7 @@ const Body = ({ modalActive, ...rest }) => {
 	const { modals } = useOverlayContext();
 	const openSmile = ({ target }) => modals.open('smile',{ 
 		target,
-		tint: true,
+		//tint: true,
 		onClosed: (e,j) => console.log('event onClosed',e,j) });
 
 	const selItems = [{
@@ -82,11 +82,12 @@ const Body = ({ modalActive, ...rest }) => {
 
 const App = () => {
 	const layerState = { 
-		modals: useOverlays({ smile: { 
-			initial: {bootY: true},
+		modals: useOverlays({ smile: {
 			child: { enter: [500,200], alignX: 50, alignY: 50, closeOutside: true },
-			parent: { alignX: 50, alignY: 50 },
-			onOpened: e => console.log('preset onOpened',e)
+			initial: {bootY: true},
+			lockLayer: true,
+			onOpened: e => console.log('preset onOpened',e),
+			parent: { alignX: 50, alignY: 50 }
 		}}),
 		popout: useOverlays(configPopouts)
 	};

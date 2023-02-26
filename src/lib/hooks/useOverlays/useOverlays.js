@@ -12,17 +12,21 @@ export default function useOverlays(presets = {}, debug) {
 	const [trash, trashSet] = useState(); // overlays that have animated out of view with data to be trashed
 	const [order, orderSet] = useState([]); // overlays visual ordering, with most recently selected at the end/top
 	const [tintTriggers, tintTriggersSet] = useState([]); // overlays which have enabled the tint
+	const [layerLock, layerLockSet] = useState(); // if true, no other overlays within this layer will open
 	const tint = !!tintTriggers.length; // true if any overlay within this layer is enabling tint
 	const [busy, busySet] = useBusy({});
 	const top = order[order.length - 1];
 
-	const add = ({ initial, tint, ...rest  }, toDo = n) => {
-		let overlayID = generateUnique({ charCount: 5 });
-		if (tint) tintTriggersSet([ ...tintTriggers, overlayID ]);
-		orderSet([ ...order, overlayID ]);
-		setItems([ ...items, { ...rest, overlayID }]);
-		dataSet({ ...data, [overlayID]: initial });
-		toDo(overlayID);
+	const add = ({ initial, lockLayer, tint, ...rest  }, toDo = n) => {
+		if (!layerLock) {
+			let overlayID = generateUnique({ charCount: 5 });
+			if (tint) tintTriggersSet([ ...tintTriggers, overlayID ]);
+			if (lockLayer) layerLockSet(true);
+			orderSet([ ...order, overlayID ]);
+			setItems([ ...items, { ...rest, lockLayer, overlayID }]);
+			dataSet({ ...data, [overlayID]: initial });
+			toDo(overlayID);
+		}
 	};
 
 	const open = (type, { target, ...setup }) => {
@@ -51,9 +55,10 @@ export default function useOverlays(presets = {}, debug) {
 
 	useEffect(() => {
 		if (trash) {
-			let { eventClosed, overlayID, preClosed } = trash;
+			let { lockLayer, eventClosed, overlayID, preClosed } = trash;
 			let newData = { ...data };
 			delete newData[overlayID];
+			if (lockLayer) layerLockSet();
 			if (preClosed) preClosed(overlayID, data[overlayID]);
 			if (eventClosed) eventClosed(overlayID, data[overlayID]);
 			orderSet(filterID([...order], overlayID));
