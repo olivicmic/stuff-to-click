@@ -26,6 +26,7 @@ export default function OverFrame({ autoBoundary, child, className, debug, enter
 		const edge = [alignPos(0) + dim[0], alignPos(1) + dim[1]];
 		const edgeCheck = ax => {
 			let winDiff = edge[ax] - host.win[ax];
+			if (debug) console.debug('OverFrame debug winDiff', off[ax], edge[ax], host.win[ax], winDiff );
 			if (off[ax] !== Math.max(winDiff,0)) {
 				offSet(off.map((item,i) => i === ax ? Math.max(winDiff,0) : item ));
 			}
