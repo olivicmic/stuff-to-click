@@ -20,13 +20,18 @@ export default function OverFrame({ autoBoundary, child, className, debug, enter
 		const dim = [mainRef?.current?.clientWidth || 0, mainRef?.current?.clientHeight || 0];
 		const mainPos = [mainRef?.current?.offsetLeft || 0, mainRef?.current?.offsetTop || 0];
 		const alignment = [child?.alignX, child?.alignY];
-		const alignPos = ax => mainPos[ax] - ( dim[ax] * ( .01 * alignment[ax] ));
-		const boo = [alignPos(0),alignPos(1)];
+		const alignPos = ax => (mainPos[ax] - ( dim[ax] * ( .01 * alignment[ax] ))) || 0;
 		const xy = [host.positions(0,0),host.positions(1,0)];
 		const edge = [alignPos(0) + dim[0], alignPos(1) + dim[1]];
 		const edgeCheck = ax => {
 			let winDiff = edge[ax] - host.win[ax];
-			if (debug) console.debug('OverFrame debug winDiff', off[ax], edge[ax], host.win[ax], winDiff );
+			if (debug) console.debug('OverFrame debug', { 
+				offAxis: off[ax], 
+				childAlignment: alignment[ax], 
+				anchorEdge: edge[ax], 
+				windowDimension: host.win[ax],
+				winDiff
+			} );
 			if (off[ax] !== Math.max(winDiff,0)) {
 				offSet(off.map((item,i) => i === ax ? Math.max(winDiff,0) : item ));
 			}
