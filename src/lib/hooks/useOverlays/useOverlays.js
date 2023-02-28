@@ -76,5 +76,5 @@ export default function useOverlays(presets = {}, debug) {
 	},[arrival, completed, data, layerLock, items, tintTriggers, trash, order]);
 
 
-	return { add, busy, busySet, clean, completed, currentSet, data, items, open, order, remove, tint, top, update };
+	return { add, busy, busySet, clean, completed, currentSet, data, items, open, order, remove, tint, tintTriggers, top, update };
 };

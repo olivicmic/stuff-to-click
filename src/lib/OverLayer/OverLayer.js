@@ -5,9 +5,9 @@ import { OverlayContext, OverModule } from '..';
 import './OverLayer.scss'
 
 export default function OverLayer({ layers = [], layerState, render: Render, renderProps, tintStyle, zBase = 1000, ...rest }) {
-	const [tinted, tintedSet] = useState([]);
+	const [tinted, tintedSet] = useState({});
 	const [overlayerBusy, overlayerBusySet] = useBusy();
-	const isTinted = !!tinted.length;
+	const isTinted = !!Object.keys(tinted).length;
 	const tintRef = useSpringRef();
 	const moduleRef = useSpringRef();
 	const tintTransition = useTransition(isTinted, {

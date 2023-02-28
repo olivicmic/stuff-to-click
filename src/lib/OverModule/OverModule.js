@@ -1,10 +1,25 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useBusy } from 'hangers';
 import { useTransition } from 'react-spring';
 import { OverFrame } from '..';
 
-export default function OverModule({ busy, debug, overlayerBusy, overLayerName, moduleRef, overlays, tinted, tintedSet = () => {}, ...rest }) {
-	const [moduleBusy, setBusy] = useBusy({ onRest: overlays.clean });
+export default function OverModule({ busy, debug, overlayerBusy, overLayerName, moduleRef, overlays, tinted = {}, tintedSet = () => {}, ...rest }) {
+	const [moduleBusy, setBusy] = useBusy({
+		onStart: (busy, item) => {
+			let tintLayer = tinted[overLayerName] || [];
+			if (overlays.completed.find(id => id === item.overlayID)) {
+				let newLayerTint = tintLayer.filter((ni,i) => ni !== item.overlayID);
+				let newTinted = { ...tinted };
+				delete newTinted[overLayerName];
+				if (!!newLayerTint.length) newTinted[overLayerName] = newLayerTint;
+				overlays.clean(busy, item);
+				tintedSet(newTinted);
+			} else if (overlays.tint) {
+				tintedSet({ ...tinted, [overLayerName]: [ ...tintLayer, item.overlayID ] });
+			}
+		},
+		onRest: overlays.clean
+	});
 	const overlayTransitions = useTransition(overlays.items, {
 		config: ({ child }) => child.spring || { tension: 150, friction: 14 },
 		from: { opacity: 0 },
@@ -28,13 +43,6 @@ export default function OverModule({ busy, debug, overlayerBusy, overLayerName, 
 			...overlayState
 		};
 	}
-
-	useEffect(() => {
-		if (!tinted.find(t => t === overLayerName) && overlays.tint && !!overlays.items.length ) {
-			tintedSet([ ...tinted, overLayerName ]);
-		}
-		else if (tinted.indexOf(overLayerName) > -1 && !overlays.items.length) tintedSet([]);
-	},[overLayerName, overlays, tinted, tintedSet]);
 
 	return overlayTransitions((style, overlay) => 
 		<OverFrame {...{ debug, overlays, style, ...overlaysProps(overlay), ...rest }}/>);

@@ -19,7 +19,7 @@ export default function OverFrame({ autoBoundary, child, className, debug, enter
 	useEffect(() => {
 		const dim = [mainRef?.current?.clientWidth || 0, mainRef?.current?.clientHeight || 0];
 		const mainPos = [mainRef?.current?.offsetLeft || 0, mainRef?.current?.offsetTop || 0];
-		const alignment = [child?.alignX, child?.alignY];
+		const alignment = [child?.alignX || 0, child?.alignY || 0 ];
 		const alignPos = ax => (mainPos[ax] - ( dim[ax] * ( .01 * alignment[ax] ))) || 0;
 		const xy = [host.positions(0,0),host.positions(1,0)];
 		const edge = [alignPos(0) + dim[0], alignPos(1) + dim[1]];
@@ -38,7 +38,7 @@ export default function OverFrame({ autoBoundary, child, className, debug, enter
 		};
 		edgeCheck(0);
 		edgeCheck(1, true);
-		if (debug) console.debug('OverFrame debug', host.positions(0,1), {boo, host, mainPos, xy, off, dim, edge });
+		if (debug) console.debug('OverFrame debug', host.positions(0,1), {host, mainPos, xy, off, dim, edge });
 	},[child, defined, debug, host, off]);
 
 	return <animated.div {...{ 
