@@ -3,9 +3,9 @@ import { generateUnique } from 'lal';
 import { useBusy } from 'hangers';
 import { modifyOpen } from '../..';
 import { configure, filterID } from './layerTools';
-const n = o => o;
 
 export default function useOverlays(presets = {}, debug) {
+	const [arrival, arrivalSet] = useState(); // new modals configs are place here, then added to items by useEffect below
 	const [items, setItems] = useState([]); // core overlay array, which includes live overlays and their base props
 	const [data, dataSet] = useState({}); // overlay data object corresponding to 'items' via overlay id keys
 	const [completed, completedSet] = useState([]); // overlays removed from 'items' animating out of view
@@ -17,25 +17,18 @@ export default function useOverlays(presets = {}, debug) {
 	const [busy, busySet] = useBusy({});
 	const top = order[order.length - 1];
 
-	const add = ({ initial, lockLayer, tint, ...rest  }, toDo = n) => {
-		if (!layerLock) {
-			let overlayID = generateUnique({ charCount: 5 });
-			if (tint) tintTriggersSet([ ...tintTriggers, overlayID ]);
-			if (lockLayer) layerLockSet(true);
-			orderSet([ ...order, overlayID ]);
-			setItems([ ...items, { ...rest, lockLayer, overlayID }]);
-			dataSet({ ...data, [overlayID]: initial });
-			toDo(overlayID);
-		}
-	};
+	const add = (config, toDo) => arrivalSet([config, toDo]);
 
-	const open = (type, { target, ...setup }) => {
-		let [preConfig, preModify, preOpened, preClosed, preset] = configure(presets[type] || {});
-		let [eventConfig, eventModify, eventOpened, eventClosed, event] = configure(setup || {});
+	const open = (type, inSetup) => {
+		let { target, ...event } = inSetup  || {};
+		let [preConfig, preModify, preOpened, preClosed, preDebug, preProps] = configure(presets[type] || {});
+		let [eventConfig, eventModify, eventOpened, eventClosed, eventDebug, eventProps] = configure(event || {});
 		let modify = preModify || eventModify || modifyOpen;
-		if (presets[type]) add(
-			{ ...preset, ...event, ...modify({ eventConfig, preConfig, target }), preClosed, eventClosed },
-			j => { eventOpened(j); preOpened(j); });
+		if (presets[type]) add({
+			...preProps,
+			...eventProps,
+			...modify({ debug: debug || preDebug || eventDebug, eventConfig, preConfig, target }), preClosed, eventClosed 
+		}, j => { eventOpened(j); preOpened(j); });
 	};
 	
 	const update = (id, d) => {
@@ -54,6 +47,19 @@ export default function useOverlays(presets = {}, debug) {
 	const clean = (busy, item) => !items.find((entry,i) => entry.overlayID === item.overlayID) && trashSet(item);
 
 	useEffect(() => {
+		if (arrival) {
+			let [{ initial, lockLayer, tint, ...arrivingItem }, toDo = () => {}] = arrival;
+			if (!layerLock) {
+				let overlayID = generateUnique({ charCount: 5 });
+				if (tint) tintTriggersSet([ ...tintTriggers, overlayID ]);
+				if (lockLayer) layerLockSet(true);
+				orderSet([ ...order, overlayID ]);
+				setItems([ ...items, { ...arrivingItem, lockLayer, overlayID }]);
+				dataSet({ ...data, [overlayID]: initial });
+				toDo(overlayID);
+			}
+			arrivalSet();
+		}
 		if (trash) {
 			let { lockLayer, eventClosed, overlayID, preClosed } = trash;
 			let newData = { ...data };
@@ -67,7 +73,7 @@ export default function useOverlays(presets = {}, debug) {
 			dataSet(newData);
 			trashSet();
 		}
-	},[completed, data, tintTriggers, trash, order]);
+	},[arrival, completed, data, layerLock, items, tintTriggers, trash, order]);
 
 
 	return { add, busy, busySet, clean, completed, currentSet, data, items, open, order, remove, tint, top, update };

@@ -1,4 +1,5 @@
 import AccHeader from './AccHeader';
+import Body from './Body';
 import ExampleSlide from './ExampleSlide';
 
-export { AccHeader, ExampleSlide };
+export { AccHeader, Body, ExampleSlide };
