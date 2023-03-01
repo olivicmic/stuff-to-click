@@ -54,7 +54,6 @@ export default function useLayer(layerName, mainTint = {}, presets = {}, debug) 
 				let tintLayer = mainTint.state[layerName] || [];
 				let overlayID = generateUnique({ charCount: 5 });
 				if (debug) console.log('useLayer arriving debug', { arrival, overlayID });
-				//if (tint) tintTriggersSet([ ...tintTriggers, overlayID ]);
 				if (tint) mainTint.set({ ...mainTint.state, [layerName]: [ ...tintLayer, overlayID ] });
 				if (lockLayer) layerLockSet(true);
 				orderSet([ ...order, overlayID ]);

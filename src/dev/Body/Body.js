@@ -5,7 +5,7 @@ import './Body.scss';
 import './sanitize.css';
 import 'sanitize.css/forms.css';
 
-export default function Body({ modalActive, ...rest }) {
+export default function Body({ style, ...rest }) {
 	const [apSt, setSt] = useState({
 		text: '',
 		password: '',
@@ -54,7 +54,7 @@ export default function Body({ modalActive, ...rest }) {
 		}
 	},[modals, modalDone]);
 
-	return  <div {...{ style: { ...modalActive && { position: 'fixed' } } }}>
+	return  <div {...{ style }}>
 		<h1>Stuff to Click</h1>
 		<div {...{ className: 'demo-block'}}>
 			<h3>Modals</h3>
