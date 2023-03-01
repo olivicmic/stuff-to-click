@@ -8,9 +8,9 @@ export default function OverLayer({ layers = [], layerState, render: Render, ren
 	const [overlayerBusy, overlayerBusySet] = useBusy();
 	const tintRef = useSpringRef();
 	const moduleRef = useSpringRef();
-	const tintTransition = useTransition(tint.isTinted, {
+	const tintTransition = useTransition(tint.active, {
 		config: {
-			easing: tint.isTinted ? easings.easeOutQuad : easings.easeInQuad,
+			easing: tint.active ? easings.easeOutQuad : easings.easeInQuad,
 			duration: 175
 		},
 		from: { opacity: 0 },
@@ -20,11 +20,11 @@ export default function OverLayer({ layers = [], layerState, render: Render, ren
 		...overlayerBusySet
 	});
 
-	useChain([tintRef, moduleRef], tint.isTinted ? [0,.25] : [0,0] );
+	useChain([tintRef, moduleRef], tint.active ? [0,.25] : [0,0] );
 
 	return <OverlayContext.Provider value={layerState}>
-		<Render { ...{ ...renderProps, ...tint.isTinted && { style: { position: 'fixed' } } } }/>
-		<div {...{ className: `stuff-overlays${ tint.isTinted ? ' stuff-over-active' : '' }`, style: { zIndex: zBase } }}>
+		<Render { ...{ ...renderProps, ...tint.active && { style: { position: 'fixed' } } } }/>
+		<div {...{ className: `stuff-overlays${ tint.active ? ' stuff-over-active' : '' }`, style: { zIndex: zBase } }}>
 			{ tintTransition((tinter, shade) => 
 				shade && <animated.div {...{ className: 'stuff-tint', style: { ...tinter, ...tintStyle} }} />) }
 			{ layers.map(({ overLayerName, ...layer }, key ) => 
