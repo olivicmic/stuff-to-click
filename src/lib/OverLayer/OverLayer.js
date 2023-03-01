@@ -4,7 +4,7 @@ import { useBusy } from 'hangers';
 import { OverlayContext, OverModule } from '..';
 import './OverLayer.scss'
 
-export default function OverLayer({ layers = [], layerState, render: Render, renderProps, tint, tintStyle, zBase = 1000, ...rest }) {
+export default function OverLayer({ layers = [], layerState, render: Render, renderProps, tint = {}, tintStyle, zBase = 1000, ...rest }) {
 	const [overlayerBusy, overlayerBusySet] = useBusy();
 	const tintRef = useSpringRef();
 	const moduleRef = useSpringRef();

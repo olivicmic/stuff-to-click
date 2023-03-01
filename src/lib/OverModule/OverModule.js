@@ -5,7 +5,6 @@ import { OverFrame } from '..';
 
 export default function OverModule({ busy, debug, overlayerBusy, moduleRef, overlays, ...rest }) {
 	const [moduleBusy, setBusy] = useBusy({
-		onStart: overlays.tinter,
 		onRest: overlays.clean
 	});
 	const overlayTransitions = useTransition(overlays.items, {
@@ -16,7 +15,6 @@ export default function OverModule({ busy, debug, overlayerBusy, moduleRef, over
 		ref: moduleRef,
 			...setBusy,
 	});
-	
 	const overlaysProps = ({ overlayID, ...overlayState }) => {
 		return {
 			overlay: {

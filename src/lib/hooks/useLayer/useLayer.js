@@ -11,7 +11,7 @@ export default function useLayer(layerName, mainTint = {}, presets = {}, debug) 
 	const [completed, completedSet] = useState([]); // overlays removed from 'items' animating out of view
 	const [trash, trashSet] = useState(); // overlays that have animated out of view with data to be trashed
 	const [order, orderSet] = useState([]); // overlays visual ordering, with most recently selected at the end/top
-	const [tintTriggers, tintTriggersSet] = useState([]); // overlays which have enabled the tint
+	const [tintTriggers] = useState([]); // overlays which have enabled the tint
 	const [layerLock, layerLockSet] = useState(); // if true, no other overlays within this layer will open
 	const [busy, busySet] = useBusy({});
 	const top = order[order.length - 1];
@@ -35,31 +35,27 @@ export default function useLayer(layerName, mainTint = {}, presets = {}, debug) 
 	const currentSet = inputID => orderSet([ ...filterID([...order], inputID), inputID]);
 
 	const remove = inputID => {
+		let newLayerTint = (mainTint.state[layerName] || []).filter((ni,i) => ni !== inputID);
+		let newTinted = { ...mainTint.state };
+		delete newTinted[layerName];
+		if (!!newLayerTint.length) newTinted[layerName] = newLayerTint;
+
+		mainTint.set(newTinted);
 		setItems(filterID([...items], inputID));
 		completedSet([...completed, ...inputID && [inputID] ]);
-	}
+	};
 
 	const clean = (busy, item) => !items.find((entry,i) => entry.overlayID === item.overlayID) && trashSet(item);
-
-	const tinter = (busy, item) => {
-		let tintLayer = mainTint.state[layerName] || [];
-		if (completed.find(id => id === item.overlayID)) {
-			let newLayerTint = tintLayer.filter((ni,i) => ni !== item.overlayID);
-			let newTinted = { ...mainTint.state };
-			delete newTinted[layerName];
-			if (!!newLayerTint.length) newTinted[layerName] = newLayerTint;
-			mainTint.set(newTinted);
-		} else if (!!tintTriggers.length) {
-			mainTint.set({ ...mainTint.state, [layerName]: [ ...tintLayer, item.overlayID ] });
-		}
-	};
 
 	useEffect(() => {
 		if (arrival) {
 			let [{ initial, lockLayer, tint, ...arrivingItem }, toDo = () => {}] = arrival;
 			if (!layerLock) {
+				let tintLayer = mainTint.state[layerName] || [];
 				let overlayID = generateUnique({ charCount: 5 });
-				if (tint) tintTriggersSet([ ...tintTriggers, overlayID ]);
+				if (debug) console.log('useLayer arriving debug', { arrival, overlayID });
+				//if (tint) tintTriggersSet([ ...tintTriggers, overlayID ]);
+				if (tint) mainTint.set({ ...mainTint.state, [layerName]: [ ...tintLayer, overlayID ] });
 				if (lockLayer) layerLockSet(true);
 				orderSet([ ...order, overlayID ]);
 				setItems([ ...items, { ...arrivingItem, lockLayer, overlayID }]);
@@ -77,14 +73,12 @@ export default function useLayer(layerName, mainTint = {}, presets = {}, debug) 
 			if (eventClosed) eventClosed(overlayID, data[overlayID]);
 			orderSet(filterID([...order], overlayID));
 			completedSet(filterID([...completed], overlayID));
-			tintTriggersSet(filterID([...tintTriggers], overlayID));
 			dataSet(newData);
 			trashSet();
 		}
-	},[arrival, completed, data, layerLock, items, tintTriggers, trash, order]);
-
+	},[arrival, completed, data, debug, layerLock, layerName, mainTint, items, tintTriggers, trash, order]);
 
 	return {
-		[layerName]: { add, busy, busySet, clean, completed, currentSet, data, items, layerName, open, order, remove, tinter, tintTriggers, top, update }
+		[layerName]: { add, busy, busySet, clean, completed, currentSet, data, items, layerName, open, order, remove, tintTriggers, top, update }
 	};
 };
