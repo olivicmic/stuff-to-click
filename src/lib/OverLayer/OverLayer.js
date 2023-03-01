@@ -23,8 +23,11 @@ export default function OverLayer({ layers = [], layerState, render: Render, ren
 	useChain([tintRef, moduleRef], tint.active ? [0,.25] : [0,0] );
 
 	return <OverlayContext.Provider value={layerState}>
-		<Render { ...{ ...renderProps, ...tint.active && { style: { position: 'fixed' } } } }/>
-		<div {...{ className: `stuff-overlays${ tint.active ? ' stuff-over-active' : '' }`, style: { zIndex: zBase } }}>
+		<Render { ...{ ...renderProps, ...tint.style && { style: tint.style } } }/>
+		<div {...{ 
+			className: `stuff-overlays${ tint.active ? ' stuff-over-active' : '' }`, 
+			style: { ...tint.style, zIndex: zBase }
+		}}>
 			{ tintTransition((tinter, shade) => 
 				shade && <animated.div {...{ className: 'stuff-tint', style: { ...tinter, ...tintStyle} }} />) }
 			{ layers.map(({ overLayerName, ...layer }, key ) => 

@@ -8,7 +8,7 @@ export default function OverModule({ busy, debug, overlayerBusy, moduleRef, over
 		onRest: overlays.clean
 	});
 	const overlayTransitions = useTransition(overlays.items, {
-		config: ({ child }) => child.spring || { tension: 150, friction: 14 },
+		config: ({ child = {} }) => child?.spring || { tension: 150, friction: 14 },
 		from: { opacity: 0 },
 		enter: { opacity: 1 },
 		leave: { opacity: 0 },
