@@ -1,7 +1,8 @@
 import useHost from './useHost';
+import useLayer from './useLayer';
 import useOverlayContext from './useOverlayContext';
-import useOverlays from './useOverlays';
+import useTint from './useTint';
 import useSlides from './useSlides';
 import useSlideshow from './useSlideshow';
 
-export { useHost, useOverlayContext, useOverlays, useSlides, useSlideshow };
+export { useHost, useLayer, useOverlayContext, useSlides, useSlideshow, useTint };

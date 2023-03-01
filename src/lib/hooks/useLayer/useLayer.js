@@ -4,7 +4,7 @@ import { useBusy } from 'hangers';
 import { modifyOpen } from '../..';
 import { configure, filterID } from './layerTools';
 
-export default function useOverlays(presets = {}, debug) {
+export default function useLayer(layerName, mainTint = {}, presets = {}, debug) {
 	const [arrival, arrivalSet] = useState(); // new modals configs are place here, then added to items by useEffect below
 	const [items, setItems] = useState([]); // core overlay array, which includes live overlays and their base props
 	const [data, dataSet] = useState({}); // overlay data object corresponding to 'items' via overlay id keys
@@ -13,7 +13,6 @@ export default function useOverlays(presets = {}, debug) {
 	const [order, orderSet] = useState([]); // overlays visual ordering, with most recently selected at the end/top
 	const [tintTriggers, tintTriggersSet] = useState([]); // overlays which have enabled the tint
 	const [layerLock, layerLockSet] = useState(); // if true, no other overlays within this layer will open
-	const tint = !!tintTriggers.length; // true if any overlay within this layer is enabling tint
 	const [busy, busySet] = useBusy({});
 	const top = order[order.length - 1];
 
@@ -31,11 +30,7 @@ export default function useOverlays(presets = {}, debug) {
 		}, j => { eventOpened(j); preOpened(j); });
 	};
 	
-	const update = (id, d) => {
-		if (top === id) {
-			dataSet({ ...data, [id]: { ...data[id], ...d, } })
-		}
-	};
+	const update = (id, d) => { if (top === id) { dataSet({ ...data, [id]: { ...data[id], ...d, } }) }};
 
 	const currentSet = inputID => orderSet([ ...filterID([...order], inputID), inputID]);
 
@@ -45,6 +40,19 @@ export default function useOverlays(presets = {}, debug) {
 	}
 
 	const clean = (busy, item) => !items.find((entry,i) => entry.overlayID === item.overlayID) && trashSet(item);
+
+	const tinter = (busy, item) => {
+		let tintLayer = mainTint.state[layerName] || [];
+		if (completed.find(id => id === item.overlayID)) {
+			let newLayerTint = tintLayer.filter((ni,i) => ni !== item.overlayID);
+			let newTinted = { ...mainTint.state };
+			delete newTinted[layerName];
+			if (!!newLayerTint.length) newTinted[layerName] = newLayerTint;
+			mainTint.set(newTinted);
+		} else if (!!tintTriggers.length) {
+			mainTint.set({ ...mainTint.state, [layerName]: [ ...tintLayer, item.overlayID ] });
+		}
+	};
 
 	useEffect(() => {
 		if (arrival) {
@@ -76,5 +84,7 @@ export default function useOverlays(presets = {}, debug) {
 	},[arrival, completed, data, layerLock, items, tintTriggers, trash, order]);
 
 
-	return { add, busy, busySet, clean, completed, currentSet, data, items, open, order, remove, tint, tintTriggers, top, update };
+	return {
+		[layerName]: { add, busy, busySet, clean, completed, currentSet, data, items, layerName, open, order, remove, tinter, tintTriggers, top, update }
+	};
 };

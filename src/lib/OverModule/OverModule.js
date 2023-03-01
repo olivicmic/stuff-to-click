@@ -3,21 +3,9 @@ import { useBusy } from 'hangers';
 import { useTransition } from 'react-spring';
 import { OverFrame } from '..';
 
-export default function OverModule({ busy, debug, overlayerBusy, overLayerName, moduleRef, overlays, tinted = {}, tintedSet = () => {}, ...rest }) {
+export default function OverModule({ busy, debug, overlayerBusy, moduleRef, overlays, ...rest }) {
 	const [moduleBusy, setBusy] = useBusy({
-		onStart: (busy, item) => {
-			let tintLayer = tinted[overLayerName] || [];
-			if (overlays.completed.find(id => id === item.overlayID)) {
-				let newLayerTint = tintLayer.filter((ni,i) => ni !== item.overlayID);
-				let newTinted = { ...tinted };
-				delete newTinted[overLayerName];
-				if (!!newLayerTint.length) newTinted[overLayerName] = newLayerTint;
-				overlays.clean(busy, item);
-				tintedSet(newTinted);
-			} else if (overlays.tint) {
-				tintedSet({ ...tinted, [overLayerName]: [ ...tintLayer, item.overlayID ] });
-			}
-		},
+		onStart: overlays.tinter,
 		onRest: overlays.clean
 	});
 	const overlayTransitions = useTransition(overlays.items, {

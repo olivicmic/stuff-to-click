@@ -12,7 +12,7 @@ import Select from './Select';
 import Selection from './Selection';
 import Slide from './Slide';
 import Slideshow from './Slideshow';
-import { useOverlayContext, useOverlays, useSlideshow } from './hooks';
+import { useLayer, useOverlayContext, useSlideshow, useTint } from './hooks';
 import { configPopouts, modifyOpen } from './utilities';
 
 export {
@@ -32,7 +32,8 @@ export {
 	Selection,
 	Slide,
 	Slideshow,
+	useLayer,
 	useOverlayContext,
-	useOverlays,
-	useSlideshow
+	useSlideshow,
+	useTint
 };
