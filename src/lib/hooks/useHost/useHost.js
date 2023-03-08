@@ -14,14 +14,15 @@ export default function useHost({ autoBoundary = 0, enter, exit, parent }) {
 		const setSpawn = ax => Math.min((origin[ax] || 0) - ((padding[ax] / 2)|| 0), win[ax] - autoBoundary);
 		const xy = [setSpawn(0),setSpawn(1)];
 		const orient = ax => (xy[ax] + (size[ax] / 2)) > (win[ax] * [.75,.66][ax]) ? 1 : 0;
+		const orientation = [orient(0),orient(1)];
 		const gap = [parent?.gapX || 0, parent?.gapY || 0];
-		const hostAlign = ax => size[ax] * (.01 * alignment[ax]);
-		const edge = ax => xy[ax] + hostAlign(ax) + gap[ax];
+		const hostAlign = ax => size[ax] * ( orientation[ax] ? 1 - (.01 * alignment[ax]) : (.01 * alignment[ax]) );
+		const edge = ax => xy[ax] + hostAlign(ax) + ( orientation[ax] ? -gap[ax] : gap[ax] );
 
 		return {
 			alignment,
 			gap,
-			orientation: [orient(0),orient(1)],
+			orientation,
 			positions: (ax, fl) => !fl ? edge(ax) : win[ax] - edge(ax),
 			size,
 			win,
