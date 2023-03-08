@@ -18,7 +18,7 @@ export default function useHost({ autoBoundary = 0, enter, exit, parent }) {
 		const hostAlign = ax => size[ax] * (.01 * alignment[ax]);
 		const positions = (ax, fl) => !fl ? 
 			xy[ax] + hostAlign(ax) + gap[ax] :
-			xy[ax] - win[ax] - hostAlign(ax) - gap[ax];
+			win[ax] - (xy[ax] + hostAlign(ax) + gap[ax]);
 
 		return {
 			alignment,
