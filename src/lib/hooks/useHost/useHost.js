@@ -16,15 +16,13 @@ export default function useHost({ autoBoundary = 0, enter, exit, parent }) {
 		const orient = ax => (xy[ax] + (size[ax] / 2)) > (win[ax] * [.75,.66][ax]) ? 1 : 0;
 		const gap = [parent?.gapX || 0, parent?.gapY || 0];
 		const hostAlign = ax => size[ax] * (.01 * alignment[ax]);
-		const positions = (ax, fl) => !fl ? 
-			xy[ax] + hostAlign(ax) + gap[ax] :
-			win[ax] - (xy[ax] + hostAlign(ax) + gap[ax]);
+		const edge = ax => xy[ax] + hostAlign(ax) + gap[ax];
 
 		return {
 			alignment,
 			gap,
 			orientation: [orient(0),orient(1)],
-			positions,
+			positions: (ax, fl) => !fl ? edge(ax) : win[ax] - edge(ax),
 			size,
 			win,
 			xy,

@@ -10,7 +10,7 @@ export default function OverFrame({ autoBoundary, child, className, debug, enter
 	const mainRef = useRef();
 	const host = useHost({ autoBoundary, enter, exit, parent });
 	const definedBounds = definedZero(autoBoundary);
-	const setPos = (ax, fl = 0) => `${(host.positions(ax,fl) || 0) + off[ax] + host.gap[ax]}px`;
+	const setPos = (ax, fl = 0) => `${(host.positions(ax,fl) || 0) + off[ax]}px`;
 	const setTransform  = (step, axis)  => ((1 - step) * (overlay.phase ? 
 		defined(child?.exit?.[axis],0) : defined(child?.enter?.[axis],0)) * (host.orientation[axis] ? -1 : 1 ));
 	const idName = 'over-frame-id-' + overlay.id;
