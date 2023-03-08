@@ -7,6 +7,7 @@ const configure =  ({
 	debug: d,
 	...obj
 }) => [{ child, parent }, m, o, c, d, obj];
+const n = o => o;
 
 const filterID = (arr, inputID) => arr.filter((overlay,i) => (overlay?.overlayID || overlay) !== inputID);
-export { configure, filterID };
+export { configure, filterID, n };

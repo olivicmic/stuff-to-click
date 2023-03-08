@@ -3,6 +3,7 @@ import { animated } from 'react-spring';
 import { useInOut } from 'hangers';
 import { is, makeClasses } from 'lal';
 import { useHost } from '../hooks';
+import mapPos from './mapPos';
 
 export default function OverFrame({ autoBoundary, child, className, debug, enter, exit, overlay, overlays, parent, style, type: Type, zBase = 0, ...rest }) {
 	const { definedZero, defined } = is;
@@ -10,10 +11,12 @@ export default function OverFrame({ autoBoundary, child, className, debug, enter
 	const mainRef = useRef();
 	const host = useHost({ autoBoundary, enter, exit, parent });
 	const definedBounds = definedZero(autoBoundary);
-	const setPos = (ax, fl = 0) => `${(host.positions(ax,fl) || 0) + off[ax]}px`;
+	const setPos = (ax, fl = 0) => `${host.positions(ax,fl)}px`;
 	const setTransform  = (step, axis)  => ((1 - step) * (overlay.phase ? 
 		defined(child?.exit?.[axis],0) : defined(child?.enter?.[axis],0)) * (host.orientation[axis] ? -1 : 1 ));
 	const idName = 'over-frame-id-' + overlay.id;
+
+	if (debug) console.debug('OverFrame base debug', mapPos(host.positions, setPos), {host, off });
 
 	useInOut({ debug, boundary: idName, disabled: !child?.closeOutside, onOut: overlay.close });
 	useEffect(() => {
@@ -25,7 +28,7 @@ export default function OverFrame({ autoBoundary, child, className, debug, enter
 		const edge = [alignPos(0) + dim[0], alignPos(1) + dim[1]];
 		const edgeCheck = ax => {
 			let winDiff = edge[ax] - host.win[ax];
-			if (debug) console.debug('OverFrame debug', { 
+			if (debug) console.debug('OverFrame edgeCheck debug', { 
 				offAxis: off[ax], 
 				childAlignment: alignment[ax], 
 				anchorEdge: edge[ax], 
@@ -36,9 +39,9 @@ export default function OverFrame({ autoBoundary, child, className, debug, enter
 				offSet(off.map((item,i) => i === ax ? Math.max(winDiff,0) : item ));
 			}
 		};
+		if (debug) console.debug('OverFrame off adjust debug', {host, mainPos, xy, off, dim, edge });
 		edgeCheck(0);
 		edgeCheck(1, true);
-		if (debug) console.debug('OverFrame debug', host.positions(0,1), {host, mainPos, xy, off, dim, edge });
 	},[child, defined, debug, host, off]);
 
 	return <animated.div {...{ 

@@ -1,4 +1,4 @@
 import configPopouts from './configPopouts';
-import modifyOpen from './modifyOpen';
+import positionOverlay from './positionOverlay';
 
-export { configPopouts, modifyOpen };
+export { configPopouts, positionOverlay };

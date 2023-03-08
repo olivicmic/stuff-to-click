@@ -44,7 +44,7 @@ export default function Body({ style, ...rest }) {
 
 	useEffect(() => {
 		if (!modalDone) {
-			console.log('🐤', modalDone);
+			//console.log('🐤', modalDone);
 			modals.open('smile',{
 				tint: true,
 				debug: true, 

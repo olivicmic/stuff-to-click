@@ -3,7 +3,7 @@ import { is } from 'lal';
 const parentKeys = ['alignX', 'alignY', 'bottom', 'centerX', 'cornerX', 'cornerY', 'debug', 'height', 'padX', 'padY', 'right', 'top', 'width', 'x', 'y'];
 const childKeys = ['alignX', 'alignY', 'closeOutside', 'disableTint', 'enter', 'exit', 'spring'];
 
-const modifyOpen = ({ debug, eventConfig, preConfig, target: inTarget }) => {
+const positionOverlay = ({ debug, eventConfig, preConfig, target: inTarget, ...rest }) => {
 	const { child: presetChild = {}, parent: presetParent = {} } = preConfig || {};
 	const { child: eventChild = {}, parent: eventParent = {} } = eventConfig || {};
 	const parents = [eventParent, presetParent];
@@ -25,9 +25,10 @@ const modifyOpen = ({ debug, eventConfig, preConfig, target: inTarget }) => {
 	const multiply = ['gapXMultiply','gapYMultiply'];
 	const animate = (n,i) =>({ [gap[i]]: n * is.defined(eventParent[multiply[i]], presetParent[multiply[i]], 0) });
 
-	if (debug) console.debug('modifyOpen debug',{ debug, childProps, parentProps });
+	if (debug) console.debug('positionOverlay debug',{ debug, childProps, parentProps });
 
 	return {
+		...rest,
 		...( parents.concat(children).find(a => !!Object.keys(a).length) || inTarget) && {
 			...childProps && { child: childProps },
 			parent: {
@@ -40,4 +41,4 @@ const modifyOpen = ({ debug, eventConfig, preConfig, target: inTarget }) => {
 	};
 };
 
-export default modifyOpen;
+export default positionOverlay;

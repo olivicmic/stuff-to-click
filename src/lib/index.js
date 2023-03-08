@@ -13,7 +13,7 @@ import Selection from './Selection';
 import Slide from './Slide';
 import Slideshow from './Slideshow';
 import { useLayer, useOverlayContext, useSlideshow, useTint } from './hooks';
-import { configPopouts, modifyOpen } from './utilities';
+import { configPopouts, positionOverlay } from './utilities';
 
 export {
 	Accordian,
@@ -22,12 +22,12 @@ export {
 	DragSlider,
 	Input,
 	InputWrap,
-	modifyOpen,
 	OverFrame,
 	OverlayContext,
 	OverLayer,
 	OverModule,
 	Picker,
+	positionOverlay,
 	Select,
 	Selection,
 	Slide,
