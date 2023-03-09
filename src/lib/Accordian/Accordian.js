@@ -19,15 +19,14 @@ export default function Accordian({
 	title = '',
 	...rest
 }) {
-	let defaultHeight = 0;
 	const [busy, statusControls] = useBusy();
 	const [expanded, toggle] = useState(opened);
 	const [updated, setUpdated] = useState(false);
 	const [switched, setSwitched] = useState(false);
-	const [height, setHeight] = useState(defaultHeight);
+	const { height, ref } = useResizeDetector();
 	const expand = useSpring({
 		config: { friction: 50, tension: 350 },
-		...( !expanded ? { height: 0 } : updated ? { height } : {} : {} ),
+		...( !expanded ? { height: 0 } : { height } ),
 		...statusControls
 	});
 
@@ -52,12 +51,6 @@ export default function Accordian({
 			onClosed(true);
 		};
 	},[expanded, onClosed, onOpened, switched]);
-
-	const { height: newHeight, ref } = useResizeDetector();
-
-	useEffect(() => {
-		if (height !== newHeight) setHeight(newHeight);
-	}, [height, newHeight]);
 
 	const childProps = { expanded, onClick, title, ...rest };
 
