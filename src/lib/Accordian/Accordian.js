@@ -1,6 +1,7 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useBusy } from 'hangers';
 import { useSpring, animated }  from 'react-spring';
+import { useResizeDetector } from 'react-resize-detector';
 import './Accordian.scss'
 
 export default function Accordian({ 
@@ -24,7 +25,6 @@ export default function Accordian({
 	const [updated, setUpdated] = useState(false);
 	const [switched, setSwitched] = useState(false);
 	const [height, setHeight] = useState(defaultHeight);
-	const mainRef = useRef();
 	const expand = useSpring({
 		config: { friction: 50, tension: 350 },
 		...( !expanded ? { height: 0 } : updated ? { height } : {} : {} ),
@@ -53,10 +53,11 @@ export default function Accordian({
 		};
 	},[expanded, onClosed, onOpened, switched]);
 
+	const { height: newHeight, ref } = useResizeDetector();
+
 	useEffect(() => {
-		const newHeight = mainRef?.current?.clientHeight || 0;
 		if (height !== newHeight) setHeight(newHeight);
-	}, [height, mainRef]);
+	}, [height, newHeight]);
 
 	const childProps = { expanded, onClick, title, ...rest };
 
@@ -65,7 +66,7 @@ export default function Accordian({
 			{ Header ? <Header { ...childProps} /> : '' }
 		</header>
 		{ children ? <animated.div {...{ className: `stuff-accordian-body${ busy ? ' accordian-busy' : ''}${ !expanded ? ' accordian-closed' : ''}`, style: expand }} >
-				<div {...{ className: 'stuff-accordian-content', ref: mainRef }}>
+				<div {...{ className: 'stuff-accordian-content', ref }}>
 					<hr className='stuff-accordian-seperator'/>
 					{ children }
 					<footer className='stuff-accordian-footer'>

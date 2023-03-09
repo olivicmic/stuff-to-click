@@ -1,6 +1,6 @@
 {
   "name": "stuff-to-click",
-  "version": "5.0.17",
+  "version": "5.0.18",
   "description": "Experimental React components by vics.pics",
   "author": "olivicmic",
   "license": "MIT",
@@ -46,6 +46,7 @@
     "hangers": "^3.0.12",
     "lal": "^7.0.3",
     "react-range": "^1.8.14",
+    "react-resize-detector": "^8.0.4",
     "react-spring": "^9.6.1",
     "sass": "^1.58.3"
   }
