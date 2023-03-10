@@ -18,11 +18,11 @@ const App = () => {
 			onOpened: e => console.log('preset onOpened',e),
 			parent: { alignX: 50, alignY: 50 }
 		}}),
-		...useLayer('popout', tint, configPopouts({}))
+		...useLayer('popouts', tint, configPopouts({}))
 	};
 	const layers = [
 		{ overLayerName: 'modals', type: Smile },
-		{ overLayerName: 'popout', type: Popout }
+		{ overLayerName: 'popouts', type: Popout }
 	];
 	return <OverLayer {...{ layers, layerState, render: Body, tint }}/>;
 };

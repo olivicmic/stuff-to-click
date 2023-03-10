@@ -4,22 +4,22 @@ import useKeySelect from './useKeySelect';
 import useSelectState from './useSelectState';
 
 export default function useSelect({ debug, id, name, onChange, set, valid, value }) {
-	const { popout } = useOverlayContext();
+	const { popouts } = useOverlayContext();
 	const [input, inputRef] = useStateRef();
 	const { active, hostid, index, setActive, setID, setIndex, valueName } = useSelectState(value, set);
 	const count = set.length;
 	const onFocus = () => { input.focus && input.focus() };
-	const setIndices = i => { popout.update(hostid, { index: i }); setIndex(i); };
-	const close = targetID => { setActive(false); popout.remove(targetID || hostid); setIndex(-1); };
+	const setIndices = i => { popouts.update(hostid, { index: i }); setIndex(i); };
+	const close = targetID => { setActive(false); popouts.remove(targetID || hostid); setIndex(-1); };
 	const submit = ({ target: { name: n, value: y }}) => {
 		onChange({ target: { ...set[y], count, name, selectIndex: set.indexOf(set[y]) }}); close(n); };
-	const keySubmit = y => { popout.update(hostid, { ...set[y], index: y }); submit({ target: { name: hostid, value: y}}); };
+	const keySubmit = y => { popouts.update(hostid, { ...set[y], index: y }); submit({ target: { name: hostid, value: y}}); };
 
 	const open = ({ target }) => {
 		if (!active) {
 			setActive(true);
 
-			popout.open('picker',{
+			popouts.open('picker',{
 				debug: 'select picker',
 				onFocus,
 				onOpened: setID,
