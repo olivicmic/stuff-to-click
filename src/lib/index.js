@@ -8,6 +8,7 @@ import OverlayContext from './OverlayContext';
 import OverLayer from './OverLayer';
 import OverModule from './OverModule';
 import Picker from './Picker';
+import Popout from './Popout';
 import Select from './Select';
 import Selection from './Selection';
 import Slide from './Slide';
@@ -27,6 +28,7 @@ export {
 	OverLayer,
 	OverModule,
 	Picker,
+	Popout,
 	positionOverlay,
 	Select,
 	Selection,

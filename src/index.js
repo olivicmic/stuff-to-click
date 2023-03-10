@@ -1,6 +1,6 @@
 import React from 'react';
 import { createRoot } from 'react-dom/client';
-import { configPopouts, OverLayer, Picker, useLayer, useTint } from './lib';
+import { configPopouts, OverLayer, Popout, useLayer, useTint } from './lib';
 import { Body } from './dev';
 
 const Smile = ({ mainRef, style, ...rest }) => {
@@ -18,11 +18,11 @@ const App = () => {
 			onOpened: e => console.log('preset onOpened',e),
 			parent: { alignX: 50, alignY: 50 }
 		}}),
-		...useLayer('popout', tint, configPopouts)
+		...useLayer('popout', tint, configPopouts({}))
 	};
 	const layers = [
 		{ overLayerName: 'modals', type: Smile },
-		{ overLayerName: 'popout', type: Picker }
+		{ overLayerName: 'popout', type: Popout }
 	];
 	return <OverLayer {...{ layers, layerState, render: Body, tint }}/>;
 };
