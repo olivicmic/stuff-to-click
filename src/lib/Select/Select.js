@@ -3,18 +3,18 @@ import { InputWrap, Selection } from '..';
 import useSelect from './useSelect';
 import './Select.scss'
 
-export default function Select({ debug, disabled, name, id, onChange, tabIndex, value, set = [], ...rest }) {
-	const hiddenList = set && set.map((item,i) => <option value={item.value} key={i}>{item.label}</option>);
-	const { keyInput, wrapProps } = useSelect({ debug, id, name, onChange, set, value });
+export default function Select({ debug, disabled, name, id, onChange, tabIndex, value, options = [], ...rest }) {
+	const hiddenList = options && options.map((item,i) => <option value={item.value} key={i}>{item.label}</option>);
+	const { keyInput, wrapProps } = useSelect({ debug, id, name, onChange, options, value });
 	const attrSet = { disabled, id, name, tabIndex, value };
 
-	return <React.Fragment>
-		<InputWrap { ...{ ...rest, ...wrapProps, disabled, name, id, tabIndex, value, set, type: 'select' }} dropdown component={( comProps ) => <React.Fragment>
+	return <>
+		<InputWrap { ...{ ...rest, ...wrapProps, disabled, name, id, tabIndex, value, type: 'select' }} dropdown component={comProps => <>
 			<Selection {...{...attrSet, ...comProps, onKeyDown: keyInput, onKeyUp: keyInput }} />
 			<select {...{ disabled, name, onChange, tabIndex, value, key: 'native'}} >
 				<option value={null} disabled={true}> </option>
-				{hiddenList}
+				{ hiddenList }
 			</select>
-		</React.Fragment > } />
-	</React.Fragment >
+		</> } />
+	</>
 };

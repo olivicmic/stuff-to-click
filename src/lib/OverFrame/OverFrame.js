@@ -16,7 +16,7 @@ export default function OverFrame({ autoBoundary, child, className, debug, enter
 		defined(child?.exit?.[axis],0) : defined(child?.enter?.[axis],0)) * (host.orientation[axis] ? -1 : 1 ));
 	const idName = 'over-frame-id-' + overlay.id;
 
-	if (debug) console.debug('OverFrame base debug', mapPos(host.positions, setPos), {host, off });
+	if (debug) console.debug('OverFrame base debug', mapPos(host.positions, setPos).flat(), {host, off });
 
 	useInOut({ debug, boundary: idName, disabled: !child?.closeOutside, onOut: overlay.close });
 	useEffect(() => {

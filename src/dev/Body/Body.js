@@ -18,7 +18,10 @@ export default function Body({ style, ...rest }) {
 		food: ''
 	});
 	const [modalDone, modalDoneSet] = useState();
-	const onChange = (e) => {console.log(e.target.name); setSt({ ...apSt, [e.target.name]: e.target.value})};
+	const onChange = ({ target }) => {
+		console.log(target.name, target.value);
+		setSt({ ...apSt, [target.name]: target.value})
+	};
 	const opacityChange = ({ target }) => { console.log(target); setSt({ ...apSt, opacity: target.value}); };
 	const things = ['Apple','Banana','carrot'];
 	const slides = things.map((thing, i) => ({ body: ExampleSlide, value: thing }));
@@ -31,7 +34,7 @@ export default function Body({ style, ...rest }) {
 		//tint: true,
 		onClosed: (e,j) => console.log('event onClosed',e,j) });
 
-	const selItems = [{
+	const options = [{
 		value: 'pizza',
 		label: 'Pizza'
 	},{
@@ -47,7 +50,7 @@ export default function Body({ style, ...rest }) {
 			//console.log('🐤', modalDone);
 			modals.open('smile',{
 				tint: true,
-				debug: true, 
+				// debug: true, 
 				parent: { x: window.innerWidth + 80, y: window.innerHeight + 80 }
 			});
 			modalDoneSet(true);
@@ -62,7 +65,7 @@ export default function Body({ style, ...rest }) {
 		</div>
 		<div {...{ className: 'demo-block'}}>
 			<h3>Select</h3>
-			<Select {...{ value: apSt.food, onChange, name: 'food', label: 'Food', set: selItems }} />
+			<Select {...{ value: apSt.food, onChange, name: 'food', label: 'Food', options }} />
 		</div>
 		<div {...{ className: 'demo-block'}}>
 			<h3>Input</h3>

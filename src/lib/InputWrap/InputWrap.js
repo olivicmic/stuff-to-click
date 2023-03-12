@@ -1,14 +1,14 @@
-import React from "react";
+import React from 'react';
 import { useSpring, animated, easings } from 'react-spring';
 import { useHover } from 'hangers';
 import useStuffClasses from './useStuffClasses';
 import './InputWrap.scss';
 
-export default function InputWrap({ bar = {}, barFade, className, component, events, focus, debug, dropdown, id, inputRef, label, name, onFocus, required, set = [], style, tabIndex = 0, valid, value, valueName, type, ...rest }) {
+export default function InputWrap({ bar = {}, barFade, className, component, events, focus, debug, dropdown, id, inputRef, label, labelLock, name, onFocus, required, style, tabIndex = 0, valid, value, valueName, type, ...rest }) {
 	const [hover, setHover] = useHover();
 	const expand = useSpring({
 		config: { mass: 1.75, tension: 300, friction: 25 },
-		bottom: `${ value || value === 0 || focus ? 1.5 : 0}em`
+		bottom: `${ value || value === 0 || focus ? 1.5 : (!labelLock && hover) ? .5 : 0}em`
 	});
 	const highlight = useSpring({
 		config: { duration: 250, easing: easings.easeInOutQuad },

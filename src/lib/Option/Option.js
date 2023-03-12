@@ -19,7 +19,7 @@ export default function Option({ opacity, overlay, position, index, item, click,
 
 	const itemProps = { 
 		...hoverEvents,
-		onClick: () => !overlay.busy && click(position),
+		onClick: () => !overlay.busy && click(item.value),
 		value: item.value,
 	};
 

@@ -22,7 +22,7 @@ export default function useLayer(layerName, mainTint = {}, presets = {}, debug) 
 		let { target, ...event } = inSetup  || {};
 		let [preConfig, preModify = n, preOpened, preClosed, preDebug, preProps] = configure(presets[type] || {});
 		let [eventConfig, eventModify = n, eventOpened, eventClosed, eventDebug, eventProps] = configure(event || {});
-		if (presets[type]) add(positionOverlay(preModify(eventModify({
+		if (presets[type]) add(positionOverlay(eventModify(preModify({
 			...preProps,
 			...eventProps,
 			debug: debug || preDebug || eventDebug,
@@ -45,7 +45,7 @@ export default function useLayer(layerName, mainTint = {}, presets = {}, debug) 
 			if (!layerLock) {
 				let tintLayer = mainTint.state[layerName] || [];
 				let overlayID = generateUnique({ charCount: 5 });
-				if (debug) console.log('useLayer arriving debug', { arrival, overlayID });
+				if (debug) console.log('useLayer arriving debug', debug, { arrival, overlayID });
 				if (tint) mainTint.set({ ...mainTint.state, [layerName]: [ ...tintLayer, overlayID ] });
 				if (lockLayer) layerLockSet(true);
 				orderSet([ ...order, overlayID ]);
@@ -69,7 +69,7 @@ export default function useLayer(layerName, mainTint = {}, presets = {}, debug) 
 			let { lockLayer, eventClosed, overlayID, preClosed } = trash;
 			let newData = { ...data };
 			delete newData[overlayID];
-			if (debug) console.log('useLayer trash debug', trash);
+			if (debug) console.log('useLayer trash debug', debug, trash);
 			if (lockLayer) layerLockSet();
 			if (preClosed) preClosed(overlayID, data[overlayID]);
 			if (eventClosed) eventClosed(overlayID, data[overlayID]);

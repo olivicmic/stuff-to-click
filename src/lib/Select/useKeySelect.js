@@ -9,10 +9,7 @@ export default function useKeySelect({ active, close, count, focus, index, open,
 
 	const keySet = {
 		'9': { keydown: () => close() }, // tab
-		'13': { keyup: e => { // enter released
-			e.preventDefault();
-			submit(index);
-		}},
+		'13': { keyup: e => { e.preventDefault(); submit(index); }}, // enter released
 		'38': { keydown: e => keyAction(e, index <= 0 ? 0: index - 1) }, // up
 		'40': { keydown: e => keyAction(e, index === count - 1 ? index : index + 1) }, // down
 	};
