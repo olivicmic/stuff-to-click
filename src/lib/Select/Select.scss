@@ -44,19 +44,13 @@
 
 }
 
-.stuff-faux-select-list {	
-	background-color: #000;
-	border-radius: 4px;
+.stuff-faux-select-list {
 	box-sizing: border-box;
 	pointer-events: none;
-	cursor: pointer;
 	flex-direction: column;
 	padding: 0;
-	position: absolute;
 	display: flex;
-	width: auto;
-	z-index: 3000;
-	color: #fff;
+	width: fit-content;
 	margin: 0;
 	outline: none;
 

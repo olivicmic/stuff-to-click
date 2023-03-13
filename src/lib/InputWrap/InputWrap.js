@@ -8,7 +8,7 @@ export default function InputWrap({ bar = {}, barFade, className, component, eve
 	const [hover, setHover] = useHover();
 	const expand = useSpring({
 		config: { mass: 1.75, tension: 300, friction: 25 },
-		bottom: `${ value || value === 0 || focus ? 1.5 : (!labelLock && hover) ? .5 : 0}em`
+		bottom: `${ valueName || value || value === 0 || focus ? 1.5 : (!labelLock && hover) ? .5 : 0}em`
 	});
 	const highlight = useSpring({
 		config: { duration: 250, easing: easings.easeInOutQuad },

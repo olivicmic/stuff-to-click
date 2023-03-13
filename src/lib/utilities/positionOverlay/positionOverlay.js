@@ -1,7 +1,7 @@
 import { is } from 'lal';
 
-const parentKeys = ['alignX', 'alignY', 'bottom', 'centerX', 'cornerX', 'cornerY', 'debug', 'height', 'padX', 'padY', 'right', 'top', 'width', 'x', 'y'];
-const childKeys = ['alignX', 'alignY', 'closeOutside', 'disableTint', 'enter', 'exit', 'spring'];
+const parentKeys = ['alignX', 'alignY', 'bottom', 'debug', 'height', 'padX', 'padY', 'right', 'top', 'width', 'x', 'y'];
+const childKeys = ['alignX', 'alignY', 'centerX', 'centerY', 'closeOutside', 'disableTint', 'enter', 'exit', 'spring'];
 
 const positionOverlay = ({ debug, eventConfig, preConfig, target: inTarget, ...rest }) => {
 	const { child: presetChild = {}, parent: presetParent = {} } = preConfig || {};
@@ -31,11 +31,11 @@ const positionOverlay = ({ debug, eventConfig, preConfig, target: inTarget, ...r
 		...rest,
 		...( parents.concat(children).find(a => !!Object.keys(a).length) || inTarget) && {
 			...childProps && { child: childProps },
-			parent: {
+			...parentProps && { parent: {
 				...parentProps,
 				...is.defined(n => animate(n,0), eventParent.gapX, presetParent.gapX, fontSize),
 				...is.defined(n => animate(n,1), eventParent.gapY, presetParent.gapY, fontSize) 
-			},
+			} },
 			debug
 		}
 	};

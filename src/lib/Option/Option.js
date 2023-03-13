@@ -6,14 +6,14 @@ export default function Option({ opacity, overlay, position, index, item, click,
 	const focus = position === index;
 	const [hover, hoverEvents] = useHover();
 	const selected = value === item.value;
+	if (position === 0) console.log({position, selected, focus, index, hover});
 	const indicator = () => {
-		if (selected && ( hover || focus )) return 'translateX(-0.5em)';
-		else if (selected) return 'translateX(0em)';
-		else if (hover || focus ) return 'translateX(1em)';
-		else return 'translateX(1.5em)';
+		if (selected || focus) { return hover ? -.5 : 0; }
+		else return hover ? 1 : 1.5; 
 	};
+
 	const indSpring = useSpring({
-		transform: indicator(),
+		transform: `translateX(${indicator()}em)`,
 		config: config.wobbly
 	});
 
