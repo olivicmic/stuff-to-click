@@ -3,7 +3,7 @@ import { useInput, useOverlayContext } from '../hooks';
 import useKeySelect from './useKeySelect';
 import useSelectState from './useSelectState';
 
-export default function useSelect({ debug, id, name, options, onChange, valid, value }) {
+export default function useSelect({ debug, id, name, options, onChange, type, valid, value }) {
 	const { popouts } = useOverlayContext();
 	const inputRef = useRef();
 	const { active, hostid, index, setActive, setID, setIndex, valueName } = useSelectState(value, options);
@@ -34,7 +34,7 @@ export default function useSelect({ debug, id, name, options, onChange, valid, v
 		if (!active) {
 			setActive(true);
 
-			popouts.open('picker',{
+			popouts.open((type || 'picker'),{
 				debug,
 				onFocus,
 				onOpened: setID,

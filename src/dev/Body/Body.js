@@ -65,7 +65,7 @@ export default function Body({ style, ...rest }) {
 		</div>
 		<div {...{ className: 'demo-block'}}>
 			<h3>Select</h3>
-			<Select {...{ value: apSt.food, onChange, name: 'food', label: 'Food', options }} />
+			<Select {...{ value: apSt.food, onChange, name: 'food', label: 'Food', options, }} />
 		</div>
 		<div {...{ className: 'demo-block'}}>
 			<h3>Input</h3>

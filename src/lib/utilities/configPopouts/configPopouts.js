@@ -5,10 +5,10 @@ const popoutAnchor = (child, parent) => ({
 	parent: { alignX: 0, gapYMultiply: .5, padX: 4, ...parent }
 });
 
-const configPopouts = ({ debug, picker, addConfigs }) => ({
+const configPopouts = ({ debug, picker, pickerOverride, addConfigs }) => ({
 	picker: {
 		component: picker || Picker,
-		...popoutAnchor(addConfigs?.child || {}, addConfigs?.parent || {})
+		...popoutAnchor(pickerOverride?.child || {}, pickerOverride?.parent || {})
 	},
 	...addConfigs && Object.keys(addConfigs).reduce((obj, config) => {
 		let { child, parent, ...configRest } = addConfigs[config];

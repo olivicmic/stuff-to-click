@@ -18,7 +18,13 @@ const App = () => {
 			onOpened: e => console.log('preset onOpened',e),
 			parent: { alignX: 50, alignY: 50 }
 		}}),
-		...useLayer('popouts', tint, configPopouts({}))
+		...useLayer('popouts', tint, configPopouts({
+			addConfigs: {
+				jammy: {
+					component: Smile,
+				}
+			}
+		}))
 	};
 	const layers = [
 		{ overLayerName: 'modals', type: Smile },
