@@ -26,13 +26,12 @@ export default function useLayer(layerName, mainTint = {}, presets = {}, debug) 
 			...preProps,
 			...eventProps,
 			debug: debug || preDebug || eventDebug,
+			eventClosed,
 			eventConfig,
+			preClosed,
 			preConfig,
 			target
-		})),
-			preClosed,
-			eventClosed 
-		), j => { eventOpened(j); preOpened(j); });
+		}))), j => { eventOpened(j); preOpened(j); });
 	};
 	const update = (id, d) => { if (top === id) { dataSet({ ...data, [id]: { ...data[id], ...d, } }) }};
 	const currentSet = inputID => orderSet([ ...filterID([...order], inputID), inputID]);
@@ -46,8 +45,8 @@ export default function useLayer(layerName, mainTint = {}, presets = {}, debug) 
 				let tintLayer = mainTint.state[layerName] || [];
 				let overlayID = generateUnique({ charCount: 5 });
 				if (debug) console.log('useLayer arriving debug', debug, { arrival, overlayID });
-				if (tint) mainTint.set({ ...mainTint.state, [layerName]: [ ...tintLayer, overlayID ] });
-				if (lockLayer) layerLockSet(true);
+				if (tint || lockLayer) mainTint.set({ ...mainTint.state, [layerName]: [ ...tintLayer, overlayID ] });
+				if (lockLayer) layerLockSet(overlayID);
 				orderSet([ ...order, overlayID ]);
 				setItems([ ...items, { ...arrivingItem, lockLayer, overlayID }]);
 				dataSet({ ...data, [overlayID]: initial });
@@ -81,6 +80,6 @@ export default function useLayer(layerName, mainTint = {}, presets = {}, debug) 
 	},[arrival, completed, data, debug, ending, layerLock, layerName, mainTint, items, tintTriggers, trash, order]);
 
 	return {
-		[layerName]: { add, busy, busySet, clean, completed, currentSet, data, items, layerName, open, order, remove, tintTriggers, top, update }
+		[layerName]: { add, busy, busySet, clean, completed, currentSet, data, items, layerLock, layerName, open, order, remove, tintTriggers, top, update }
 	};
 };

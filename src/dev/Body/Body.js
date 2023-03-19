@@ -17,7 +17,7 @@ export default function Body({ style, ...rest }) {
 		num: '',
 		food: ''
 	});
-	const [modalDone, modalDoneSet] = useState();
+	const [modalDone, modalDoneSet] = useState(true);
 	const onChange = ({ target }) => {
 		console.log(target.name, target.value);
 		setSt({ ...apSt, [target.name]: target.value})
@@ -33,6 +33,7 @@ export default function Body({ style, ...rest }) {
 		target,
 		//tint: true,
 		onClosed: (e,j) => console.log('event onClosed',e,j) });
+	const openDevil = ({ target }) => modals.open('devil',{ tint: true });
 
 	const options = [{
 		value: 'pizza',
@@ -49,6 +50,7 @@ export default function Body({ style, ...rest }) {
 		if (!modalDone) {
 			//console.log('🐤', modalDone);
 			modals.open('smile',{
+				closeOutside: true,
 				tint: true,
 				// debug: true, 
 				parent: { x: window.innerWidth + 80, y: window.innerHeight + 80 }
@@ -62,6 +64,7 @@ export default function Body({ style, ...rest }) {
 		<div {...{ className: 'demo-block'}}>
 			<h3>Modals</h3>
 			<button onClick={openSmile}>Open it</button>
+			<button onClick={openDevil}>Open it</button>
 		</div>
 		<div {...{ className: 'demo-block'}}>
 			<h3>Select</h3>

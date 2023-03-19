@@ -2,6 +2,12 @@
 	background-color: red;
 }
 
+.demo-block {
+	button {
+		margin-right: 40px;
+	}
+}
+
 .smile {
 	box-shadow: 0 10px 15px rgba(#000,.75);
 	height: 125px;
@@ -16,11 +22,5 @@
 	span {
 		transform: rotateZ(90deg);
 		margin-right: -15px;
-	}
-}
-
-.overlay-modals {
-	:first-child {
-		position: absolute;
 	}
 }

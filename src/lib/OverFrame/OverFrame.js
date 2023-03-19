@@ -5,7 +5,7 @@ import { is, makeClasses } from 'lal';
 import { useHost } from '../hooks';
 import mapPos from './mapPos';
 
-export default function OverFrame({ autoBoundary, child, className, debug, enter, exit, overlay, overlays, parent, style, type: Type, zBase = 0, ...rest }) {
+export default function OverFrame({ autoBoundary, child, className, debug, enter, exit, overlay, overlays, parent, priority, style, type: Type, zBase = 0, ...rest }) {
 	const { definedZero, defined } = is;
 	const [off, offSet] = useState([0,0]);
 	const mainRef = useRef();
@@ -15,6 +15,7 @@ export default function OverFrame({ autoBoundary, child, className, debug, enter
 	const setTransform  = (step, axis)  => ((1 - step) * (overlay.phase ? 
 		defined(child?.exit?.[axis],0) : defined(child?.enter?.[axis],0)) * (host.orientation[axis] ? -1 : 1 ));
 	const idName = 'over-frame-id-' + overlay.id;
+	const order = overlays.order.indexOf(overlay.id);
 
 	if (debug) console.debug('OverFrame base debug', mapPos(host.positions, setPos).flat(), {host, off });
 
@@ -55,7 +56,8 @@ export default function OverFrame({ autoBoundary, child, className, debug, enter
 		style: {
 			...style,
 			transform: style.opacity.to(o => `translate(${ setTransform(o,0) }px, ${ setTransform(o,1) }px)`),
-			zIndex: zBase + overlays.order.indexOf(overlay.id)
+			zIndex: overlays.layerLock && overlays.layerLock !== overlay.id && !priority ? 
+				-(overlays.items.length - order) : zBase + order
 		} 
 	}}>
 		<Type { ...{ 

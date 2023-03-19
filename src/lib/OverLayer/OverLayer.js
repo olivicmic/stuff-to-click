@@ -31,7 +31,16 @@ export default function OverLayer({ layers = [], layerState, render: Render, ren
 			{ tintTransition((tinter, shade) => 
 				shade && <animated.div {...{ className: 'stuff-tint', style: { ...tinter, ...tintStyle} }} />) }
 			{ layers.map(({ overLayerName, ...layer }, key ) => 
-				<OverModule { ...{ ...layer, className: `overlay-${overLayerName}`, key, moduleRef, overlayerBusy, overlays: layerState[overLayerName], tint, zBase: zBase * (1 + key) }}/>
+				<OverModule { ...{ 
+					...layer,
+					className: `overlay-${overLayerName}`,
+					key,
+					moduleRef,
+					overlayerBusy,
+					overlays: layerState[overLayerName],
+					tint,
+					zBase: zBase * (1 + key)
+				}}/>
 			) }
 		</div>
 	</OverlayContext.Provider>;
