@@ -1,7 +1,8 @@
 
 import React from 'react';
 import { useSpring, animated } from 'react-spring';
-import { useResizeDetector } from 'react-resize-detector';
+import useResizeObserver from 'use-resize-observer/polyfilled';
+// import { useResizeDetector } from 'react-resize-detector';
 import { useBusy } from 'hangers';
 import { useSlides } from '../hooks';
 import { TestSlide } from '..';
@@ -9,7 +10,7 @@ import { TestSlide } from '..';
 export default function TestCoreSlideshow({ busy, className, debug, pagination = {}, paused: inPaused, slides = [], lockHeight, lockWidth, resizeSpring, slideState, ...rest }) {
 	const [slideMask, parentCtrls] = useBusy();
 	const paused = inPaused || !pagination.active;
-	const { height, width, ref: slideRef } = useResizeDetector();
+	const { height, width, ref: slideRef } = useResizeObserver();
 	const expand = useSpring({
 		config: resizeSpring || { tension: 120, friction: 14 },
 		...!lockWidth && { width },

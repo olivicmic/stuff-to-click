@@ -13,6 +13,8 @@ import Select from './Select';
 import Selection from './Selection';
 import Slide from './Slide';
 import Slideshow from './Slideshow';
+import TestCoreSlideshow from './TestCoreSlideshow';
+import TestSlide from './TestSlide';
 import { useLayer, useOverlayContext, useSlideshow, useTint } from './hooks';
 import { configPopouts, positionOverlay } from './utilities';
 
@@ -34,6 +36,8 @@ export {
 	Selection,
 	Slide,
 	Slideshow,
+	TestCoreSlideshow,
+	TestSlide,
 	useLayer,
 	useOverlayContext,
 	useSlideshow,

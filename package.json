@@ -48,6 +48,7 @@
     "react-range": "^1.8.14",
     "react-resize-detector": "^8.0.4",
     "react-spring": "^9.6.1",
-    "sass": "^1.58.3"
+    "sass": "^1.58.3",
+    "use-resize-observer": "^9.1.0"
   }
 }

@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useBusy } from 'hangers';
 import { useSpring, animated }  from 'react-spring';
-import { useResizeDetector } from 'react-resize-detector';
+// import { useResizeDetector } from 'react-resize-detector';
+import useResizeObserver from 'use-resize-observer/polyfilled';
 import './Accordian.scss'
 
 export default function Accordian({ 
@@ -23,7 +24,7 @@ export default function Accordian({
 	const [expanded, toggle] = useState(opened);
 	const [updated, setUpdated] = useState(false);
 	const [switched, setSwitched] = useState(false);
-	const { height, ref } = useResizeDetector();
+	const { height, ref } = useResizeObserver();
 	const expand = useSpring({
 		config: { friction: 50, tension: 350 },
 		...( !expanded ? { height: 0 } : { height } ),

@@ -11,7 +11,7 @@
 
 	.stuff-accordian-body {
 		overflow: hidden;
-		min-height: fit-content;
+		// min-height: fit-content;
 		&.accordian-busy, &.accordian-closed, {overflow: hidden; min-height: 0}
 	}
 
