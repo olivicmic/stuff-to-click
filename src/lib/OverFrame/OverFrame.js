@@ -5,11 +5,12 @@ import { is, makeClasses } from 'lal';
 import { useHost } from '../hooks';
 import mapPos from './mapPos';
 
-export default function OverFrame({ autoBoundary, child, className, debug, enter, exit, overlay, overlays, parent, priority, style, type: Type, zBase = 0, ...rest }) {
+
+export default function OverFrame({ autoBoundary, child, className, debug, enter, exit, fixed, overlay, overlays, parent, priority, style, type: Type, zBase = 0, ...rest }) {
 	const { definedZero, defined } = is;
 	const [off, offSet] = useState([0,0]);
 	const mainRef = useRef();
-	const host = useHost({ autoBoundary, enter, exit, parent });
+	const host = useHost({ autoBoundary, enter, exit, fixed, parent });
 	const definedBounds = definedZero(autoBoundary);
 	const setPos = (ax, fl = 0) => `${host.positions(ax,fl)}px`;
 	const setTransform  = (step, axis)  => ((1 - step) * (overlay.phase ? 
@@ -17,8 +18,8 @@ export default function OverFrame({ autoBoundary, child, className, debug, enter
 	const idName = 'over-frame-id-' + overlay.id;
 	const order = overlays.order.indexOf(overlay.id);
 
-	if (debug) console.debug('OverFrame base debug', mapPos(host.positions, setPos).flat(), {host, off });
-
+	console.debug('OverFrame base debug', mapPos(host.positions, setPos).flat(), {host, off });
+	// console.log('🔋',rest);
 	useInOut({ debug, boundary: idName, disabled: !child?.closeOutside, onOut: overlay.close });
 	useEffect(() => {
 		const dim = [mainRef?.current?.clientWidth || 0, mainRef?.current?.clientHeight || 0];
@@ -46,37 +47,42 @@ export default function OverFrame({ autoBoundary, child, className, debug, enter
 	},[child, defined, debug, host, off]);
 
 	return <animated.div {...{ 
-		className: makeClasses([className,[
-			'overlay-align-right',(definedBounds && off[0])
-			]],
+		className: makeClasses(
+			[className,['overlay-align-right',(definedBounds && off[0])]],
 			'',
 			'stuff-overlay'),
 		id: idName,
 		onMouseDown: e => overlay.elevate(e),
 		style: {
 			...style,
+			position: fixed ? 'fixed' : 'absolute', 
 			transform: style.opacity.to(o => `translate(${ setTransform(o,0) }px, ${ setTransform(o,1) }px)`),
 			zIndex: overlays.layerLock && overlays.layerLock !== overlay.id && !priority ? 
 				-(overlays.items.length - order) : zBase + order
 		} 
 	}}>
-		<Type { ...{ 
-			...rest,
-			debug,
-			overlay,
-			overlays,
-			mainRef,
-			style: {
-				...parent && {
-					...!child?.centerX && !host.orientation[0] && { left: setPos(0,0) },
-					...!child?.centerY && !host.orientation[1] && { top: setPos(1,0) },
-					...!child?.centerX && host.orientation[0] && { right: setPos(0,1) },
-					...!child?.centerY && host.orientation[1] && { bottom: setPos(1,1)}
-				},
-				...(child?.alignX || child?.alignY)  &&  {
-					transform: `translate(-${child.alignX || 0 }%,-${child.alignY || 0}%)`
-				},
-			}
-		}}/>
+		<div {...{
+				ref: mainRef,
+				style: {
+					...parent && {
+						...!child?.centerX && !host.orientation[0] && { left: setPos(0,0) },
+						...!child?.centerX && host.orientation[0] && { right: setPos(0,1) },
+						...!child?.centerY && !host.orientation[1] && { top: setPos(1,0) },
+						...!child?.centerY && host.orientation[1] && { bottom: setPos(1,1)}
+					},
+					...(child?.alignX || child?.alignY)  &&  {
+						transform: `translate(-${child.alignX || 0 }%,-${child.alignY || 0}%)`
+					},
+				}
+		}}>
+			<div {...{ style: { transform: `translateY(0px)` }}}>
+				<Type { ...{ 
+					...rest,
+					debug,
+					overlay,
+					overlays,
+				}}/>
+			</div>
+		</div>
 	</animated.div>
 };

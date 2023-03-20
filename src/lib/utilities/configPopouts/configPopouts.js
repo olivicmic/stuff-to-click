@@ -8,6 +8,7 @@ const popoutAnchor = (child, parent) => ({
 
 const configPopouts = ({ debug, overrideAll, picker, pickerOverride, addConfigs }) => ({
 	picker: {
+		debug,
 		component: picker || Picker,
 		...popoutAnchor(pickerOverride?.child || {}, pickerOverride?.parent || {}),
 		...overrideAll

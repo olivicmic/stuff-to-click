@@ -3,9 +3,9 @@ import { InputWrap, Selection } from '..';
 import useSelect from './useSelect';
 import './Select.scss'
 
-export default function Select({debug, disabled, name, id, onChange, tabIndex, type, value, options = [], ...rest }) {
+export default function Select({debug, disabled, fixed, name, id, onChange, tabIndex, type, value, options = [], ...rest }) {
 	const hiddenList = options && options.map((item,i) => <option value={item.value} key={i}>{item.label}</option>);
-	const { keyInput, wrapProps } = useSelect({ debug, id, name, onChange, options, type, value });
+	const { keyInput, wrapProps } = useSelect({ debug, fixed, id, name, onChange, options, type, value });
 	const attrSet = { disabled, id, name, tabIndex, value };
 
 	return <>

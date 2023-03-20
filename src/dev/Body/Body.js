@@ -69,6 +69,7 @@ export default function Body({ style, ...rest }) {
 		<div {...{ className: 'demo-block'}}>
 			<h3>Select</h3>
 			<Select {...{ value: apSt.food, onChange, name: 'food', label: 'Food', options, }} />
+			<Select {...{ fixed: true, value: apSt.food, onChange, name: 'food', label: 'Food', options, }} />
 		</div>
 		<div {...{ className: 'demo-block'}}>
 			<h3>Input</h3>
@@ -91,6 +92,10 @@ export default function Body({ style, ...rest }) {
 		<div {...{ className: 'demo-block'}}>
 			<h3>DragSlider</h3>
 			<DragSlider {...{ value: apSt.opacity, max: 100, onChange: opacityChange, trackStyle: {backgroundColor: `rgba(100,100,100, ${ apSt.opacity / 100})`} }}/>
+		</div>
+		<div {...{ className: 'demo-block'}}>
+			<h3>Select</h3>
+			<Select {...{ value: apSt.food, onChange, name: 'food', label: 'Food', options, }} />
 		</div>
 	</div>;
 };

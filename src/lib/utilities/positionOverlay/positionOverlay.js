@@ -9,6 +9,7 @@ const positionOverlay = ({ debug, eventConfig, preConfig, target: inTarget, ...r
 	const parents = [eventParent, presetParent];
 	const children = [eventChild, presetChild];
 	const target = inTarget?.getBoundingClientRect() || {};
+
 	const setupProps = (arr, input) => arr.reduce((obj, prop) => ({ 
 		...obj,
 		...is.defined(a => ({  [prop]: a }), input[0][prop],target[prop],input[1][prop])

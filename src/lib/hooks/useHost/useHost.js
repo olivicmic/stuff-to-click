@@ -1,8 +1,9 @@
 import { useMemo } from 'react';
 import { is } from 'lal';
 
-export default function useHost({ autoBoundary = 0, enter, exit, parent }) {
+export default function useHost({ autoBoundary = 0, enter, exit, fixed, parent }) {
 	return useMemo(() => {
+		console.log(fixed);
 		const align = which => Math.min(is.defined(parent?.[which],100),100);
 		const alignment = [align('alignX'), align('alignY')];
 		const win = [window.innerWidth, window.innerHeight];
@@ -12,7 +13,7 @@ export default function useHost({ autoBoundary = 0, enter, exit, parent }) {
 		const sizeSet = ax => (parentSize[ax]|| 0) + (padding[ax] || 0);
 		const size = [sizeSet(0), sizeSet(1)];
 		const setSpawn = ax => Math.min((origin[ax] || 0) - ((padding[ax] / 2)|| 0), win[ax] - autoBoundary);
-		const xy = [setSpawn(0),setSpawn(1)];
+		const xy = [setSpawn(0),setSpawn(1) + (fixed ? 0 : window.scrollY)];
 		const orient = ax => (xy[ax] + (size[ax] / 2)) > (win[ax] * [.75,.66][ax]) ? 1 : 0;
 		const orientation = [orient(0),orient(1)];
 		const gap = [parent?.gapX || 0, parent?.gapY || 0];
@@ -28,5 +29,5 @@ export default function useHost({ autoBoundary = 0, enter, exit, parent }) {
 			win,
 			xy,
 		};
-	},[autoBoundary, parent]);
+	},[autoBoundary, fixed, parent]);
 };

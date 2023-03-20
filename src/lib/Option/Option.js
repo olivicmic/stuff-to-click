@@ -6,7 +6,6 @@ export default function Option({ opacity, overlay, position, index, item, click,
 	const focus = position === index;
 	const [hover, hoverEvents] = useHover();
 	const selected = value === item.value;
-	if (position === 0) console.log({position, selected, focus, index, hover});
 	const indicator = () => {
 		if (selected || focus) { return hover ? -.5 : 0; }
 		else return hover ? 1 : 1.5; 

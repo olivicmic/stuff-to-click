@@ -35,6 +35,7 @@ const App = () => {
 			}
 		}),
 		...useLayer('popouts', tint, configPopouts({
+			 debug: true,
 			addConfigs: {
 				jammy: {
 					component: Smile,
@@ -43,8 +44,8 @@ const App = () => {
 		}))
 	};
 	const layers = [
-		{ overLayerName: 'modals', type: Popout },
-		{ overLayerName: 'popouts', type: Popout }
+		{ overLayerName: 'modals', type: Popout, },
+		{ autoBoundary: 16, overLayerName: 'popouts', type: Popout }
 	];
 	return <OverLayer {...{ layers, layerState, render: Body, tint }}/>;
 };

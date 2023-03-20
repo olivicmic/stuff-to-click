@@ -32,6 +32,7 @@ div.stuff-over-active {
 		border: 2px currentColor solid;
 		background-color: #fff;
 		border-radius: .25rem;
+		box-sizing: content-box;
 		color: currentColor;
 	}
 }
