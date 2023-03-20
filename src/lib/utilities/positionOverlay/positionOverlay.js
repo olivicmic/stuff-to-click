@@ -1,7 +1,7 @@
 import { is } from 'lal';
 
 const parentKeys = ['alignX', 'alignY', 'bottom', 'debug', 'height', 'padX', 'padY', 'right', 'top', 'width', 'x', 'y'];
-const childKeys = ['alignX', 'alignY', 'centerX', 'centerY', 'closeOutside', 'disableTint', 'enter', 'exit', 'spring'];
+const childKeys = ['alignX', 'alignY', 'centerX', 'centerY', 'closeOutside', 'disableTint', 'enter', 'exit', 'fitToParentX', 'spring'];
 
 const positionOverlay = ({ debug, eventConfig, preConfig, target: inTarget, ...rest }) => {
 	const { child: presetChild = {}, parent: presetParent = {} } = preConfig || {};

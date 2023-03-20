@@ -35,7 +35,7 @@ const App = () => {
 			}
 		}),
 		...useLayer('popouts', tint, configPopouts({
-			 debug: true,
+			// debug: true,
 			addConfigs: {
 				jammy: {
 					component: Smile,

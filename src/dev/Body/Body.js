@@ -59,7 +59,7 @@ export default function Body({ style, ...rest }) {
 		}
 	},[modals, modalDone]);
 
-	return  <div {...{ style }}>
+	return  <div {...{ className: 'body-frame', style }}>
 		<h1>Stuff to Click</h1>
 		<div {...{ className: 'demo-block'}}>
 			<h3>Modals</h3>
@@ -68,8 +68,8 @@ export default function Body({ style, ...rest }) {
 		</div>
 		<div {...{ className: 'demo-block'}}>
 			<h3>Select</h3>
-			<Select {...{ value: apSt.food, onChange, name: 'food', label: 'Food', options, }} />
 			<Select {...{ fixed: true, value: apSt.food, onChange, name: 'food', label: 'Food', options, }} />
+			<Select {...{ value: apSt.food, onChange, name: 'food', label: 'Food', options, }} />
 		</div>
 		<div {...{ className: 'demo-block'}}>
 			<h3>Input</h3>
@@ -95,6 +95,7 @@ export default function Body({ style, ...rest }) {
 		</div>
 		<div {...{ className: 'demo-block'}}>
 			<h3>Select</h3>
+			<Select {...{ fixed: true, value: apSt.food, onChange, name: 'food', label: 'Food', options, }} />
 			<Select {...{ value: apSt.food, onChange, name: 'food', label: 'Food', options, }} />
 		</div>
 	</div>;

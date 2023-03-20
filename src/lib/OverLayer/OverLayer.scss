@@ -29,10 +29,14 @@ div.stuff-over-active {
 
 .overlay-popouts {
 	& > :first-child {
+		box-sizing: content-box;
+		min-width: fit-content;
+	}
+
+	.overlay-overframe-adjust {
 		border: 2px currentColor solid;
 		background-color: #fff;
 		border-radius: .25rem;
-		box-sizing: content-box;
 		color: currentColor;
 	}
 }

@@ -4,18 +4,13 @@
 	display: inline-flex;
 	flex-direction: column;
 	align-items: center;
-	min-width: 200px;
+	min-width: 125px;
 	font-size: 1em;
 	height: auto;
 	padding: 2px;
 	outline: none;
-	//border: 2px solid currentColor;
-	//will-change: border;
-	// border: 2px solid;
-	// border-color: transparent;
 	border-radius: 4px;
 	box-sizing: border-box;
-	//transition: .25s all ease-in-out;
 	vertical-align: bottom;
 
 	&.stuff-input-focus, &.stuff-email-focus, &.stuff-email-focus, &.stuff-password-focus, &.stuff-select-focus, &.stuff-tel-focus, &.stuff-text-focus  {

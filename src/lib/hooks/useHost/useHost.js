@@ -3,10 +3,9 @@ import { is } from 'lal';
 
 export default function useHost({ autoBoundary = 0, enter, exit, fixed, parent }) {
 	return useMemo(() => {
-		console.log(fixed);
 		const align = which => Math.min(is.defined(parent?.[which],100),100);
 		const alignment = [align('alignX'), align('alignY')];
-		const win = [window.innerWidth, window.innerHeight];
+		const win = [window.innerWidth, window.innerHeight + (fixed ? 0 : window.scrollY)];
 		const origin = [parent?.x, parent?.y];
 		const padding = [parent?.padX, parent?.padY];
 		const parentSize = [parent?.width, parent?.height];

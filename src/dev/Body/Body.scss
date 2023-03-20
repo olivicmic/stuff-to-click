@@ -1,6 +1,20 @@
+#root {
+	position: relative;
+}
+
+.body-frame {
+	overflow: auto;
+}
+
+
 h1 {
+	margin-top: 0;
 	margin-bottom: 300px;
 }
+
+.stuff-select { margin-right: 520px;}
+
+// .stuff-faux-select-list { width: 750px;}
 
 .yoohoo {
 	background-color: red;
