@@ -1,8 +1,9 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { animated, useSpring } from 'react-spring';
+import { animated } from 'react-spring';
 import { useInOut } from 'hangers';
 import { is, makeClasses } from 'lal';
 import { useHost } from '../hooks';
+import { adjustChild } from '../utilities';
 import mapPos from './mapPos';
 
 export default function OverFrame({ autoBoundary, child = {}, className, debug, enter, exit, fixed, overlay, overlays, parent, priority, style, type: Type, zBase = 0, ...rest }) {
@@ -17,21 +18,14 @@ export default function OverFrame({ autoBoundary, child = {}, className, debug, 
 	const idName = 'over-frame-id-' + overlay.id;
 	const order = overlays.order.indexOf(overlay.id);
 	const boundAdjust = ax => off[ax] ? -(off[ax] + definedBounds) : 0;
-	const adjustSpring = useSpring({
-		config: child.spring || { tension: 150, friction: 14 },
-		transform: `translate(${boundAdjust(0)}px,${boundAdjust(1)}px)`
-	});
 
 	if (debug) console.debug('OverFrame base debug', mapPos(host.positions, setPos).flat(), {host, off });
 
 	useInOut({ debug, boundary: idName, disabled: !child.closeOutside, onOut: overlay.close });
 	useEffect(() => {
-		const dim = [mainRef?.current?.clientWidth || 0, mainRef?.current?.clientHeight || 0];
-		const mainPos = [mainRef?.current?.offsetLeft || 0, mainRef?.current?.offsetTop || 0];
-		const alignment = [child.alignX || 0, child.alignY || 0 ];
-		const alignPos = ax => (mainPos[ax] - ( dim[ax] * ( .01 * alignment[ax] ))) || 0;
+		const { alignment, dim, edge, mainPos } = adjustChild(mainRef?.current, child);
 		const xy = [host.positions(0,0),host.positions(1,0)];
-		const edge = [alignPos(0) + dim[0], alignPos(1) + dim[1]];
+
 		const edgeCheck = ax => {
 			let winDiff = edge[ax] - host.win[ax];
 			if (debug) console.debug('OverFrame edgeCheck debug', { 
@@ -68,32 +62,27 @@ export default function OverFrame({ autoBoundary, child = {}, className, debug, 
 				-(overlays.items.length - order) : zBase + order
 		} 
 	}}>
-		<div {...{
-				className: 'overlay-overframe-position',
-				ref: mainRef,
-				style: {
-					...child.fitToParentX && { width: host.size[0] },
-					...parent && {
-						...!child.centerX && !host.orientation[0] && { left: setPos(0,0) },
-						...!child.centerX && host.orientation[0] && { right: setPos(0,1) },
-						...!child.centerY && !host.orientation[1] && { top: setPos(1,0) },
-						...!child.centerY && host.orientation[1] && { bottom: setPos(1,1)}
-					},
-					...(child.alignX || child.alignY)  &&  {
-						transform: `translate(-${child.alignX || 0 }%,-${child.alignY || 0}%)`
-					},
-				}
-		}}>
-			<animated.div {...{
-				className: 'overlay-overframe-adjust',
-				style: adjustSpring }}>
-				<Type { ...{ 
-					...rest,
-					debug,
-					overlay,
-					overlays,
-				}}/>
-			</animated.div>
-		</div>
+		<Type { ...{ 
+			...rest,
+			boundAdjust,
+			child,
+			debug,
+			off,
+			overlay,
+			overlays,
+			mainRef,
+			...(child.alignX || child.alignY)  &&  {
+				transform: `translate(-${child.alignX || 0 }%,-${child.alignY || 0}%)`
+			},
+			style: {
+				...child.fitToParentX && { width: host.size[0] },
+				...parent && {
+					...!child.centerX && !host.orientation[0] && { left: setPos(0,0) },
+					...!child.centerX && host.orientation[0] && { right: setPos(0,1) },
+					...!child.centerY && !host.orientation[1] && { top: setPos(1,0) },
+					...!child.centerY && host.orientation[1] && { bottom: setPos(1,1)}
+				},
+			}
+		}}/>
 	</animated.div>
 };

@@ -1,6 +1,6 @@
 {
   "name": "stuff-to-click",
-  "version": "5.0.40",
+  "version": "5.1.0",
   "description": "Experimental React components by vics.pics",
   "author": "olivicmic",
   "license": "MIT",
@@ -45,6 +45,7 @@
   "dependencies": {
     "hangers": "^3.0.12",
     "lal": "^7.0.3",
+    "react-draggable": "^4.4.5",
     "react-range": "^1.8.14",
     "react-spring": "^9.6.1",
     "sass": "^1.58.3",

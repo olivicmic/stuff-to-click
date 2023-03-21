@@ -21,7 +21,9 @@ export default function useHost({ autoBoundary = 0, enter, exit, fixed, parent }
 
 		return {
 			alignment,
+			edge,
 			gap,
+			hostAlign,
 			orientation,
 			positions: (ax, fl) => !fl ? edge(ax) : win[ax] - edge(ax),
 			size,

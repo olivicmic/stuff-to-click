@@ -65,6 +65,25 @@ export default function Body({ style, ...rest }) {
 			<h3>Modals</h3>
 			<button onClick={openSmile}>Open it</button>
 			<button onClick={openDevil}>Open it</button>
+			<button onClick={openSmile}>Open it</button>
+			<button onClick={openSmile}>Open it</button>
+			<button onClick={openSmile}>Open it</button>
+			<button onClick={openSmile}>Open it</button>
+			<button onClick={openSmile}>Open it</button>
+			<button onClick={openSmile}>Open it</button>
+			<button onClick={openSmile}>Open it</button>
+			<button onClick={openSmile}>Open it</button>
+			<button onClick={openSmile}>Open it</button>
+			<button onClick={openSmile}>Open it</button>
+			<button onClick={openSmile}>Open it</button>
+			<button onClick={openSmile}>Open it</button>
+			<button onClick={openSmile}>Open it</button>
+			<button onClick={openSmile}>Open it</button>
+			<button onClick={openSmile}>Open it</button>
+			<button onClick={openSmile}>Open it</button>
+			<button onClick={openSmile}>Open it</button>
+			<button onClick={openSmile}>Open it</button>
+			<button onClick={openSmile}>Open it</button>
 		</div>
 		<div {...{ className: 'demo-block'}}>
 			<h3>Select</h3>

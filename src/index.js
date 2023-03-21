@@ -21,6 +21,7 @@ const App = () => {
 			},
 			smile: {
 				child: { 
+					handle: '.smile',
 					enter: [500,200],
 					alignX: 50,
 					alignY: 50, 

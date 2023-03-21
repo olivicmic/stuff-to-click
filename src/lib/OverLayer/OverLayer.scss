@@ -18,25 +18,23 @@ div.stuff-over-active {
 }
 
 .stuff-overlay {
+	overflow: hidden;
 	pointer-events: none;
 	position: absolute;
 	will-change: transform, opacity;
-	height: 100vh;
-	width: 100vw;
-
-	& > :first-child { position: absolute; }
+	& > :first-child {
+		position: absolute;
+	}
 }
 
 .overlay-popouts {
 	& > :first-child {
 		box-sizing: content-box;
 		min-width: fit-content;
-	}
-
-	.overlay-overframe-adjust {
 		border: 2px currentColor solid;
 		background-color: #fff;
 		border-radius: .25rem;
 		color: currentColor;
 	}
+
 }
