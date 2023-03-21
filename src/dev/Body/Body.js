@@ -34,6 +34,7 @@ export default function Body({ style, ...rest }) {
 		//tint: true,
 		onClosed: (e,j) => console.log('event onClosed',e,j) });
 	const openDevil = ({ target }) => modals.open('devil',{ tint: true });
+	const openHotdog = ({ target }) => modals.open('hotdog',{ target });
 
 	const options = [{
 		value: 'pizza',
@@ -63,9 +64,18 @@ export default function Body({ style, ...rest }) {
 		<h1>Stuff to Click</h1>
 		<div {...{ className: 'demo-block'}}>
 			<h3>Modals</h3>
-			<button onClick={openSmile}>Open it</button>
+			<button onClick={openHotdog}>Open it</button>
 			<button onClick={openDevil}>Open it</button>
 			<button onClick={openSmile}>Open it</button>
+			<button onClick={openHotdog}>Open it</button>
+			<button onClick={openSmile}>Open it</button>
+			<button onClick={openSmile}>Open it</button>
+			<button onClick={openSmile}>Open it</button>
+			<button onClick={openSmile}>Open it</button>
+			<button onClick={openSmile}>Open it</button>
+			<button onClick={openSmile}>Open it</button>
+			<button onClick={openSmile}>Open it</button>
+			<button onClick={openHotdog}>Open it</button>
 			<button onClick={openSmile}>Open it</button>
 			<button onClick={openSmile}>Open it</button>
 			<button onClick={openSmile}>Open it</button>
@@ -74,20 +84,12 @@ export default function Body({ style, ...rest }) {
 			<button onClick={openSmile}>Open it</button>
 			<button onClick={openSmile}>Open it</button>
 			<button onClick={openSmile}>Open it</button>
-			<button onClick={openSmile}>Open it</button>
-			<button onClick={openSmile}>Open it</button>
-			<button onClick={openSmile}>Open it</button>
-			<button onClick={openSmile}>Open it</button>
-			<button onClick={openSmile}>Open it</button>
-			<button onClick={openSmile}>Open it</button>
-			<button onClick={openSmile}>Open it</button>
-			<button onClick={openSmile}>Open it</button>
-			<button onClick={openSmile}>Open it</button>
-			<button onClick={openSmile}>Open it</button>
+			<button onClick={openHotdog}>Open it</button>
 		</div>
-		<div {...{ className: 'demo-block'}}>
-			<h3>Select</h3>
+		<h3>Select</h3>
+		<div {...{ className: 'demo-block demo-grid'}}>
 			<Select {...{ fixed: true, value: apSt.food, onChange, name: 'food', label: 'Food', options, }} />
+			<Select {...{ value: apSt.food, onChange, name: 'food', label: 'Food', options, }} />
 			<Select {...{ value: apSt.food, onChange, name: 'food', label: 'Food', options, }} />
 		</div>
 		<div {...{ className: 'demo-block'}}>
@@ -112,9 +114,10 @@ export default function Body({ style, ...rest }) {
 			<h3>DragSlider</h3>
 			<DragSlider {...{ value: apSt.opacity, max: 100, onChange: opacityChange, trackStyle: {backgroundColor: `rgba(100,100,100, ${ apSt.opacity / 100})`} }}/>
 		</div>
-		<div {...{ className: 'demo-block'}}>
-			<h3>Select</h3>
+		<h3>Select</h3>
+		<div {...{ className: 'demo-block demo-grid'}}>
 			<Select {...{ fixed: true, value: apSt.food, onChange, name: 'food', label: 'Food', options, }} />
+			<Select {...{ value: apSt.food, onChange, name: 'food', label: 'Food', options, }} />
 			<Select {...{ value: apSt.food, onChange, name: 'food', label: 'Food', options, }} />
 		</div>
 	</div>;

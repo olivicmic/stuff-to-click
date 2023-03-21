@@ -12,7 +12,7 @@ h1 {
 	margin-bottom: 300px;
 }
 
-.stuff-select { margin-right: 520px;}
+// .stuff-select { margin-right: 200px;}
 
 // .stuff-faux-select-list { width: 750px;}
 
@@ -23,7 +23,13 @@ h1 {
 .demo-block {
 	button {
 		margin-right: 40px;
+		margin-bottom: 60px;
 	}
+}
+
+.demo-grid {
+	display: flex;
+	justify-content: space-between;
 }
 
 .smile {
@@ -41,4 +47,18 @@ h1 {
 		transform: rotateZ(90deg);
 		margin-right: -15px;
 	}
+}
+
+.hotdog {
+	display: flex;
+	// background-color: red;
+	background-image: url('../images/hotdog.png');
+	background-size: cover;
+	// width: 829px;
+	// height: 518px;
+	width: 663px;
+	height: 414px;
+	// 	width: 332px;
+	// height: 207px;
+	pointer-events: auto;
 }

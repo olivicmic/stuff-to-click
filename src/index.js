@@ -3,18 +3,30 @@ import { createRoot } from 'react-dom/client';
 import { configPopouts, OverLayer, Popout, useLayer, useTint } from './lib';
 import { Body } from './dev';
 
-const Smile = ({ mainRef, style, ...rest }) => {
-	return <div {...{ className: 'smile', style, ref: mainRef }} ><span>:)</span></div>;
+const Smile = ({ ...rest }) => {
+	return <div {...{ className: 'smile', }} ><span>:)</span></div>;
 };
 
-const Devil = ({ mainRef, style, ...rest }) => {
-	return <div {...{ className: 'smile', ref: mainRef, style: { ...style, backgroundColor: 'red' } }} ><span>>:)</span></div>;
+const Devil = ({ ...rest }) => {
+	return <div {...{ className: 'smile', style: { backgroundColor: 'red' } }} ><span>>:)</span></div>;
+};
+
+const Hotdog = ({ ...rest }) => {
+	return <div {...{ className: 'hotdog' }} ></div>;
 };
 
 const App = () => {
 	const tint = useTint();
 	const layerState = { 
 		...useLayer('modals', tint, {
+			hotdog: { 
+				component: Hotdog,
+				child: { 
+					handle: '.hotdog',
+					closeOutside: true,
+					enter: [500,200],
+				},
+			},
 			devil: { 
 				component: Devil,
 				lockLayer: true

@@ -21,7 +21,7 @@ export default function OverFrame({ autoBoundary, child = {}, className, debug, 
 
 	if (debug) console.debug('OverFrame base debug', mapPos(host.positions, setPos).flat(), {host, off });
 
-	useInOut({ debug, boundary: idName, disabled: !child.closeOutside, onOut: overlay.close });
+	useInOut({ debug: true, boundary: idName, disabled: !child.closeOutside, onOut: overlay.close });
 	useEffect(() => {
 		const { alignment, dim, edge, mainPos } = adjustChild(mainRef?.current, child);
 		const xy = [host.positions(0,0),host.positions(1,0)];
@@ -67,6 +67,8 @@ export default function OverFrame({ autoBoundary, child = {}, className, debug, 
 			boundAdjust,
 			child,
 			debug,
+			fixed,
+			host,
 			off,
 			overlay,
 			overlays,
