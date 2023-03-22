@@ -19,7 +19,8 @@ const App = () => {
 	const tint = useTint();
 	const layerState = { 
 		...useLayer('modals', tint, {
-			hotdog: { 
+			hotdog: {
+				autoBoundary: 16,
 				component: Hotdog,
 				child: { 
 					handle: '.hotdog',

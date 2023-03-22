@@ -4,9 +4,10 @@ import { useInOut } from 'hangers';
 import { is, makeClasses } from 'lal';
 import { useHost } from '../hooks';
 import { adjustChild } from '../utilities';
+import DragLayer from '../DragLayer';
 import mapPos from './mapPos';
 
-export default function OverFrame({ autoBoundary, child = {}, className, debug, enter, exit, fixed, overlay, overlays, parent, priority, style, type: Type, zBase = 0, ...rest }) {
+export default function OverFrame({ autoBoundary, child = {}, className, debug, enter, exit, fixed, overlay, overlays, parent, popoutStyle, priority, style, type: Type, zBase = 0, ...rest }) {
 	const { definedZero, defined } = is;
 	const [off, offSet] = useState([0,0]);
 	const mainRef = useRef();
@@ -17,7 +18,6 @@ export default function OverFrame({ autoBoundary, child = {}, className, debug, 
 		defined(child.exit?.[axis],0) : defined(child.enter?.[axis],0)) * (host.orientation[axis] ? -1 : 1 ));
 	const idName = 'over-frame-id-' + overlay.id;
 	const order = overlays.order.indexOf(overlay.id);
-	const boundAdjust = ax => off[ax] ? -(off[ax] + definedBounds) : 0;
 
 	if (debug) console.debug('OverFrame base debug', mapPos(host.positions, setPos).flat(), {host, off });
 
@@ -62,20 +62,15 @@ export default function OverFrame({ autoBoundary, child = {}, className, debug, 
 				-(overlays.items.length - order) : zBase + order
 		} 
 	}}>
-		<Type { ...{ 
-			...rest,
-			boundAdjust,
+		<DragLayer {...{ 
 			child,
 			debug,
+			definedBounds,
 			fixed,
 			host,
 			off,
-			overlay,
-			overlays,
 			mainRef,
-			...(child.alignX || child.alignY)  &&  {
-				transform: `translate(-${child.alignX || 0 }%,-${child.alignY || 0}%)`
-			},
+			popoutStyle,
 			style: {
 				...child.fitToParentX && { width: host.size[0] },
 				...parent && {
@@ -84,7 +79,18 @@ export default function OverFrame({ autoBoundary, child = {}, className, debug, 
 					...!child.centerY && !host.orientation[1] && { top: setPos(1,0) },
 					...!child.centerY && host.orientation[1] && { bottom: setPos(1,1)}
 				},
-			}
-		}}/>
+			},
+			...(child.alignX || child.alignY)  &&  {
+				transform: `translate(-${child.alignX || 0 }%,-${child.alignY || 0}%)`
+			},
+		}}>
+			<Type { ...{ 
+				...rest,
+				child,
+				debug,
+				overlay,
+				overlays
+			}}/>
+		</DragLayer>	
 	</animated.div>
 };

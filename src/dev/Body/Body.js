@@ -85,6 +85,10 @@ export default function Body({ style, ...rest }) {
 			<button onClick={openSmile}>Open it</button>
 			<button onClick={openSmile}>Open it</button>
 			<button onClick={openHotdog}>Open it</button>
+			<button onClick={openHotdog}>Open it</button>
+			<button onClick={openHotdog}>Open it</button>
+			<button onClick={openHotdog}>Open it</button>
+			<button onClick={openHotdog}>Open it</button>
 		</div>
 		<h3>Select</h3>
 		<div {...{ className: 'demo-block demo-grid'}}>
