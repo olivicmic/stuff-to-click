@@ -29,12 +29,7 @@ export default function Body({ style, ...rest }) {
 	const onClosed = (oState) => console.log('closed');
 	const onOpened = (oState) => console.log('opened');
 	const { modals } = useOverlayContext();
-	const openSmile = ({ target }) => modals.open('smile',{ 
-		target,
-		//tint: true,
-		onClosed: (e,j) => console.log('event onClosed',e,j) });
-	const openDevil = ({ target }) => modals.open('devil',{ tint: true });
-	const openHotdog = ({ target }) => modals.open('hotdog',{ target });
+	const openGuy = (guy = 'hotdog') => ({ target }) => modals.open(guy,{ fixed: true, target });
 
 	const options = [{
 		value: 'pizza',
@@ -61,34 +56,32 @@ export default function Body({ style, ...rest }) {
 	},[modals, modalDone]);
 
 	return  <div {...{ className: 'body-frame', style }}>
-		<h1>Stuff to Click</h1>
 		<div {...{ className: 'demo-block'}}>
-			<h3>Modals</h3>
-			<button onClick={openHotdog}>Open it</button>
-			<button onClick={openDevil}>Open it</button>
-			<button onClick={openSmile}>Open it</button>
-			<button onClick={openHotdog}>Open it</button>
-			<button onClick={openSmile}>Open it</button>
-			<button onClick={openSmile}>Open it</button>
-			<button onClick={openSmile}>Open it</button>
-			<button onClick={openSmile}>Open it</button>
-			<button onClick={openSmile}>Open it</button>
-			<button onClick={openSmile}>Open it</button>
-			<button onClick={openSmile}>Open it</button>
-			<button onClick={openHotdog}>Open it</button>
-			<button onClick={openSmile}>Open it</button>
-			<button onClick={openSmile}>Open it</button>
-			<button onClick={openSmile}>Open it</button>
-			<button onClick={openSmile}>Open it</button>
-			<button onClick={openSmile}>Open it</button>
-			<button onClick={openSmile}>Open it</button>
-			<button onClick={openSmile}>Open it</button>
-			<button onClick={openSmile}>Open it</button>
-			<button onClick={openHotdog}>Open it</button>
-			<button onClick={openHotdog}>Open it</button>
-			<button onClick={openHotdog}>Open it</button>
-			<button onClick={openHotdog}>Open it</button>
-			<button onClick={openHotdog}>Open it</button>
+			<button onClick={openGuy('hotdog')}>Open it</button>
+			<button onClick={openGuy('hotdog')}>Open it</button>
+			<button onClick={openGuy('hotdog')}>Open it</button>
+			<button onClick={openGuy('hotdog')}>Open it</button>
+			<button onClick={openGuy('hotdog')}>Open it</button>
+			<button onClick={openGuy('hotdog')}>Open it</button>
+			<button onClick={openGuy('hotdog')}>Open it</button>
+			<button onClick={openGuy('hotdog')}>Open it</button>
+			<button onClick={openGuy('hotdog')}>Open it</button>
+			<button onClick={openGuy('hotdog')}>Open it</button>
+			<button onClick={openGuy('hotdog')}>Open it</button>
+			<button onClick={openGuy('hotdog')}>Open it</button>
+			<button onClick={openGuy('hotdog')}>Open it</button>
+			<button onClick={openGuy('hotdog')}>Open it</button>
+			<button onClick={openGuy('hotdog')}>Open it</button>
+			<button onClick={openGuy('hotdog')}>Open it</button>
+			<button onClick={openGuy('hotdog')}>Open it</button>
+			<button onClick={openGuy('hotdog')}>Open it</button>
+			<button onClick={openGuy('hotdog')}>Open it</button>
+			<button onClick={openGuy('hotdog')}>Open it</button>
+			<button onClick={openGuy('hotdog')}>Open it</button>
+			<button onClick={openGuy('hotdog')}>Open it</button>
+			<button onClick={openGuy('hotdog')}>Open it</button>
+			<button onClick={openGuy('hotdog')}>Open it</button>
+			<button onClick={openGuy('hotdog')}>Open it</button>
 		</div>
 		<h3>Select</h3>
 		<div {...{ className: 'demo-block demo-grid'}}>

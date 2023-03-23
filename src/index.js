@@ -23,6 +23,8 @@ const App = () => {
 				autoBoundary: 16,
 				component: Hotdog,
 				child: { 
+					alignY: 0,
+					alignX: 0,
 					handle: '.hotdog',
 					closeOutside: true,
 					enter: [500,200],

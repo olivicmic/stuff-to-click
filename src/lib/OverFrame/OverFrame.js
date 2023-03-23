@@ -3,7 +3,7 @@ import { animated } from 'react-spring';
 import { useInOut } from 'hangers';
 import { is, makeClasses } from 'lal';
 import { useHost } from '../hooks';
-import { adjustChild } from '../utilities';
+import { adjustChild, invert } from '../utilities';
 import DragLayer from '../DragLayer';
 import mapPos from './mapPos';
 
@@ -21,17 +21,24 @@ export default function OverFrame({ autoBoundary, child = {}, className, debug, 
 
 	if (debug) console.debug('OverFrame base debug', mapPos(host.positions, setPos).flat(), {host, off });
 
-	useInOut({ debug: true, boundary: idName, disabled: !child.closeOutside, onOut: overlay.close });
+	useInOut({ debug, boundary: idName, disabled: !child.closeOutside, onOut: overlay.close });
 	useEffect(() => {
-		const { alignment, dim, edge, mainPos } = adjustChild(mainRef?.current, child);
-		const xy = [host.positions(0,0),host.positions(1,0)];
+
+		const xy = [host.positions(0,0) || 0,host.positions(1,0) || 0];
+		const { alignment, alignPos, dim, edge, mainPos } = adjustChild(mainRef?.current, child, xy, host.orientation, fixed);
+		// console.log(dim);
+
+		console.log('🪧', {
+			xy, alignment, alignPos: alignPos(0), dim: dim[0], edge: edge[0], off: off[0], win: host.win[0]});
 
 		const edgeCheck = ax => {
 			let winDiff = edge[ax] - host.win[ax];
+			console.log('🎀',winDiff);
 			if (debug) console.debug('OverFrame edgeCheck debug', { 
+				dim,
 				offAxis: off[ax], 
 				childAlignment: alignment[ax], 
-				anchorEdge: edge[ax], 
+				parentEdge: edge[ax], 
 				windowDimension: host.win[ax],
 				winDiff
 			} );
@@ -42,8 +49,7 @@ export default function OverFrame({ autoBoundary, child = {}, className, debug, 
 		if (debug) console.debug('OverFrame off adjust debug', {host, mainPos, xy, off, dim, edge });
 		edgeCheck(0);
 		edgeCheck(1, true);
-	},[child, defined, debug, host, off]);
-
+	},[child, defined, debug, fixed, host, off]);
 
 	return <animated.div {...{ 
 		className: makeClasses(
@@ -81,7 +87,8 @@ export default function OverFrame({ autoBoundary, child = {}, className, debug, 
 				},
 			},
 			...(child.alignX || child.alignY)  &&  {
-				transform: `translate(-${child.alignX || 0 }%,-${child.alignY || 0}%)`
+				transform: `translate(${invert(child.alignX, host.orientation[0])}%,${invert(child.alignY, host.orientation[1])}%)`
+				// transform: `translate(-${child.alignX || 0 }%,-${child.alignY || 0}%)`
 			},
 		}}>
 			<Type { ...{ 
