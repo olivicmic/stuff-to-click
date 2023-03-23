@@ -25,7 +25,7 @@ export default function OverFrame({ autoBoundary, child = {}, className, debug, 
 	useEffect(() => {
 
 		const xy = [host.positions(0,0) || 0,host.positions(1,0) || 0];
-		const { alignment, dim, edge, mainPos } = adjustChild(mainRef?.current, child, xy, host.orientation, fixed);
+		const { dim, edge, mainPos } = adjustChild(mainRef?.current, child, xy, host.orientation, fixed);
 		// console.log(dim);
 
 		// console.log('🪧', {
@@ -33,15 +33,15 @@ export default function OverFrame({ autoBoundary, child = {}, className, debug, 
 
 		const edgeCheck = ax => {
 			let winDiff = edge[ax] - host.win[ax];
-			console.log('🎀',winDiff);
-			if (debug) console.debug('OverFrame edgeCheck debug', { 
-				dim,
-				offAxis: off[ax], 
-				childAlignment: alignment[ax], 
-				parentEdge: edge[ax], 
-				windowDimension: host.win[ax],
-				winDiff
-			} );
+			// console.log('🎀',winDiff);
+			// if (debug) console.debug('OverFrame edgeCheck debug', { 
+			// 	dim,
+			// 	offAxis: off[ax], 
+			// 	childAlignment: alignment[ax], 
+			// 	parentEdge: edge[ax], 
+			// 	windowDimension: host.win[ax],
+			// 	winDiff
+			// } );
 			if (off[ax] !== Math.max(winDiff,0)) {
 				offSet(off.map((item,i) => i === ax ? Math.max(winDiff,0) : item ));
 			}
