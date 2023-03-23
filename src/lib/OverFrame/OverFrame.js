@@ -25,11 +25,11 @@ export default function OverFrame({ autoBoundary, child = {}, className, debug, 
 	useEffect(() => {
 
 		const xy = [host.positions(0,0) || 0,host.positions(1,0) || 0];
-		const { alignment, alignPos, dim, edge, mainPos } = adjustChild(mainRef?.current, child, xy, host.orientation, fixed);
+		const { alignment, dim, edge, mainPos } = adjustChild(mainRef?.current, child, xy, host.orientation, fixed);
 		// console.log(dim);
 
-		console.log('🪧', {
-			xy, alignment, alignPos: alignPos(0), dim: dim[0], edge: edge[0], off: off[0], win: host.win[0]});
+		// console.log('🪧', {
+			// xy, alignment, findEdge: findEdge(0), dim: dim[0], edge: edge[0], off: off[0], win: host.win[0]});
 
 		const edgeCheck = ax => {
 			let winDiff = edge[ax] - host.win[ax];

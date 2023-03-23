@@ -8,7 +8,7 @@ export default function DragLayer({ children, child, debug, fixed, host = {}, of
 	// const [winScroll] = useState(window.scrollY);
 	const xy = [host.positions(0,0) || 0,host.positions(1,0) || 0];
 	const { dim, edge } = adjustChild(mainRef?.current, child, xy, host.orientation, fixed);
-	console.log(edge[0], window.innerWidth - edge[0]);
+	// console.log(edge[0], window.innerWidth - edge[0]);
 
 	return <Draggable {...{  
 	 	bounds: {
