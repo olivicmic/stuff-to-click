@@ -9,7 +9,6 @@ export default function adjustChild(current = {} , child, xy = [], orientation, 
 		(1 - (.01 * alignment[ax])) // base - left > right / top > bottom 
 	);
 	
-	// const findEdge = (ax, i) => (xy[ax] + invert(align(ax),i));
 	const findEdge = ax => (xy[ax] + align(ax, orientation[ax] ));
 	const findEdgeNW = ax => (xy[ax] - align(ax, !orientation[ax] ));
 	// const findNW = ax => (xy[ax]  align(ax));
@@ -19,7 +18,7 @@ export default function adjustChild(current = {} , child, xy = [], orientation, 
 
 	// console.log('📊',xy[0], dim[0], align(0),findEdge(0));
 	// 
-	console.log({xy, edge, edgeNW });
+	// console.log({xy, edge, edgeNW });
 
 	return { alignment, findEdge, dim, edge, edgeNW };
 };

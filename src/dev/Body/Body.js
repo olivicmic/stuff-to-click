@@ -84,8 +84,46 @@ export default function Body({ style, ...rest }) {
 			<button onClick={openGuy('hotdog')}>Open it</button>
 		</div>
 		<h3>Select</h3>
-		<div {...{ className: 'demo-block demo-grid'}}>
+		<div {...{ className: 'demo-block'}}>
 			<Select {...{ fixed: true, value: apSt.food, onChange, name: 'food', label: 'Food', options, }} />
+			<Select {...{ value: apSt.food, onChange, name: 'food', label: 'Food', options, }} />
+			<Select {...{ value: apSt.food, onChange, name: 'food', label: 'Food', options, }} />
+			<Select {...{ value: apSt.food, onChange, name: 'food', label: 'Food', options, }} />
+			<Select {...{ value: apSt.food, onChange, name: 'food', label: 'Food', options, }} />
+			<Select {...{ value: apSt.food, onChange, name: 'food', label: 'Food', options, }} />
+			<Select {...{ value: apSt.food, onChange, name: 'food', label: 'Food', options, }} />
+			<Select {...{ value: apSt.food, onChange, name: 'food', label: 'Food', options, }} />
+			<Select {...{ value: apSt.food, onChange, name: 'food', label: 'Food', options, }} />
+			<Select {...{ value: apSt.food, onChange, name: 'food', label: 'Food', options, }} />
+			<Select {...{ value: apSt.food, onChange, name: 'food', label: 'Food', options, }} />
+						<Select {...{ value: apSt.food, onChange, name: 'food', label: 'Food', options, }} />
+			<Select {...{ value: apSt.food, onChange, name: 'food', label: 'Food', options, }} />
+			<Select {...{ value: apSt.food, onChange, name: 'food', label: 'Food', options, }} />
+			<Select {...{ value: apSt.food, onChange, name: 'food', label: 'Food', options, }} />
+			<Select {...{ value: apSt.food, onChange, name: 'food', label: 'Food', options, }} />
+			<Select {...{ value: apSt.food, onChange, name: 'food', label: 'Food', options, }} />
+			<Select {...{ value: apSt.food, onChange, name: 'food', label: 'Food', options, }} />
+			<Select {...{ value: apSt.food, onChange, name: 'food', label: 'Food', options, }} />
+			<Select {...{ value: apSt.food, onChange, name: 'food', label: 'Food', options, }} />
+			<Select {...{ value: apSt.food, onChange, name: 'food', label: 'Food', options, }} />
+						<Select {...{ value: apSt.food, onChange, name: 'food', label: 'Food', options, }} />
+			<Select {...{ value: apSt.food, onChange, name: 'food', label: 'Food', options, }} />
+			<Select {...{ value: apSt.food, onChange, name: 'food', label: 'Food', options, }} />
+			<Select {...{ value: apSt.food, onChange, name: 'food', label: 'Food', options, }} />
+			<Select {...{ value: apSt.food, onChange, name: 'food', label: 'Food', options, }} />
+			<Select {...{ value: apSt.food, onChange, name: 'food', label: 'Food', options, }} />
+			<Select {...{ value: apSt.food, onChange, name: 'food', label: 'Food', options, }} />
+			<Select {...{ value: apSt.food, onChange, name: 'food', label: 'Food', options, }} />
+			<Select {...{ value: apSt.food, onChange, name: 'food', label: 'Food', options, }} />
+			<Select {...{ value: apSt.food, onChange, name: 'food', label: 'Food', options, }} />
+						<Select {...{ value: apSt.food, onChange, name: 'food', label: 'Food', options, }} />
+			<Select {...{ value: apSt.food, onChange, name: 'food', label: 'Food', options, }} />
+			<Select {...{ value: apSt.food, onChange, name: 'food', label: 'Food', options, }} />
+			<Select {...{ value: apSt.food, onChange, name: 'food', label: 'Food', options, }} />
+			<Select {...{ value: apSt.food, onChange, name: 'food', label: 'Food', options, }} />
+			<Select {...{ value: apSt.food, onChange, name: 'food', label: 'Food', options, }} />
+			<Select {...{ value: apSt.food, onChange, name: 'food', label: 'Food', options, }} />
+			<Select {...{ value: apSt.food, onChange, name: 'food', label: 'Food', options, }} />
 			<Select {...{ value: apSt.food, onChange, name: 'food', label: 'Food', options, }} />
 			<Select {...{ value: apSt.food, onChange, name: 'food', label: 'Food', options, }} />
 		</div>
