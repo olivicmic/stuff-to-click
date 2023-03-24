@@ -24,7 +24,9 @@ const App = () => {
 				component: Hotdog,
 				child: { 
 					alignY: 0,
-					alignX: 50,
+					alignX: 0,
+					// centerX: true,
+					// centerY: true,
 					handle: '.hotdog',
 					closeOutside: true,
 					enter: [500,200],

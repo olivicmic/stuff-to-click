@@ -54,6 +54,12 @@ h1 {
 	}
 }
 
+.stuff-overlay {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
 .hotdog {
 	display: flex;
 	background-color: red;

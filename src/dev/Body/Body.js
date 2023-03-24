@@ -96,7 +96,6 @@ export default function Body({ style, ...rest }) {
 			<Select {...{ value: apSt.food, onChange, name: 'food', label: 'Food', options, }} />
 			<Select {...{ value: apSt.food, onChange, name: 'food', label: 'Food', options, }} />
 			<Select {...{ value: apSt.food, onChange, name: 'food', label: 'Food', options, }} />
-						<Select {...{ value: apSt.food, onChange, name: 'food', label: 'Food', options, }} />
 			<Select {...{ value: apSt.food, onChange, name: 'food', label: 'Food', options, }} />
 			<Select {...{ value: apSt.food, onChange, name: 'food', label: 'Food', options, }} />
 			<Select {...{ value: apSt.food, onChange, name: 'food', label: 'Food', options, }} />
@@ -106,7 +105,6 @@ export default function Body({ style, ...rest }) {
 			<Select {...{ value: apSt.food, onChange, name: 'food', label: 'Food', options, }} />
 			<Select {...{ value: apSt.food, onChange, name: 'food', label: 'Food', options, }} />
 			<Select {...{ value: apSt.food, onChange, name: 'food', label: 'Food', options, }} />
-						<Select {...{ value: apSt.food, onChange, name: 'food', label: 'Food', options, }} />
 			<Select {...{ value: apSt.food, onChange, name: 'food', label: 'Food', options, }} />
 			<Select {...{ value: apSt.food, onChange, name: 'food', label: 'Food', options, }} />
 			<Select {...{ value: apSt.food, onChange, name: 'food', label: 'Food', options, }} />
@@ -116,7 +114,9 @@ export default function Body({ style, ...rest }) {
 			<Select {...{ value: apSt.food, onChange, name: 'food', label: 'Food', options, }} />
 			<Select {...{ value: apSt.food, onChange, name: 'food', label: 'Food', options, }} />
 			<Select {...{ value: apSt.food, onChange, name: 'food', label: 'Food', options, }} />
-						<Select {...{ value: apSt.food, onChange, name: 'food', label: 'Food', options, }} />
+			<Select {...{ value: apSt.food, onChange, name: 'food', label: 'Food', options, }} />
+			<Select {...{ value: apSt.food, onChange, name: 'food', label: 'Food', options, }} />
+			<Select {...{ value: apSt.food, onChange, name: 'food', label: 'Food', options, }} />
 			<Select {...{ value: apSt.food, onChange, name: 'food', label: 'Food', options, }} />
 			<Select {...{ value: apSt.food, onChange, name: 'food', label: 'Food', options, }} />
 			<Select {...{ value: apSt.food, onChange, name: 'food', label: 'Food', options, }} />

@@ -9,7 +9,6 @@ export default function useHost({ autoBoundary = 0, enter, exit, fixed, parent }
 		const origin = [parent?.x, parent?.y];
 		const padding = [parent?.padX, parent?.padY];
 		const parentSize = [parent?.width, parent?.height];
-		// console.log(padding);
 		const sizeSet = ax => (parentSize[ax]|| 0) + (padding[ax] || 0);
 		const size = [sizeSet(0), sizeSet(1)];
 		const setSpawn = ax => Math.min((origin[ax] || 0) - ((padding[ax] / 2)|| 0), win[ax] - autoBoundary);

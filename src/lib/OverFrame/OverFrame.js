@@ -32,14 +32,12 @@ export default function OverFrame({ autoBoundary, child = {}, className, debug, 
 
 		const edgeCheck = ax => {
 			let winDiff = edge[ax] - host.win[ax];
-			let diffSW = Math.max(winDiff,0);
-			let diffNW = -Math.min(edgeNW[ax],0);
-			if (offSE[ax] !== diffSW) {
-				offSESet(offSE.map((item,i) => i === ax ? diffSW : item ));
-			}
-			if (offNW[ax] !== diffNW) {
-				offNWSet(offNW.map((item,i) => i === ax ? diffNW : item ))
-			}
+			let diffs = [Math.max(winDiff,0), -Math.min(edgeNW[ax],0)];
+			let corners = [offSE, offNW];
+			let isOff = corner => (corners[corner][ax] !== diffs[corner]) && [offSESet, offNWSet][corner](corners[corner].map((item,i) => i === ax ? diffs[corner] : item ));
+
+			isOff(0);
+			isOff(1);
 		};
 		if (debug) console.debug('OverFrame off adjust debug', {host, mainPos, xy, offSE, dim, edge });
 		edgeCheck(0);
