@@ -13,7 +13,7 @@ export default function useHost({ autoBoundary = 0, enter, exit, fixed, parent }
 		const size = [sizeSet(0), sizeSet(1)];
 		const setSpawn = ax => Math.min((origin[ax] || 0) - ((padding[ax] / 2)|| 0), win[ax] - autoBoundary);
 		const xy = [setSpawn(0),setSpawn(1) + (fixed ? 0 : window.scrollY)];
-		const orient = ax => (xy[ax] + (size[ax] / 2)) > (win[ax] * [.75,.66][ax]) ? 1 : 0;
+		const orient = ax => (xy[ax] + (size[ax] / 2)) > (win[ax] * [.5,.66][ax]) ? 1 : 0;
 		const orientation = [orient(0),orient(1)];
 		const gap = [parent?.gapX || 0, parent?.gapY || 0];
 		const hostAlign = ax => size[ax] * ( orientation[ax] ? 1 - (.01 * alignment[ax]) : (.01 * alignment[ax]) );
