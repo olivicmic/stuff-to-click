@@ -1,7 +1,9 @@
 import React from 'react';
 import Option  from '../Option';
 
-export default function Picker({ busy, onFocus, overlay, mainRef, options = [], style, submit, top, ...rest }) {
+const n = () => {};
+
+export default function Picker({ busy, onFocus = n, overlay, mainRef, options = [], style, submit = n, top, ...rest }) {
 	const click = value => {
 		onFocus();
 		submit({ target: { selectID: overlay.id, value } });

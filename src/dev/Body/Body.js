@@ -28,10 +28,12 @@ export default function Body({ style, ...rest }) {
 	const watchAcc = (oState) => console.log(oState);
 	const onClosed = (oState) => console.log('closed');
 	const onOpened = (oState) => console.log('opened');
-	const { modals } = useOverlayContext();
+	const { modals, popouts } = useOverlayContext();
 	const openGuy = (guy = 'hotdog') => ({ target }) => modals.open(guy,{ fixed: true, target });
 
 	const options = [{
+		component: () => <div {...{ style: { backgroundColor: 'red', width: 50, height: 80 } }}>🍌</div>,
+		onClick: () => console.log('🌊'),
 		value: 'pizza',
 		label: 'Pizza'
 	},{
@@ -57,6 +59,7 @@ export default function Body({ style, ...rest }) {
 
 	return  <div {...{ className: 'body-frame', style }}>
 		<div {...{ className: 'demo-block'}}>
+			<button onClick={() => popouts.open('salami',{ options })}>Open it</button>
 			<button onClick={openGuy('hotdog')}>Open it</button>
 			<button onClick={openGuy('hotdog')}>Open it</button>
 			<button onClick={openGuy('hotdog')}>Open it</button>

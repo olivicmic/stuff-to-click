@@ -1,6 +1,6 @@
 import React from 'react';
 import { createRoot } from 'react-dom/client';
-import { configPopouts, OverLayer, Popout, useLayer, useTint } from './lib';
+import { configPopouts, OverLayer, Picker, Popout, useLayer, useTint } from './lib';
 import { Body } from './dev';
 
 const Smile = ({ ...rest }) => {
@@ -57,6 +57,9 @@ const App = () => {
 			addConfigs: {
 				jammy: {
 					component: Smile,
+				},
+				salami: {
+					component: Picker,
 				}
 			}
 		}))

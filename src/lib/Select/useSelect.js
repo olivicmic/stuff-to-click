@@ -39,7 +39,7 @@ export default function useSelect({ debug, fixed, id, name, options, onChange, t
 				fixed,
 				onFocus,
 				onOpened: setID,
-				initial: { focus, options, submit, value, index },
+				initial: { focus, name, options, submit, value, index },
 				target: inputRef.current
 			});
 		} else close(hostid);
