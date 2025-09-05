@@ -5,7 +5,7 @@ import DragThumb from './DragThumb';
 import './DragSlider.scss';
 
 export default function Slider({ className, handleStyle, max = 100, min = 0, name, onChange: toDo, step = 1, thumbStyle, trackStyle, type, value, ...rest }) {
-	const [hover, hoverProps] = useHover();
+	const [hover, hoverProps] = useHover({});
 	const onChange = newVal => toDo({ target: { ...name && { name }, ...type && { type }, value: newVal[0] }});
 	return <div {...{ className: `drag-slider${className ? ' ' + className : ''}` }}>
 		<Range {...{...rest, max, min, onChange, step, values: [value] }}

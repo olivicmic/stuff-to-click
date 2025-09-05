@@ -13,7 +13,10 @@ export default function useSlideshow({ onCatch = n, onChange = n, ...rest }) {
 		});
 	};
 
-	const catchPage = (slide, toDo) => onCatch(slide) && toDo(slide);
+	const catchPage = (slide, toDo) => {
+		onCatch(slide);
+		toDo(slide)
+	};
 
 	const { back, forward, goTo, ...pagination } = usePagination({
 		...rest,

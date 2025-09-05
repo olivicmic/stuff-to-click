@@ -5,7 +5,7 @@ import { useHover } from 'hangers';
 export default function Option({ name, opacity, overlay, position, index, item, click, value, ...rest }) {
 	const { component: Component, onClick, ...option } = item || {};
 	const focus = position === index;
-	const [hover, hoverEvents] = useHover();
+	const [hover, hoverEvents] = useHover({});
 	const selected = value === option.value;
 	const indicator = () => {
 		if (selected || focus) { return hover ? -.5 : 0; }
