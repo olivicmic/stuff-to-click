@@ -4,7 +4,7 @@ import { useBusy } from 'hangers';
 import { OverlayContext, OverModule } from '..';
 import './OverLayer.scss'
 
-export default function OverLayer({ layers = [], layerState, render: Render, renderProps, tint = {}, tintStyle, zBase = 1000, ...rest }) {
+export default function OverLayer({ debug = '', layers = [], layerState, render: Render, renderProps, tint = {}, tintStyle, zBase = 1000, ...rest }) {
 	const [overlayerBusy, overlayerBusySet] = useBusy();
 	const tintRef = useSpringRef();
 	const moduleRef = useSpringRef();
@@ -22,8 +22,10 @@ export default function OverLayer({ layers = [], layerState, render: Render, ren
 
 	useChain([tintRef, moduleRef], tint.active ? [0,.25] : [0,0] );
 
+	if (debug) { console.log(`OverLayer debug from: ${ debug }`,overlayerBusy) }
+
 	return <OverlayContext.Provider value={layerState}>
-		<Render { ...{ ...renderProps, ...tint.style && { style: tint.style } } }/>
+		<Render { ...{ ...renderProps, ...tint.style && { style: tint.style }, overlayerBusy } }/>
 		<div {...{ 
 			className: `stuff-overlays${ tint.active ? ' stuff-over-active' : '' }`, 
 			style: { ...tint.style, zIndex: zBase }
