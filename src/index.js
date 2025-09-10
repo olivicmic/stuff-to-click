@@ -42,7 +42,7 @@ const App = () => {
 					enter: [500,200],
 					alignX: 50,
 					alignY: 50, 
-					// closeOutside: true 
+					closeOutside: true 
 				},
 				component: Smile,
 				initial: {bootY: true},
@@ -68,7 +68,7 @@ const App = () => {
 		{ overLayerName: 'modals', type: Popout, },
 		{ autoBoundary: 16, overLayerName: 'popouts', type: Popout }
 	];
-	return <OverLayer {...{ layers, layerState, render: Body, tint }}/>;
+	return <OverLayer {...{ debug: '🖲️', layers, layerState, render: Body, tint }}/>;
 };
 
 createRoot( document.getElementById('root')).render(<App />);

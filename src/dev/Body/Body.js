@@ -48,16 +48,17 @@ export default function Body({ style, ...rest }) {
 		if (!modalDone) {
 			//console.log('🐤', modalDone);
 			modals.open('smile',{
-				closeOutside: true,
+				// closeOutside: true,
 				tint: true,
 				// debug: true, 
-				parent: { x: window.innerWidth + 80, y: window.innerHeight + 80 }
+				// parent: { x: window.innerWidth + 80, y: window.innerHeight + 80 }
 			});
 			modalDoneSet(true);
 		}
 	},[modals, modalDone]);
 
 	return  <div {...{ className: 'body-frame', style }}>
+	<h1 {...{ onClick: () => modalDoneSet(false) }}>Things</h1>
 		<div {...{ className: 'demo-block'}}>
 			<button onClick={() => popouts.open('salami',{ options })}>Open it</button>
 			<button onClick={openGuy('hotdog')}>Open it</button>

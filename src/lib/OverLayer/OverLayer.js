@@ -13,7 +13,7 @@ export default function OverLayer({ debug = '', layers = [], layerState, render:
 			easing: tint.active ? easings.easeOutQuad : easings.easeInQuad,
 			duration: 175
 		},
-		from: { opacity: 0 },
+		from: { opacity: tint.initialized ? 0 : 1 },
 		enter: { opacity: 1 },
 		leave: { opacity: 0 },
 		ref: tintRef,
